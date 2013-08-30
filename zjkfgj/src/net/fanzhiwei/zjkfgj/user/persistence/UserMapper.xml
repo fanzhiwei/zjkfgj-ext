@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.fanzhiwei.zjkfgj.user.persistence.UserMapper">
+
+  <cache />
+  
+  <select id="getId" resultType="long">
+  	SELECT max(id) FROM t_user
+  </select>
+  
+  <select id="login" parameterType="map" resultType="User">
+    SELECT
+    	id,
+    	name,
+   		password,
+    	create_date
+    FROM t_user
+    WHERE name = #{name} AND password = #{password}
+  </select>
+
+  <select id="getUser" parameterType="map" resultType="User">
+    SELECT
+    	id,
+    	name,
+   		password,
+    	create_date
+    FROM t_user
+    <where>
+    	<if test="id != null">
+    		id = #{id}
+    	</if>
+    	<if test="name != null">
+    		AND name = #{name}
+    	</if>
+    	<if test="password != null">
+    		AND password = #{password}
+    	</if>
+    </where>
+  </select>
+  
+  <select id="getUserNameList" resultType="hashmap">
+  	SELECT id,name FROM t_user
+  </select>
+  
+  <select id="getUserList" resultMap="userResult">
+    SELECT
+    	u.id as user_id,
+    	u.name as user_name,
+    	u.create_date,
+    	r.id as role_id,
+    	r.name as role_name
+    FROM t_user u
+    LEFT JOIN t_user_role ur ON(u.id=ur.user_id)
+    LEFT JOIN t_role r ON(r.id=ur.role_id)
+  </select>
+  
+  <resultMap id="userResult"  type="User"> 
+		<id property="id"  column="user_id" />
+		<result property="name" column="user_name"/>
+		<result property="createDate" column="create_date"/>
+		<collection property="roles"  ofType="Role"> 
+			<id property="id"  column="role_id"/> 
+			<result property="name"  column="role_name"/>
+		</collection> 
+  </resultMap>
+  
+  <insert id="insertUser" parameterType="User" >
+  	INSERT INTO t_user (id,name, password, create_date)
+    VALUES (#{id},#{name}, #{password}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertUserRole" parameterType="map">
+  	INSERT INTO t_user_role (user_id,role_id)
+    VALUES (#{user_id}, #{role_id})
+  </insert>
+  
+  <update id="updateUser"  parameterType="User"> 
+	UPDATE t_user
+	<set> 
+		<if test="name != null">name=#{name},</if> 
+		<if test="password != null">password=#{password}</if>
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <update id="updateUserRole"  parameterType="map"> 
+	UPDATE t_user_role SET
+	role_id=#{role_id}
+	WHERE user_id=#{user_id}
+  </update>
+  
+  <delete id="deleteUser"  parameterType="map">
+  	DELETE FROM t_user WHERE id=#{id}
+  </delete>
+  
+  <delete id="deleteUserRole"  parameterType="map">
+  	DELETE FROM t_user_role WHERE user_id=#{user_id}
+  </delete>
+  
+  <update id="changeUserPassword"  parameterType="map"> 
+	UPDATE t_user SET password=#{newPassword} WHERE id=#{id}
+  </update>
+  
+</mapper>
