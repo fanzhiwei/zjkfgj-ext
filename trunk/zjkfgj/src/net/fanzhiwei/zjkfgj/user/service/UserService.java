@@ -45,6 +45,15 @@ public class UserService{
 		return userMapper.getUser(param);
 	}
 	/**
+	 * 判断新增或修改某个用户名是否存在
+	 * @param param
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public User getIsExistUser(Map<String,Object> param) {
+		return userMapper.getIsExistUser(param);
+	}
+	/**
 	 * 获取用户列表
 	 * @return
 	 */

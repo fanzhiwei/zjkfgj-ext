@@ -134,10 +134,20 @@ public class UserController {
             HttpServletResponse response){
 		Map<String,Object> responseMap = new HashMap<String,Object>();
 		String id = request.getParameter("id");
-		String name = request.getParameter("name");
+		String name = request.getParameter("name").trim();
 		String password = request.getParameter("password");
 		String roleList = request.getParameter("roleList");
 		try {
+			//先判断用户名是否存在
+			Map<String,Object> paramMap = new HashMap<String,Object>();
+			paramMap.put("id",id);
+			paramMap.put("name",name);
+			User isExistUser = userService.getIsExistUser(paramMap);
+			if(isExistUser != null) {
+				responseMap.put("info", "用户名已存在！"); 
+				return responseMap;
+			}
+			
 			//编辑用户信息
 			if(!"".equals(id)) {
 				Map<String,Object> param = new HashMap<String,Object>();
