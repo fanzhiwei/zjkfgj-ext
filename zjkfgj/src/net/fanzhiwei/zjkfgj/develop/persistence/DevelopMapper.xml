@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.fanzhiwei.zjkfgj.develop.persistence.DevelopMapper">
+  
+  <select id="getDevelopList" parameterType="map" resultType="Develop">
+    SELECT r.*,a.areaName 
+    FROM realestate_develop r
+    join area a
+    on r.areaId = a.id
+    <where>
+    	<if test="id != null">
+    		r.id = #{id}
+    	</if>
+    	<if test="recordYearMonth != null">
+    		and r.recordYearMonth = #{recordYearMonth}
+    	</if>
+    	<if test="userId != null">
+    		and r.userId = #{userId}
+    	</if>
+    </where>
+    order by a.displayOrder
+  </select>
+  
+  <insert id="insertDevelop" parameterType="Develop" >
+  	INSERT INTO realestate_develop 
+  		(areaId, userId,createTime, recordYearMonth, 
+  		investHouse,investBusiness, investOffice, investOther,
+  		financialSourcingInland, financialSourcingForeign, financialSourcingSelf,financialSourcingOther,
+  		workingAreaHouse, workingAreaBusiness,workingAreaOffice, workingAreaOther, 
+  		newAreaHouse,newAreaBusiness, newAreaOffice, newAreaOther,
+  		completeAreaHouse, completeAreaBusiness, completeAreaOffice,completeAreaOther, 
+  		saledAreaHouse, saledAreaBusiness,saledAreaOffice, saledAreaOther, 
+  		incomingHouse,incomingBusiness, incomingOffice, incomingOther,
+  		onsaleAreaHouse, onsaleAreaBusiness, onsaleAreaOffice,onsaleAreaOther)
+    VALUES 
+    	(#{areaId}, #{userId},now(), #{recordYearMonth}, 
+  		#{investHouse},#{investBusiness}, #{investOffice}, #{investOther},
+  		#{financialSourcingInland}, #{financialSourcingForeign}, #{financialSourcingSelf},#{financialSourcingOther},
+  		#{workingAreaHouse}, #{workingAreaBusiness},#{workingAreaOffice}, #{workingAreaOther}, 
+  		#{newAreaHouse},#{newAreaBusiness}, #{newAreaOffice}, #{newAreaOther},
+  		#{completeAreaHouse}, #{completeAreaBusiness}, #{completeAreaOffice},#{completeAreaOther}, 
+  		#{saledAreaHouse}, #{saledAreaBusiness},#{saledAreaOffice}, #{saledAreaOther}, 
+  		#{incomingHouse},#{incomingBusiness}, #{incomingOffice}, #{incomingOther},
+  		#{onsaleAreaHouse}, #{onsaleAreaBusiness}, #{onsaleAreaOffice},#{onsaleAreaOther})
+  </insert>
+  
+  <update id="updateDevelop"  parameterType="Develop"> 
+	UPDATE realestate_develop
+	<set> 
+		<if test="1 == 1">modifyTime=now(),</if> 
+		<if test="userId != null">userId=#{userId},</if> 
+		<if test="recordYearMonth != null">recordYearMonth=#{recordYearMonth},</if> 
+		<if test="investHouse != null">investHouse=#{investHouse},</if> 
+		<if test="investBusiness != null">investBusiness=#{investBusiness},</if> 
+		<if test="investOffice != null">investOffice=#{investOffice},</if> 
+		<if test="investOther != null">investOther=#{investOther},</if> 
+		<if test="financialSourcingInland != null">financialSourcingInland=#{financialSourcingInland},</if> 
+		<if test="financialSourcingForeign != null">financialSourcingForeign=#{financialSourcingForeign},</if> 
+		<if test="financialSourcingSelf != null">financialSourcingSelf=#{financialSourcingSelf},</if> 
+		<if test="financialSourcingOther != null">financialSourcingOther=#{financialSourcingOther},</if> 
+		<if test="workingAreaHouse != null">workingAreaHouse=#{workingAreaHouse},</if> 
+		<if test="workingAreaBusiness != null">workingAreaBusiness=#{workingAreaBusiness},</if> 
+		<if test="workingAreaOffice != null">workingAreaOffice=#{workingAreaOffice},</if> 
+		<if test="workingAreaOther != null">workingAreaOther=#{workingAreaOther},</if> 
+		<if test="newAreaHouse != null">newAreaHouse=#{newAreaHouse},</if> 
+		<if test="newAreaBusiness != null">newAreaBusiness=#{newAreaBusiness},</if> 
+		<if test="newAreaOffice != null">newAreaOffice=#{newAreaOffice},</if> 
+		<if test="newAreaOther != null">newAreaOther=#{newAreaOther},</if> 
+		<if test="completeAreaHouse != null">completeAreaHouse=#{completeAreaHouse},</if> 
+		<if test="completeAreaBusiness != null">completeAreaBusiness=#{completeAreaBusiness},</if> 
+		<if test="completeAreaOffice != null">completeAreaOffice=#{completeAreaOffice},</if> 
+		<if test="completeAreaOther != null">completeAreaOther=#{completeAreaOther},</if> 
+		<if test="saledAreaHouse != null">saledAreaHouse=#{saledAreaHouse},</if> 
+		<if test="saledAreaBusiness != null">saledAreaBusiness=#{saledAreaBusiness},</if> 
+		<if test="saledAreaOffice != null">saledAreaOffice=#{saledAreaOffice},</if> 
+		<if test="saledAreaOther != null">saledAreaOther=#{saledAreaOther},</if> 
+		<if test="incomingHouse != null">incomingHouse=#{incomingHouse},</if> 
+		<if test="incomingBusiness != null">incomingBusiness=#{incomingBusiness},</if> 
+		<if test="incomingOffice != null">incomingOffice=#{incomingOffice},</if> 
+		<if test="incomingOther != null">incomingOther=#{incomingOther},</if> 
+		<if test="onsaleAreaHouse != null">onsaleAreaHouse=#{onsaleAreaHouse},</if> 
+		<if test="onsaleAreaBusiness != null">onsaleAreaBusiness=#{onsaleAreaBusiness},</if> 
+		<if test="onsaleAreaOffice != null">onsaleAreaOffice=#{onsaleAreaOffice},</if> 
+		<if test="onsaleAreaOther != null">onsaleAreaOther=#{onsaleAreaOther}</if> 
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <delete id="deleteDevelop"  parameterType="map">
+  	DELETE FROM realestate_develop WHERE id=#{id}
+  </delete>
+</mapper>

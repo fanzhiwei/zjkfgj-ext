@@ -4,7 +4,7 @@
 
 <mapper namespace="net.fanzhiwei.zjkfgj.role.persistence.RoleMapper">
 
-  <cache />
+  <!-- cache /> -->
   
   <select id="getId" resultType="long">
   	SELECT max(id) FROM t_role

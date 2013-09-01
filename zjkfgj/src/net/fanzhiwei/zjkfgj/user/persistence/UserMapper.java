@@ -10,6 +10,7 @@ public interface UserMapper {
 	Long getId();
 	User login(Map<String,Object> param);
 	User getUser(Map<String,Object> param);
+	User getIsExistUser(Map<String,Object> param);
 	List<User> getUserList();
 	List<Map<String,Object>> getUserNameList();
 	void insertUser(User user);

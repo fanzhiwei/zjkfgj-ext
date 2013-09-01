@@ -4,7 +4,7 @@
 
 <mapper namespace="net.fanzhiwei.zjkfgj.user.persistence.UserMapper">
 
-  <cache />
+  <!-- <cache /> -->
   
   <select id="getId" resultType="long">
   	SELECT max(id) FROM t_user
@@ -36,6 +36,22 @@
     	</if>
     	<if test="password != null">
     		AND password = #{password}
+    	</if>
+    </where>
+  </select>
+  
+  <select id="getIsExistUser" parameterType="map" resultType="User">
+    SELECT
+    	id,
+    	name,
+   		password
+    FROM t_user
+    <where>
+    	<if test="id != null and id != ''">
+    		id != #{id}
+    	</if>
+    	<if test="name != null">
+    		AND name = #{name}
     	</if>
     </where>
   </select>
