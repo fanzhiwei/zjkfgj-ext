@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.fanzhiwei.zjkfgj.develop.domain.Area;
 import net.fanzhiwei.zjkfgj.develop.domain.Develop;
 import net.fanzhiwei.zjkfgj.develop.persistence.DevelopMapper;
 
@@ -54,5 +55,11 @@ public class DevelopService{
 			map.put("id", idsArray[i]);
 			developMapper.deleteDevelop(map);
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Area> getArea() {
+		List<Area> areaList = developMapper.getArea();
+		return areaList;
 	}
 }

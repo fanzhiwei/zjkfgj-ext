@@ -9,14 +9,15 @@
         	if (queryDateObj == null) {
         		queryDate = "";
         	} else {
-        		queryDate = queryDateObj.value;
+        		queryDate = queryDateObj.value.replace(".","");
         	}
             var store = new Ext.data.Store({
                 autoLoad: {
-					params : {start:0, limit:15,recordYearMonth:queryDate}
+					params : {}
+//            		params : {start:0, limit:15,recordYearMonth:queryDate}
 				},
 				proxy: new Ext.data.HttpProxy({
-					url : 'develop/lists'
+					url : 'develop/lists?t=' + new Date().getTime()
 				}),
                 remoteSort: false,
 				reader: new Ext.data.JsonReader({
@@ -69,11 +70,80 @@
 					},
 					{
 						name: 'financialSourcingOther'
-//					},
-//					{
-//						name: "investBusiness"
-//						convert: this.roleList
-					}]
+					},
+					{
+						name: "workingAreaHouse"
+					},
+					{
+						name: "workingAreaBusiness"
+					},
+					{
+						name: "workingAreaOffice"
+					},
+					{
+						name: "workingAreaOther"
+					},
+					{
+						name: "newAreaHouse"
+					},
+					{
+						name: "newAreaBusiness"
+					},
+					{
+						name: "newAreaOffice"
+					},
+					{
+						name: "newAreaOther"
+					},
+					{
+						name: "completeAreaHouse"
+					},
+					{
+						name: "completeAreaBusiness"
+					},
+					{
+						name: "completeAreaOffice"
+					},
+					{
+						name: "completeAreaOther"
+					},
+					{
+						name: "saledAreaHouse"
+					},
+					{
+						name: "saledAreaBusiness"
+					},
+					{
+						name: "saledAreaOffice"
+					},
+					{
+						name: "saledAreaOther"
+					},
+					{
+						name: "incomingHouse"
+					},
+					{
+						name: "incomingBusiness"
+					},
+					{
+						name: "incomingOffice"
+					},
+					{
+						name: "incomingOther"
+					},
+					{
+						name: "onsaleAreaHouse"
+					},
+					{
+						name: "onsaleAreaBusiness"
+					},
+					{
+						name: "onsaleAreaOffice"
+					},
+					{
+						name: "onsaleAreaOther"
+					}
+					]
 				})
             });
             return store;
@@ -88,59 +158,230 @@
 //        },
 
         getForm: function() {
-        	var areaDataType = new Ext.data.SimpleStore({  
-        	    fields : ['key', 'value'],  
-        	    data : [['1', '桥东区'], ['2', '桥西区']]  
-        	});  
-        	          
-        	var areaTypeCombo = new Ext.form.ComboBox({  
-        	        colspan : 2,  
-        	        fieldLabel : '区县',  
-        	        store : areaDataType,  
-        	        displayField : 'value',  
-        	        valueField : 'key',  
-        	        mode : 'local',  
-        	        typeAhead : true,  
-        	        forceSelection : true,  
-        	        triggerAction : 'all',  
-        	        width : 155,  
-//        	        emptyText : '请选择 .... ',  
-        	        selectOnFocus : true  
-        	});  
-        	
         	var investHouse = {
-        		xtype:'textfield',
-      	    	fieldLabel: '住宅',
-      	    	name: 'investHouse',
-      	    	allowBlank: false
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'investHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
         	},investBusiness = {
             		xtype:'textfield',
           	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'investBusiness'
             },investOffice = {
             		xtype:'textfield',
           	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'investOffice'
             },investOther = {
             		xtype:'textfield',
           	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'investOther'
             },financialSourcingInland = {
             		xtype:'textfield',
           	    	fieldLabel: '国内筹款',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'financialSourcingInland'
             },financialSourcingForeign = {
             		xtype:'textfield',
           	    	fieldLabel: '利用外资',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'financialSourcingForeign'
             },financialSourcingSelf = {
             		xtype:'textfield',
           	    	fieldLabel: '自筹资金',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'financialSourcingSelf'
             },financialSourcingOther = {
             		xtype:'textfield',
           	    	fieldLabel: '其他资金',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
           	    	name: 'financialSourcingOther'
+            },workingAreaHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'workingAreaHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},workingAreaBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'workingAreaBusiness'
+            },workingAreaOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'workingAreaOffice'
+            },workingAreaOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'workingAreaOther'
+            },newAreaHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'newAreaHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},newAreaBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'newAreaBusiness'
+            },newAreaOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'newAreaOffice'
+            },newAreaOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'newAreaOther'
+            },completeAreaHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'completeAreaHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},completeAreaBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'completeAreaBusiness'
+            },completeAreaOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'completeAreaOffice'
+            },completeAreaOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'completeAreaOther'
+            },saledAreaHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'saledAreaHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},saledAreaBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'saledAreaBusiness'
+            },saledAreaOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'saledAreaOffice'
+            },saledAreaOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'saledAreaOther'
+            },incomingHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'incomingHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},incomingBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'incomingBusiness'
+            },incomingOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'incomingOffice'
+            },incomingOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'incomingOther'
+            },onsaleAreaHouse = {
+	        		xtype:'textfield',
+	      	    	fieldLabel: '住宅',
+	      	    	name: 'onsaleAreaHouse',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	allowBlank: false
+        	},onsaleAreaBusiness = {
+            		xtype:'textfield',
+          	    	fieldLabel: '商业营业房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'onsaleAreaBusiness'
+            },onsaleAreaOffice = {
+            		xtype:'textfield',
+          	    	fieldLabel: '办公房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'onsaleAreaOffice'
+            },onsaleAreaOther = {
+            		xtype:'textfield',
+          	    	fieldLabel: '其他房',
+          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+          	    	regexText:'最多输入14位数字，且只能有两位小数',
+          	    	allowBlank: false,
+          	    	name: 'onsaleAreaOther'
             };
             var form = new Ext.form.FormPanel({
 				url:'develop/save',
@@ -148,7 +389,7 @@
                 buttonAlign: 'center',
                 bodyStyle: 'padding:5px',
                 frame: true,
-                labelWidth: 60,
+//                labelWidth: 60,
                 defaultType: 'textfield',
                 defaults: {
                     allowBlank: false,
@@ -162,39 +403,81 @@
                     value: ''
                 },
                 {
-                    name: 'areaId',
-                    fieldLabel: '区域名称',
+                	id:'area',
+                    xtype: 'combo',
+                    allowBlank: false,
+                    name: 'area',
+                    hiddenName:'areaId',
+                    fieldLabel: '报送区域',
+                    maxlength: 20,
+                    store: new Ext.data.Store({
+						proxy: new Ext.data.HttpProxy({
+							url : 'develop/area'
+						}),
+						autoLoad: true,
+						remoteSort: false,
+						reader: new Ext.data.JsonReader({
+							totalProperty: 'totalCount',
+							idProperty: 'id',
+							root: 'rows',
+							fields: [{
+								name: 'id'
+							},
+							{
+								name: 'areaName'
+							}]
+						})
+                    }),
+					mode: 'local',
+                    forceSelection: true,
+                    valueField: 'id',
+                    displayField: 'areaName',
+					listeners:{
+						"expand":function(combo, store,index){ 
+						Ext.getCmp("area").getStore().load();
+						} 
+					}                    
+//                    listeners: {
+//                        scope: this,
+//                        keypress: function(field, e) {
+//                            if (e.getKey() == 13) {
+//                                var obj = this.form.getForm().findField("recordYearMonth");
+//                                if (obj) obj.focus();
+//                            }
+//                        } //keypress
+//                    }
                 },
                 {
+                	id:'recordYearMonth',
                     name: 'recordYearMonth',
-                    fieldLabel: '记录年月',
+                    fieldLabel: '报送年月',
+                    readOnly:true
                 },
                 {
                 	xtype:'fieldset',
                 	title:'完成投资（万元）',
                 	collapsible:true,
-                	height:100,
+//                	height:100,
                 	items:
                 	[
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.3,
+            	    	   columnWidth:0.5,
             	    	   items:investHouse
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.3,
-            	    	   labelWidth: 90,
+            	    	   columnWidth:0.5,
             	    	   items:investBusiness
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.3,
+            	    	   columnWidth:0.5,
             	    	   items:investOffice
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.3,
+            	    	   columnWidth:0.5,
             	    	   items:investOther
             	       }
                 	],
@@ -204,33 +487,212 @@
                 	xtype:'fieldset',
                 	title:'资金来源总数（万元）',
                 	collapsible:true,
-                	height:100,
+//                	height:100,
                 	items:
                 	[
                 		 {
                 			 layout:'form',
-                			 columnWidth:.33,
+                			 columnWidth:.5,
                 			 items:financialSourcingInland
                 		 },
                 		 {
                 			 layout:'form',
-                			 columnWidth:.33,
+                			 columnWidth:.5,
                 			 items:financialSourcingForeign
                 		 },
                 		 {
                 			 layout:'form',
-                			 columnWidth:.33,
+                			 columnWidth:.5,
                 			 items:financialSourcingSelf
                 		 },
                 		 {
                 			 layout:'form',
-                			 columnWidth:.33,
+                			 columnWidth:.5,
                 			 items:financialSourcingOther
                 		 }
                 	],
                 	layout:"column"
-                }
-                ],
+                },
+                {
+                	xtype:'fieldset',
+                	title:'施工面积（㎡）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:workingAreaHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:workingAreaBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:workingAreaOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:workingAreaOther
+            	       }
+                	],
+                	layout:"column"
+                },
+                {
+                	xtype:'fieldset',
+                	title:'新开工面积（㎡）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:newAreaHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:newAreaBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:newAreaOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:newAreaOther
+            	       }
+                	],
+                	layout:"column"
+                },
+                {
+                	xtype:'fieldset',
+                	title:'竣工面积（㎡）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:completeAreaHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:completeAreaBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:completeAreaOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:completeAreaOther
+            	       }
+                	],
+                	layout:"column"
+                },
+                {
+                	xtype:'fieldset',
+                	title:'销售面积（㎡）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:saledAreaHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:saledAreaBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:saledAreaOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:saledAreaOther
+            	       }
+                	],
+                	layout:"column"
+                },
+                {
+                	xtype:'fieldset',
+                	title:'销售收入（万元）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:incomingHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:incomingBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:incomingOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:incomingOther
+            	       }
+                	],
+                	layout:"column"
+                },
+                {
+                	xtype:'fieldset',
+                	title:'完成投资（万元）',
+                	collapsible:true,
+//                	height:100,
+                	items:
+                	[
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:onsaleAreaHouse
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:onsaleAreaBusiness
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:onsaleAreaOffice
+            	       },
+            	       {
+            	    	   layout:'form',
+            	    	   columnWidth:0.5,
+            	    	   items:onsaleAreaOther
+            	       }
+                	],
+                	layout:"column"
+                }],
                 buttons: [{
                     text: '确定',
                     scope: this,
@@ -267,6 +729,9 @@
                             this.store.reload();
                             if (action.result.method == "Create") {
                                 this.form.getForm().reset();
+                                //TODO有时间改进，不关闭，但把记录在reset后保留
+                                this.dlg.hide();
+                                this.add();
                             } else {
                                 this.dlg.hide();
                             }
@@ -283,8 +748,8 @@
 
         getDialog: function() {
             var dlg = new Ext.Window({
-                width: 750,
-                height: 500,
+                width: 800,
+                height: 600,
                 title: '',
                 plain: true,
                 closable: true,
@@ -330,10 +795,10 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	this.getStore();
+                        	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
                         },
 		                change: function(obj, date) {
-		                	this.getStore();
+		                	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
 		                }
                     }
                 },{
@@ -358,11 +823,17 @@
                     header: "编号",
                     width: 40,
                     sortable: true,
-                    dataIndex: 'id'
+                    renderer:function(value,metadata,record,rowIndex){
+                    	if(this.rowspan){ 
+                    	p.cellAttr = 'rowspan="'+this.rowspan+'"'; 
+                    	}
+                    	var start = 0;
+                    	return start + rowIndex+1;
+                    }//自动编号
                 },
                 {
                     header: "记录地区",
-                    width: 100,
+                    width: 150,
                     sortable: true,
                     dataIndex: 'areaName'
                 },
@@ -374,14 +845,14 @@
                 },
                 {
                     header: "创建日期",
-                    width: 300,
+                    width: 250,
                     sortable: true,
                     dataIndex: 'createTime',
                     renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
                 },
                 {
                 	header: "修改日期",
-                	width: 300,
+                	width: 250,
                 	sortable: true,
                 	dataIndex: 'modifyTime',
                 	renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
@@ -394,7 +865,7 @@
             Ext.apply(this.currentFormValues, {
             	id:'',
             	areaId:'',
-            	recordYearMonth:'',
+            	recordYearMonth: document.getElementById("queryDate").value.replace(".",""),
             	investHouse:'',
             	investBusiness:'',
             	investOffice:'',
@@ -402,7 +873,31 @@
             	financialSourcingInland:'',
             	financialSourcingForeign:'',
             	financialSourcingSelf:'',
-            	financialSourcingOther:''
+            	financialSourcingOther:'',
+				workingAreaHouse:'',
+				workingAreaBusiness:'',
+				workingAreaOffice:'',
+				workingAreaOther:'',
+				newAreaHouse:'',
+				newAreaBusiness:'',
+				newAreaOffice:'',
+				newAreaOther:'',
+				completeAreaHouse:'',
+				completeAreaBusiness:'',
+				completeAreaOffice:'',
+				completeAreaOther:'',
+				saledAreaHouse:'',
+				saledAreaBusiness:'',
+				saledAreaOffice:'',
+				saledAreaOther:'',
+				incomingHouse:'',
+				incomingBusiness:'',
+				incomingOffice:'',
+				incomingOther:'',
+				onsaleAreaHouse:'',
+				onsaleAreaBusiness:'',
+				onsaleAreaOffice:'',
+				onsaleAreaOther:''
             });
             this.dlg.setTitle("新增记录");
             this.dlg.show();
@@ -412,10 +907,6 @@
             if (this.grid.getSelectionModel().hasSelection()) {
                 this.dlg.setTitle("编辑记录");
                 var rec = this.grid.getSelectionModel().getSelected();
-//                var ml = [];
-//                for (var i = 0; i < rec.data.roles.length; i++) {
-//                    ml.push(rec.data.roles[i].id);
-//                }
                 Ext.apply(this.currentFormValues, {
                 	id:rec.data.id,
                 	areaId:rec.data.areaId,
@@ -427,12 +918,31 @@
                 	financialSourcingInland:rec.data.financialSourcingInland,
                 	financialSourcingForeign:rec.data.financialSourcingForeign,
                 	financialSourcingSelf:rec.data.financialSourcingSelf,
-                	financialSourcingOther:rec.data.financialSourcingOther
-//                    id: rec.data.id,
-//                    name: rec.data.name,
-//                    password: "",
-//                    confirmPassword: "",
-//                    roleList: ml.toString()
+                	financialSourcingOther:rec.data.financialSourcingOther,
+                	workingAreaHouse:rec.data.workingAreaHouse,
+    				workingAreaBusiness:rec.data.workingAreaBusiness,
+    				workingAreaOffice:rec.data.workingAreaOffice,
+    				workingAreaOther:rec.data.workingAreaOther,
+    				newAreaHouse:rec.data.newAreaHouse,
+    				newAreaBusiness:rec.data.newAreaBusiness,
+    				newAreaOffice:rec.data.newAreaOffice,
+    				newAreaOther:rec.data.newAreaOther,
+    				completeAreaHouse:rec.data.completeAreaHouse,
+    				completeAreaBusiness:rec.data.completeAreaBusiness,
+    				completeAreaOffice:rec.data.completeAreaOffice,
+    				completeAreaOther:rec.data.completeAreaOther,
+    				saledAreaHouse:rec.data.saledAreaHouse,
+    				saledAreaBusiness:rec.data.saledAreaBusiness,
+    				saledAreaOffice:rec.data.saledAreaOffice,
+    				saledAreaOther:rec.data.saledAreaOther,
+    				incomingHouse:rec.data.incomingHouse,
+    				incomingBusiness:rec.data.incomingBusiness,
+    				incomingOffice:rec.data.incomingOffice,
+    				incomingOther:rec.data.incomingOther,
+    				onsaleAreaHouse:rec.data.onsaleAreaHouse,
+    				onsaleAreaBusiness:rec.data.onsaleAreaBusiness,
+    				onsaleAreaOffice:rec.data.onsaleAreaOffice,
+    				onsaleAreaOther:rec.data.onsaleAreaOther            
                 });
                 this.dlg.show();
             } else {

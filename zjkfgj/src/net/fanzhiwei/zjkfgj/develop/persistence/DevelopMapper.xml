@@ -19,6 +19,9 @@
     	<if test="userId != null">
     		and r.userId = #{userId}
     	</if>
+    	<if test="areaId != null">
+    		and r.areaId = #{areaId}
+    	</if>
     </where>
     order by a.displayOrder
   </select>
@@ -91,4 +94,14 @@
   <delete id="deleteDevelop"  parameterType="map">
   	DELETE FROM realestate_develop WHERE id=#{id}
   </delete>
+  
+  <select id="getArea" resultType="Area">
+  	SELECT 
+  		id,
+  		areaName,
+        displayOrder,
+        descriptin
+  	FROM area  
+  	order by displayOrder
+  </select>
 </mapper>

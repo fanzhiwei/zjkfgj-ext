@@ -3,6 +3,7 @@ package net.fanzhiwei.zjkfgj.develop.persistence;
 import java.util.List;
 import java.util.Map;
 
+import net.fanzhiwei.zjkfgj.develop.domain.Area;
 import net.fanzhiwei.zjkfgj.develop.domain.Develop;
 
 public interface DevelopMapper {
@@ -10,4 +11,5 @@ public interface DevelopMapper {
 	void insertDevelop(Develop develop);
 	void updateDevelop(Develop develop);
 	void deleteDevelop(Map<String,Object> param);
+	List<Area> getArea();
 }
