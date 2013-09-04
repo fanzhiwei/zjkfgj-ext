@@ -24,5 +24,6 @@
     <script type="text/javascript" src="${ctx}/scripts/ux/SearchField.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/ChangePasswordDialog.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/Main.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/jquery/jquery-1.8.2.min.js"></script>
   </body>
 </html>
