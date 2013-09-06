@@ -104,4 +104,46 @@
   	FROM area  
   	order by displayOrder
   </select>
+  
+  <select id="selectDevelopCount1" parameterType="map" resultType="DevelopDTO">
+	select 
+		SUM(r.`investHouse`) as investHouseSum,
+		SUM(r.`investBusiness`) as investBusinessSum,
+		SUM(r.`investOffice`) as investOfficeSum,
+		SUM(r.`investOther`) as investOtherSum,
+		SUM(r.`financialSourcingInland`) as financialSourcingInlandSum,
+		SUM(r.`financialSourcingForeign`) as financialSourcingForeignSum,
+		SUM(r.`financialSourcingSelf`) as financialSourcingSelfSum,
+		SUM(r.`financialSourcingOther`) as financialSourcingOtherSum,
+		SUM(r.`workingAreaHouse`) as workingAreaHouseSum,
+		SUM(r.`workingAreaBusiness`) as workingAreaBusinessSum,
+		SUM(r.`workingAreaOffice`) as workingAreaOfficeSum,
+		SUM(r.`workingAreaOther`) as workingAreaOtherSum,
+		SUM(r.`newAreaHouse`) as newAreaHouseSum,
+		SUM(r.`newAreaBusiness`) as newAreaBusinessSum,
+		SUM(r.`newAreaOffice`) as newAreaOfficeSum,
+		SUM(r.`newAreaOther`) as newAreaOtherSum,
+		SUM(r.`completeAreaHouse`) as completeAreaHouseSum,
+		SUM(r.`completeAreaBusiness`) as completeAreaBusinessSum,
+		SUM(r.`completeAreaOffice`) as completeAreaOfficeSum,
+		SUM(r.`completeAreaOther`) as completeAreaOtherSum,
+		SUM(r.`saledAreaHouse`) as saledAreaHouseSum,
+		SUM(r.`saledAreaBusiness`) as saledAreaBusinessSum,
+		SUM(r.`saledAreaOffice`) as saledAreaOfficeSum,
+		SUM(r.`saledAreaOther`) as saledAreaOtherSum,
+		SUM(r.`incomingHouse`) as incomingHouseSum,
+		SUM(r.`incomingBusiness`) as incomingBusinessSum,
+		SUM(r.`incomingOffice`) as incomingOfficeSum,
+		SUM(r.`incomingOther`) as incomingOtherSum,
+		SUM(r.`onsaleAreaHouse`) as onsaleAreaHouseSum,
+		SUM(r.`onsaleAreaBusiness`) as onsaleAreaBusinessSum,
+		SUM(r.`onsaleAreaOffice`) as onsaleAreaOfficeSum,
+		SUM(r.`onsaleAreaOther`) as onsaleAreaOtherSum
+	from
+	realestate_develop r
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+  </select>
 </mapper>

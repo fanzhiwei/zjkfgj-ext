@@ -1,11 +1,14 @@
 package net.fanzhiwei.zjkfgj.develop.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.fanzhiwei.zjkfgj.develop.domain.Area;
 import net.fanzhiwei.zjkfgj.develop.domain.Develop;
+import net.fanzhiwei.zjkfgj.develop.dto.Develop1DTO;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO;
 import net.fanzhiwei.zjkfgj.develop.persistence.DevelopMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +64,31 @@ public class DevelopService{
 	public List<Area> getArea() {
 		List<Area> areaList = developMapper.getArea();
 		return areaList;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Develop1DTO> selectDevelopCount1(int startMonth,int endMonth) {
+		List<Develop1DTO> list = new ArrayList<Develop1DTO>();
+		String recordMonth = "";
+		if (startMonth < endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		DevelopDTO dto = developMapper.selectDevelopCount1(param);
+		if (dto.getInvestHouseSum() == null) {
+			return list;
+		}
+		Develop1DTO dto1 = new Develop1DTO();
+		dto1.setRecordMonth(recordMonth);
+		dto1.setSubject("完成投资（万元）");
+		dto1.setCatagory("住宅");
+		dto1.setCount(dto.getInvestHouseSum());
 	}
 }

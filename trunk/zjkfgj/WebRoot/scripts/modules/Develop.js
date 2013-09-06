@@ -750,12 +750,14 @@
             var dlg = new Ext.Window({
                 width: 800,
                 height: 600,
+                autoScroll:true,
+                bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
                 plain: true,
                 closable: true,
                 resizable: false,
                 frame: true,
-                layout: 'fit',
+//                layout: 'fit',
                 closeAction: 'hide',
                 border: false,
                 modal: true,
@@ -958,7 +960,7 @@
                 for (var i = 0; i < recs.length; i++) {
                     var data = recs[i].data;
                     ids.push(data.id);
-                    titles += data.id + '<br>';
+                    titles += data.recordYearMonth + data.areaName + '<br>';
                 }
                 Ext.Msg.confirm('删除记录', '确定删除以下记录？<br><font color="red">' + titles + '</font>',
                 function(btn) {
