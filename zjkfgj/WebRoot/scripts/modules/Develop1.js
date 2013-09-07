@@ -59,21 +59,31 @@
                 loadMask: true,
                 tbar: [{
                     xtype: 'datefield',
-                    id: 'queryDate',
-                    name: 'queryDate',
+                    id: 'startMonth',
+                    name: 'startMonth',
                     allowBlank:false,
                     value:new Date(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
                     fieldLabel: '查询日期',
                     maxlength: 20,
-                    format: 'Y.m',
+                    format: 'Y-m',
+                },{
+                    xtype: 'datefield',
+                    id: 'endMonth',
+                    name: 'endMonth',
+                    allowBlank:false,
+                    value:new Date(),
+                    invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
+                    fieldLabel: '查询日期',
+                    maxlength: 20,
+                    format: 'Y-m',
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.Develop1.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
+                        	App.Develop1.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.Develop1.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
+		                	App.Develop1.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
 		                }
                     }
                 }],
