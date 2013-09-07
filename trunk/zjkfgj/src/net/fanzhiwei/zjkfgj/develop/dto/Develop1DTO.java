@@ -1,11 +1,20 @@
 package net.fanzhiwei.zjkfgj.develop.dto;
 
 public class Develop1DTO {
-	private String recordMonth = "";
+	private int id = 1;
+	private String recordMonth;
 	private String subject = "";
-	private Double countSum;
+	private Double subTotal;
 	private String catagory = "";
-	private Double count;
+	private Double sum;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getRecordMonth() {
 		return recordMonth;
@@ -23,12 +32,12 @@ public class Develop1DTO {
 		this.subject = subject;
 	}
 
-	public Double getCountSum() {
-		return countSum;
+	public Double getSubTotal() {
+		return subTotal;
 	}
 
-	public void setCountSum(Double countSum) {
-		this.countSum = countSum;
+	public void setSubTotal(Double subTotal) {
+		this.subTotal = subTotal;
 	}
 
 	public String getCatagory() {
@@ -39,11 +48,11 @@ public class Develop1DTO {
 		this.catagory = catagory;
 	}
 
-	public Double getCount() {
-		return count;
+	public Double getSum() {
+		return sum;
 	}
 
-	public void setCount(Double count) {
-		this.count = count;
+	public void setSum(Double sum) {
+		this.sum = sum;
 	}
 }
