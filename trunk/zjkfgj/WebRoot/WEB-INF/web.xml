@@ -50,7 +50,7 @@
 </filter-mapping>   -->
 	<!-- configure session timeout one minute -->  
 <session-config>  
-	<session-timeout>600</session-timeout>  
+	<session-timeout>1200</session-timeout>  
 </session-config> 
 
 

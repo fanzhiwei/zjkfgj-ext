@@ -4,13 +4,13 @@
         currentFormValues: {},
 
         getStore: function() {
-        	var queryDateObj = document.getElementById("queryDate");
-        	var queryDate;
-        	if (queryDateObj == null) {
-        		queryDate = "";
-        	} else {
-        		queryDate = queryDateObj.value.replace(".","");
-        	}
+//        	var queryDateObj = document.getElementById("queryDate");
+//        	var queryDate;
+//        	if (queryDateObj == null) {
+//        		queryDate = "";
+//        	} else {
+//        		queryDate = queryDateObj.value.replace(".","");
+//        	}
             var store = new Ext.data.Store({
                 autoLoad: {
 					params : {}
@@ -42,7 +42,7 @@
 					{
 						name: 'modifyTime',
 						type: 'date',
-						dateFormat: 'time',
+						dateFormat: 'time'
 					},
 					{
 						name: 'recordYearMonth'
@@ -793,14 +793,14 @@
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
                     fieldLabel: '查询日期',
                     maxlength: 20,
-                    format: 'Y.m',
+                    format: 'Y-m',
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
+                        	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace(".","")}});
+		                	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace("-","")}});
 		                }
                     }
                 },{

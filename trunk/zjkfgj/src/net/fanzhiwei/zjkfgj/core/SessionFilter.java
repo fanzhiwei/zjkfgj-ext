@@ -27,10 +27,7 @@ public class SessionFilter implements Filter {
         HttpServletRequest httpReq=(HttpServletRequest)req;  
         HttpServletResponse httpRes=(HttpServletResponse)res;  
         HttpSession httpSession=httpReq.getSession();  
-        System.out.println("111");
         if(httpSession.getAttribute("user")==null){  
-        	
-        	System.out.println("22");
             httpRes.sendRedirect("index.jsp");  
         }else{  
             chain.doFilter(req, res);  
