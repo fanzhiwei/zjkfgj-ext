@@ -448,7 +448,7 @@
 //                    }
                 },
                 {
-                	id:'recordYearMonth',
+//                	id:'recordYearMonth',
                     name: 'recordYearMonth',
                     fieldLabel: '报送年月',
                     readOnly:true

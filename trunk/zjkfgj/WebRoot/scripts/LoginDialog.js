@@ -7,7 +7,7 @@ App.LoginDialog = function() {
             var form = new Ext.form.FormPanel({
 				url:'user/login',
                 labelWidth: 80,
-                buttonAlign: 'center',
+//                buttonAlign: 'center',
                 bodyStyle: 'padding:5px;',
                 frame: true,
                 defaultType: 'textfield',
@@ -68,7 +68,9 @@ App.LoginDialog = function() {
                     html: '<div style="margin:5px 0px 0px 84px;color:red">*如果图片不清晰请单击图片更换图片</div>',
                     border: false
                 }],
-                buttons: [{
+                buttons: [
+                '<div style="padding:0px 90px 0px 5px"></div>',
+                {
                     text: '确定',
                     scope: this,
                     handler: function() {
@@ -78,9 +80,9 @@ App.LoginDialog = function() {
                     text: '重置',
                     scope: this,
                     handler: function() {
-                        form.getForm().reset()
+                        form.getForm().reset();
                     }
-                }]
+                },'<div style="padding:0px 5px 0px 30px"><a href="download/readme.zip">下载使用说明</a></div>']
             });
             return form;
         },
@@ -90,7 +92,7 @@ App.LoginDialog = function() {
             var dlg = new Ext.Window({
                 width: 400,
                 height: 300,
-                title: 'KimHo管理系统',
+                title: '张家口市房地产市场数据统计系统',
                 plain: true,
                 closable: true,
                 resizable: false,
