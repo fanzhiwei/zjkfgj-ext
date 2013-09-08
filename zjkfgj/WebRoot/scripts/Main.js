@@ -131,7 +131,7 @@ App.createCenter = function() {
             title: '欢迎您',
             closable: false,
             hideMode: 'offsets',
-            html: "KimHo管理系统"
+            html: "<div style='font-size:20px;padding:20 20'>张家口市房地产市场数据统计系统</div>"
         }]
     });
 
