@@ -1,4 +1,4 @@
-﻿App.Develop1 = function() {
+﻿App.Develop2 = function() {
     return {
 
         currentFormValues: {},
@@ -17,7 +17,7 @@
 //            		params : {start:0, limit:15,recordYearMonth:queryDate}
 				},
 				proxy: new Ext.data.HttpProxy({
-					url : 'develop/count1?t=' + new Date().getTime()
+					url : 'develop/count2?t=' + new Date().getTime()
 				}),
                 remoteSort: false,
 				reader: new Ext.data.JsonReader({
@@ -26,20 +26,28 @@
 //					idProperty : 'id',
 					fields: [
 					{
+						name: 'id'
+					},					         
+					{
 						name: 'recordMonth'
 					},
 					{
-						name: 'subject'
+						name: 'district'
 					},
 					{
-						name: 'subTotal'
+						name: 'sumCount'
 					},
 					{
-						name: 'catagory'
+						name: 'investHouseSum'
 					},
 					{
-						name: 'sum',
-						type: 'float'
+						name: 'investBusinessSum'
+					},
+					{
+						name: 'investOfficeSum'
+					},
+					{
+						name: 'investOtherSum'
 					}
 					]
 				})
@@ -52,13 +60,13 @@
             panel.body.dom.innerHTML = "";
             
             this.grid = new Ext.grid.GridPanel({
-            	id:'gridId',
+            	id:'gridId2',
                 loadMask: true,
-                title:'张家口市房地产开发企业开发情况汇总表',
+                title:'张家口市房地产开发企业完成投资情况汇总表',
                 tbar: [' ','张家口市',{
                     xtype: 'datefield',
-                    id: 'startMonth',
-                    name: 'startMonth',
+                    id: 'startMonth2',
+                    name: 'startMonth2',
                     allowBlank:false,
                     value:new Date(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
@@ -68,16 +76,16 @@
                     listeners: {
                     	scope: this,
                     	select: function(obj, date) {
-                    		this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonth2").value.replace("-",""),endMonth:document.getElementById("endMonth2").value.replace("-","")}});
                     	},
                     	change: function(obj, date) {
-                    		this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonth2").value.replace("-",""),endMonth:document.getElementById("endMonth2").value.replace("-","")}});
                     	}
                     }
                 },'至',{
                     xtype: 'datefield',
-                    id: 'endMonth',
-                    name: 'endMonth',
+                    id: 'endMonth2',
+                    name: 'endMonth2',
                     allowBlank:false,
                     value:new Date(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
@@ -87,51 +95,69 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                        	this.store.reload({params:{startMonth:document.getElementById("startMonth2").value.replace("-",""),endMonth:document.getElementById("endMonth2").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+		                	this.store.reload({params:{startMonth:document.getElementById("startMonth2").value.replace("-",""),endMonth:document.getElementById("endMonth2").value.replace("-","")}});
 		                }
                     }
-                },'房地产开发企业开发情况汇总表'
+                },'房地产开发企业完成投资情况汇总表'
                 ],
                 store: this.store,
                 columns: [
                 {
+                    header: "序号",
+                    width: 50,
+                    //sortable: true,
+                    dataIndex: 'id'
+                },
+                {
                     header: "统计日期",
                     width: 160,
-//                    sortable: true,
-                    dataIndex: 'recordMonth'
-                },
-                {
-                    header: "科  目",
-                    width: 160,
-//                    sortable: true,
-                    dataIndex: 'subject'
-                },
-                {
-                	header: "小计",
-                	width: 100,
-                	//sortable: true,
-                	dataIndex: 'subTotal'
-                },
-                {
-                    header: "分类",
-                    width: 150,
                     //sortable: true,
-                    dataIndex: 'catagory'
+                    dataIndex: 'recordMonth'
+                },                
+                {
+                    header: "县（区）",
+                    width: 100,
+                    //sortable: true,
+                    dataIndex: 'district'
                 },
                 {
-                	header: "累计",
+                	header: "小计（万元）",
                 	width: 100,
                 	//sortable: true,
-                	dataIndex: 'sum'
+                	dataIndex: 'sumCount'
+                },
+                {
+                    header: "住宅（万元）",
+                    width: 100,
+                    //sortable: true,
+                    dataIndex: 'investHouseSum'
+                },
+                {
+                	header: "商业营业房（万元）",
+                	width: 120,
+                	//sortable: true,
+                	dataIndex: 'investBusinessSum'
+                },
+                {
+                	header: "办公房（万元）",
+                	width: 100,
+                	//sortable: true,
+                	dataIndex: 'investOfficeSum'
+                },
+                {
+                	header: "其他房（万元）",
+                	width: 100,
+                	//sortable: true,
+                	dataIndex: 'investOtherSum'
                 }],
                 bbar:new Ext.Toolbar({
                     buttons: [new Ext.Button({
                         text: '导出到Excel',
                         handler: function() {
-                            var vExportContent = Ext.getCmp("gridId").getExcelXml();
+                            var vExportContent = Ext.getCmp("gridId2").getExcelXml();
                             if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
                                 var fd=Ext.get('frmDummy');
                                 if (!fd) {
