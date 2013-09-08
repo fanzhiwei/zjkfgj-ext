@@ -139,33 +139,34 @@ public class DevelopService{
 		dto8.setCatagory("其他资金");
 		dto8.setSum(dto.getFinancialSourcingOtherSum());
 		list.add(dto8);
-		
-		Develop1DTO dto9 = new Develop1DTO();
-		dto9.setId(i++);
-		dto9.setRecordMonth(recordMonth);
-		dto9.setSubject("施工面积(㎡)");
-		dto9.setSubTotal(dto.getWorkingAreaHouseSum() + dto.getWorkingAreaBusinessSum() + dto.getWorkingAreaOfficeSum() + dto.getWorkingAreaOtherSum());
-		dto9.setCatagory("住宅");
-		dto9.setSum(dto.getWorkingAreaHouseSum());
-		list.add(dto9);
-		
-		Develop1DTO dto10 = new Develop1DTO();
-		dto10.setId(i++);
-		dto10.setCatagory("商业营业房");
-		dto10.setSum(dto.getWorkingAreaBusinessSum());
-		list.add(dto10);
-		
-		Develop1DTO dto11 = new Develop1DTO();
-		dto11.setId(i++);
-		dto11.setCatagory("办公房");
-		dto11.setSum(dto.getWorkingAreaOfficeSum());
-		list.add(dto11);
-		
-		Develop1DTO dto12 = new Develop1DTO();
-		dto12.setId(i++);
-		dto12.setCatagory("其他房");
-		dto12.setSum(dto.getWorkingAreaOtherSum());
-		list.add(dto12);
+		if (startMonth == endMonth) {
+			Develop1DTO dto9 = new Develop1DTO();
+			dto9.setId(i++);
+			dto9.setRecordMonth(recordMonth);
+			dto9.setSubject("施工面积(㎡)");
+			dto9.setSubTotal(dto.getWorkingAreaHouseSum() + dto.getWorkingAreaBusinessSum() + dto.getWorkingAreaOfficeSum() + dto.getWorkingAreaOtherSum());
+			dto9.setCatagory("住宅");
+			dto9.setSum(dto.getWorkingAreaHouseSum());
+			list.add(dto9);
+			
+			Develop1DTO dto10 = new Develop1DTO();
+			dto10.setId(i++);
+			dto10.setCatagory("商业营业房");
+			dto10.setSum(dto.getWorkingAreaBusinessSum());
+			list.add(dto10);
+			
+			Develop1DTO dto11 = new Develop1DTO();
+			dto11.setId(i++);
+			dto11.setCatagory("办公房");
+			dto11.setSum(dto.getWorkingAreaOfficeSum());
+			list.add(dto11);
+			
+			Develop1DTO dto12 = new Develop1DTO();
+			dto12.setId(i++);
+			dto12.setCatagory("其他房");
+			dto12.setSum(dto.getWorkingAreaOtherSum());
+			list.add(dto12);
+		}		
 		
 		Develop1DTO dto13 = new Develop1DTO();
 		dto13.setId(i++);
@@ -275,32 +276,34 @@ public class DevelopService{
 		dto28.setSum(dto.getIncomingOtherSum());
 		list.add(dto28);
 		
-		Develop1DTO dto29 = new Develop1DTO();
-		dto29.setId(i++);
-		dto29.setRecordMonth(recordMonth);
-		dto29.setSubject("待售面积(㎡)");
-		dto29.setSubTotal(dto.getOnsaleAreaHouseSum() + dto.getOnsaleAreaBusinessSum() + dto.getOnsaleAreaOfficeSum() + dto.getOnsaleAreaOtherSum());
-		dto29.setCatagory("住宅");
-		dto29.setSum(dto.getOnsaleAreaHouseSum());
-		list.add(dto29);
-		
-		Develop1DTO dto30 = new Develop1DTO();
-		dto30.setId(i++);
-		dto30.setCatagory("商业营业房");
-		dto30.setSum(dto.getOnsaleAreaBusinessSum());
-		list.add(dto30);
-		
-		Develop1DTO dto31 = new Develop1DTO();
-		dto31.setId(i++);
-		dto31.setCatagory("办公房");
-		dto31.setSum(dto.getOnsaleAreaOfficeSum());
-		list.add(dto31);
-		
-		Develop1DTO dto32 = new Develop1DTO();
-		dto32.setId(i++);
-		dto32.setCatagory("其他房");
-		dto32.setSum(dto.getOnsaleAreaOtherSum());
-		list.add(dto32);
+		if (startMonth == endMonth) {
+			Develop1DTO dto29 = new Develop1DTO();
+			dto29.setId(i++);
+			dto29.setRecordMonth(recordMonth);
+			dto29.setSubject("待售面积(㎡)");
+			dto29.setSubTotal(dto.getOnsaleAreaHouseSum() + dto.getOnsaleAreaBusinessSum() + dto.getOnsaleAreaOfficeSum() + dto.getOnsaleAreaOtherSum());
+			dto29.setCatagory("住宅");
+			dto29.setSum(dto.getOnsaleAreaHouseSum());
+			list.add(dto29);
+			
+			Develop1DTO dto30 = new Develop1DTO();
+			dto30.setId(i++);
+			dto30.setCatagory("商业营业房");
+			dto30.setSum(dto.getOnsaleAreaBusinessSum());
+			list.add(dto30);
+			
+			Develop1DTO dto31 = new Develop1DTO();
+			dto31.setId(i++);
+			dto31.setCatagory("办公房");
+			dto31.setSum(dto.getOnsaleAreaOfficeSum());
+			list.add(dto31);
+			
+			Develop1DTO dto32 = new Develop1DTO();
+			dto32.setId(i++);
+			dto32.setCatagory("其他房");
+			dto32.setSum(dto.getOnsaleAreaOtherSum());
+			list.add(dto32);
+		}		
 		
 		return list;
 	}
