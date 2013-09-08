@@ -1,6 +1,6 @@
 package net.fanzhiwei.zjkfgj.develop.dto;
 
-public class Develop1DTO {
+public class DevelopDTO1 {
 	private int id;
 	private String recordMonth;
 	private String subject = "";

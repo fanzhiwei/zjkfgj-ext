@@ -6,6 +6,7 @@ import java.util.Map;
 import net.fanzhiwei.zjkfgj.develop.domain.Area;
 import net.fanzhiwei.zjkfgj.develop.domain.Develop;
 import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO2;
 
 public interface DevelopMapper {
 	List<Develop> getDevelopList(Map<String,Object> param);
@@ -14,4 +15,5 @@ public interface DevelopMapper {
 	void deleteDevelop(Map<String,Object> param);
 	List<Area> getArea();
 	DevelopDTO selectDevelopCount1(Map<String,Object> param);
+	List<DevelopDTO2> selectDevelopCount2(Map<String,Object> param);
 }
