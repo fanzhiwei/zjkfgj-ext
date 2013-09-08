@@ -68,9 +68,10 @@ public class DevelopService{
 	
 	@Transactional(readOnly = true)
 	public List<Develop1DTO> selectDevelopCount1(int startMonth,int endMonth) {
+		int i = 0;
 		List<Develop1DTO> list = new ArrayList<Develop1DTO>();
 		String recordMonth = "";
-		if (startMonth < endMonth) {
+		if (startMonth > endMonth) {
 			return list;
 		}
 		if (startMonth == endMonth) {
@@ -82,10 +83,11 @@ public class DevelopService{
 		param.put("startMonth", startMonth);
 		param.put("endMonth", endMonth);
 		DevelopDTO dto = developMapper.selectDevelopCount1(param);
-		if (dto.getInvestHouseSum() == null) {
+		if (dto == null || dto.getInvestHouseSum() == null) {
 			return list;
 		}
 		Develop1DTO dto1 = new Develop1DTO();
+		dto1.setId(i++);
 		dto1.setRecordMonth(recordMonth);
 		dto1.setSubject("完成投资（万元）");
 		dto1.setSubTotal(dto.getInvestHouseSum() + dto.getInvestBusinessSum() + dto.getInvestOfficeSum() + dto.getInvestOtherSum());
@@ -94,21 +96,25 @@ public class DevelopService{
 		list.add(dto1);
 		
 		Develop1DTO dto2 = new Develop1DTO();
+		dto2.setId(i++);
 		dto2.setCatagory("商业营业房");
 		dto2.setSum(dto.getInvestBusinessSum());
 		list.add(dto2);
 		
 		Develop1DTO dto3 = new Develop1DTO();
+		dto3.setId(i++);
 		dto3.setCatagory("办公房");
 		dto3.setSum(dto.getInvestOfficeSum());
 		list.add(dto3);
 		
 		Develop1DTO dto4 = new Develop1DTO();
+		dto4.setId(i++);
 		dto4.setCatagory("其他房");
 		dto4.setSum(dto.getInvestOtherSum());
 		list.add(dto4);
 		
 		Develop1DTO dto5 = new Develop1DTO();
+		dto5.setId(i++);
 		dto5.setRecordMonth(recordMonth);
 		dto5.setSubject("资金来源总数（万元）");
 		dto5.setSubTotal(dto.getFinancialSourcingInlandSum() + dto.getFinancialSourcingForeignSum() + dto.getFinancialSourcingSelfSum() + dto.getFinancialSourcingOtherSum());
@@ -117,21 +123,25 @@ public class DevelopService{
 		list.add(dto5);
 		
 		Develop1DTO dto6 = new Develop1DTO();
+		dto6.setId(i++);
 		dto6.setCatagory("利用外资");
 		dto6.setSum(dto.getFinancialSourcingForeignSum());
 		list.add(dto6);
 		
 		Develop1DTO dto7 = new Develop1DTO();
+		dto7.setId(i++);
 		dto7.setCatagory("自筹资金");
 		dto7.setSum(dto.getFinancialSourcingSelfSum());
 		list.add(dto7);
 		
 		Develop1DTO dto8 = new Develop1DTO();
+		dto8.setId(i++);
 		dto8.setCatagory("其他资金");
 		dto8.setSum(dto.getFinancialSourcingOtherSum());
 		list.add(dto8);
 		
 		Develop1DTO dto9 = new Develop1DTO();
+		dto9.setId(i++);
 		dto9.setRecordMonth(recordMonth);
 		dto9.setSubject("施工面积(㎡)");
 		dto9.setSubTotal(dto.getWorkingAreaHouseSum() + dto.getWorkingAreaBusinessSum() + dto.getWorkingAreaOfficeSum() + dto.getWorkingAreaOtherSum());
@@ -140,21 +150,25 @@ public class DevelopService{
 		list.add(dto9);
 		
 		Develop1DTO dto10 = new Develop1DTO();
+		dto10.setId(i++);
 		dto10.setCatagory("商业营业房");
 		dto10.setSum(dto.getWorkingAreaBusinessSum());
 		list.add(dto10);
 		
 		Develop1DTO dto11 = new Develop1DTO();
+		dto11.setId(i++);
 		dto11.setCatagory("办公房");
 		dto11.setSum(dto.getWorkingAreaOfficeSum());
 		list.add(dto11);
 		
 		Develop1DTO dto12 = new Develop1DTO();
+		dto12.setId(i++);
 		dto12.setCatagory("其他房");
 		dto12.setSum(dto.getWorkingAreaOtherSum());
 		list.add(dto12);
 		
 		Develop1DTO dto13 = new Develop1DTO();
+		dto13.setId(i++);
 		dto13.setRecordMonth(recordMonth);
 		dto13.setSubject("新开工面积(㎡)");
 		dto13.setSubTotal(dto.getNewAreaHouseSum() + dto.getNewAreaBusinessSum() + dto.getNewAreaOfficeSum() + dto.getNewAreaOtherSum());
@@ -163,21 +177,25 @@ public class DevelopService{
 		list.add(dto13);
 		
 		Develop1DTO dto14 = new Develop1DTO();
+		dto14.setId(i++);
 		dto14.setCatagory("商业营业房");
 		dto14.setSum(dto.getNewAreaBusinessSum());
 		list.add(dto14);
 		
 		Develop1DTO dto15 = new Develop1DTO();
+		dto15.setId(i++);
 		dto15.setCatagory("办公房");
 		dto15.setSum(dto.getNewAreaOfficeSum());
 		list.add(dto15);
 		
 		Develop1DTO dto16 = new Develop1DTO();
+		dto16.setId(i++);
 		dto16.setCatagory("其他房");
 		dto16.setSum(dto.getNewAreaOtherSum());
 		list.add(dto16);
 		
 		Develop1DTO dto17 = new Develop1DTO();
+		dto17.setId(i++);
 		dto17.setRecordMonth(recordMonth);
 		dto17.setSubject("竣工面积(㎡)");
 		dto17.setSubTotal(dto.getCompleteAreaHouseSum() + dto.getCompleteAreaBusinessSum() + dto.getCompleteAreaOfficeSum() + dto.getCompleteAreaOtherSum());
@@ -186,21 +204,25 @@ public class DevelopService{
 		list.add(dto17);
 		
 		Develop1DTO dto18 = new Develop1DTO();
+		dto18.setId(i++);
 		dto18.setCatagory("商业营业房");
 		dto18.setSum(dto.getCompleteAreaBusinessSum());
 		list.add(dto18);
 		
 		Develop1DTO dto19 = new Develop1DTO();
+		dto19.setId(i++);
 		dto19.setCatagory("办公房");
 		dto19.setSum(dto.getCompleteAreaOfficeSum());
 		list.add(dto19);
 		
 		Develop1DTO dto20 = new Develop1DTO();
+		dto20.setId(i++);
 		dto20.setCatagory("其他房");
 		dto20.setSum(dto.getCompleteAreaOtherSum());
 		list.add(dto20);
 		
 		Develop1DTO dto21 = new Develop1DTO();
+		dto21.setId(i++);
 		dto21.setRecordMonth(recordMonth);
 		dto21.setSubject("销售面积(㎡)");
 		dto21.setSubTotal(dto.getSaledAreaHouseSum() + dto.getSaledAreaBusinessSum() + dto.getSaledAreaOfficeSum() + dto.getSaledAreaOtherSum());
@@ -209,21 +231,25 @@ public class DevelopService{
 		list.add(dto21);
 		
 		Develop1DTO dto22 = new Develop1DTO();
+		dto22.setId(i++);
 		dto22.setCatagory("商业营业房");
 		dto22.setSum(dto.getSaledAreaBusinessSum());
 		list.add(dto22);
 		
 		Develop1DTO dto23 = new Develop1DTO();
+		dto23.setId(i++);
 		dto23.setCatagory("办公房");
 		dto23.setSum(dto.getSaledAreaOfficeSum());
 		list.add(dto23);
 		
 		Develop1DTO dto24 = new Develop1DTO();
+		dto24.setId(i++);
 		dto24.setCatagory("其他房");
 		dto24.setSum(dto.getSaledAreaOtherSum());
 		list.add(dto24);
 		
 		Develop1DTO dto25 = new Develop1DTO();
+		dto25.setId(i++);
 		dto25.setRecordMonth(recordMonth);
 		dto25.setSubject("销售收入（万元）");
 		dto25.setSubTotal(dto.getIncomingHouseSum() + dto.getIncomingBusinessSum() + dto.getIncomingOfficeSum() + dto.getIncomingOtherSum());
@@ -232,21 +258,25 @@ public class DevelopService{
 		list.add(dto25);
 		
 		Develop1DTO dto26 = new Develop1DTO();
+		dto26.setId(i++);
 		dto26.setCatagory("商业营业房");
 		dto26.setSum(dto.getIncomingBusinessSum());
 		list.add(dto26);
 		
 		Develop1DTO dto27 = new Develop1DTO();
+		dto27.setId(i++);
 		dto27.setCatagory("办公房");
 		dto27.setSum(dto.getIncomingOfficeSum());
 		list.add(dto27);
 		
 		Develop1DTO dto28 = new Develop1DTO();
+		dto28.setId(i++);
 		dto28.setCatagory("其他房");
 		dto28.setSum(dto.getIncomingOtherSum());
 		list.add(dto28);
 		
 		Develop1DTO dto29 = new Develop1DTO();
+		dto29.setId(i++);
 		dto29.setRecordMonth(recordMonth);
 		dto29.setSubject("待售面积(㎡)");
 		dto29.setSubTotal(dto.getOnsaleAreaHouseSum() + dto.getOnsaleAreaBusinessSum() + dto.getOnsaleAreaOfficeSum() + dto.getOnsaleAreaOtherSum());
@@ -255,16 +285,19 @@ public class DevelopService{
 		list.add(dto29);
 		
 		Develop1DTO dto30 = new Develop1DTO();
+		dto30.setId(i++);
 		dto30.setCatagory("商业营业房");
 		dto30.setSum(dto.getOnsaleAreaBusinessSum());
 		list.add(dto30);
 		
 		Develop1DTO dto31 = new Develop1DTO();
+		dto31.setId(i++);
 		dto31.setCatagory("办公房");
 		dto31.setSum(dto.getOnsaleAreaOfficeSum());
 		list.add(dto31);
 		
 		Develop1DTO dto32 = new Develop1DTO();
+		dto32.setId(i++);
 		dto32.setCatagory("其他房");
 		dto32.setSum(dto.getOnsaleAreaOtherSum());
 		list.add(dto32);

@@ -23,11 +23,8 @@
 				reader: new Ext.data.JsonReader({
 					totalProperty : 'totalCount',
 					root : 'rows',
-					idProperty : 'id',
-					fields: [{
-						name: 'id',
-						type: 'int'
-					},
+//					idProperty : 'id',
+					fields: [
 					{
 						name: 'recordMonth'
 					},
@@ -41,7 +38,8 @@
 						name: 'catagory'
 					},
 					{
-						name: 'sum'
+						name: 'sum',
+						type: 'float'
 					}
 					]
 				})
@@ -51,13 +49,13 @@
 
         createGrid: function(id) {
             var panel = Ext.getCmp(id);
-
             panel.body.dom.innerHTML = "";
-
-            var sm = new Ext.grid.CheckboxSelectionModel();
+            
             this.grid = new Ext.grid.GridPanel({
+            	id:'gridId',
                 loadMask: true,
-                tbar: [{
+                title:'张家口市房地产开发企业开发情况汇总表',
+                tbar: [' ','张家口市',{
                     xtype: 'datefield',
                     id: 'startMonth',
                     name: 'startMonth',
@@ -67,7 +65,16 @@
                     fieldLabel: '查询日期',
                     maxlength: 20,
                     format: 'Y-m',
-                },{
+                    listeners: {
+                    	scope: this,
+                    	select: function(obj, date) {
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                    	},
+                    	change: function(obj, date) {
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                    	}
+                    }
+                },'至',{
                     xtype: 'datefield',
                     id: 'endMonth',
                     name: 'endMonth',
@@ -80,55 +87,67 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.Develop1.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+                        	this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.Develop1.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
+		                	this.store.reload({params:{startMonth:document.getElementById("startMonth").value.replace("-",""),endMonth:document.getElementById("endMonth").value.replace("-","")}});
 		                }
                     }
-                }],
-                
+                },'房地产开发企业开发情况汇总表'
+                ],
                 store: this.store,
-                sm: sm,
-                columns: [sm, {
-                    header: "编号",
-                    width: 40,
+                columns: [
+                {
+                    header: "统计日期",
+                    width: 200,
                     sortable: true,
-                    renderer:function(value,metadata,record,rowIndex){
-                    	if(this.rowspan){ 
-                    	p.cellAttr = 'rowspan="'+this.rowspan+'"'; 
-                    	}
-                    	var start = 0;
-                    	return start + rowIndex+1;
-                    }//自动编号
+                    dataIndex: 'recordMonth'
                 },
                 {
-                    header: "记录地区",
-                    width: 150,
+                    header: "科  目",
+                    width: 200,
                     sortable: true,
-                    dataIndex: 'areaName'
+                    dataIndex: 'subject'
                 },
                 {
-                	header: "记录年月",
+                	header: "小计",
                 	width: 100,
                 	sortable: true,
-                	dataIndex: 'recordYearMonth'
+                	dataIndex: 'subTotal'
                 },
                 {
-                    header: "创建日期",
-                    width: 250,
+                    header: "分类",
+                    width: 150,
                     sortable: true,
-                    dataIndex: 'createTime',
-                    renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
+                    dataIndex: 'catagory'
                 },
                 {
-                	header: "修改日期",
-                	width: 250,
+                	header: "累计",
+                	width: 100,
                 	sortable: true,
-                	dataIndex: 'modifyTime',
-                	renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
-                }]
+                	dataIndex: 'sum'
+                }],
+                bbar:new Ext.Toolbar({
+                    buttons: [new Ext.Button({
+                        text: '导出到Excel',
+                        handler: function() {
+                            var vExportContent = Ext.getCmp("gridId").getExcelXml();
+                            if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
+                                var fd=Ext.get('frmDummy');
+                                if (!fd) {
+                                    fd=Ext.DomHelper.append(Ext.getBody(),{tag:'form',method:'post',id:'frmDummy',action:'exportexcel.jsp', target:'_blank',name:'frmDummy',cls:'x-hidden',cn:[
+                                        {tag:'input',name:'exportContent',id:'exportContent',type:'hidden'}
+                                    ]},true);
+                                }
+                                fd.child('#exportContent').set({value:vExportContent});
+                                fd.dom.submit();
+                            } else {
+                                document.location = 'data:application/vnd.ms-excel;base64,'+Base64.encode(vExportContent);
+                            }}
+                    })]
+                })
             });
+            
             panel.add(this.grid);
         },
 

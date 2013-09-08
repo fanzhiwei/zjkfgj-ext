@@ -1,7 +1,7 @@
 package net.fanzhiwei.zjkfgj.develop.dto;
 
 public class Develop1DTO {
-	private int id = 1;
+	private int id;
 	private String recordMonth;
 	private String subject = "";
 	private Double subTotal;
