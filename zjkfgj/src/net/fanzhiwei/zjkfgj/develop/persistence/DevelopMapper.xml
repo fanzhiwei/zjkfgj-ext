@@ -146,4 +146,34 @@
 		and r.`recordYearMonth` <= #{endMonth}
 	]]>
   </select>
+  
+  <select id="selectDevelopCount2" parameterType="map" resultType="DevelopDTO2">
+	select 0 as id ,'合计' as district,
+	SUM(r.`investHouse` + r.`investBusiness` + r.`investOffice` + r.`investOther`) AS sumCount,
+	SUM(r.`investHouse`) as investHouseSum, 
+	SUM(r.`investBusiness`) as investBusinessSum, 
+	SUM(r.`investOffice`) as investOfficeSum, 
+	SUM(r.`investOther`) as investOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`investHouse` + r.`investBusiness` + r.`investOffice` + r.`investOther`) AS sumCount,
+	SUM(r.`investHouse`) as investHouseSum, 
+	SUM(r.`investBusiness`) as investBusinessSum, 
+	SUM(r.`investOffice`) as investOfficeSum, 
+	SUM(r.`investOther`) as investOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
 </mapper>

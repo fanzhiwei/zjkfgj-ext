@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.fanzhiwei.zjkfgj.develop.domain.Area;
 import net.fanzhiwei.zjkfgj.develop.domain.Develop;
-import net.fanzhiwei.zjkfgj.develop.dto.Develop1DTO;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO1;
 import net.fanzhiwei.zjkfgj.develop.service.DevelopService;
 import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO2;
 import net.fanzhiwei.zjkfgj.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -196,7 +197,31 @@ public class DevelopController {
 			startMonth = sd.format(new Date());
 			endMonth = startMonth;
 		}
-		List<Develop1DTO>  list = developService.selectDevelopCount1(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		List<DevelopDTO1>  list = developService.selectDevelopCount1(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表2列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count2")
+	public @ResponseBody Map<String,Object> getDevelopCount2(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO2>  list = developService.selectDevelopCount2(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
 		
 		Map<String,Object> responseMap = new HashMap<String,Object>();
 		responseMap.put("totalCount", list.size());
