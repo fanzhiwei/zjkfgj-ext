@@ -12,7 +12,7 @@
     	//登录用户名
     	var loginUserName = '<%=session.getAttribute("loginUserName")%>';
     </script>
-    <title>Store</title>
+    <title>张家口市房地产市场数据统计系统</title>
   </head>
   <body>
     <%@ include file="/scripts/loading/loading.jsp"%>

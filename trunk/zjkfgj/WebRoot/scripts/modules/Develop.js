@@ -709,6 +709,13 @@
                         f.setValues(this.currentFormValues);
                         f.clearInvalid();
                     }
+                },
+                {
+                    text: '关闭',
+                    scope: this,
+                    handler: function() {
+                    	this.dlg.hide();
+                    }
                 }]
             });
             return form;
@@ -749,7 +756,7 @@
         getDialog: function() {
             var dlg = new Ext.Window({
                 width: 800,
-                height: 600,
+                height: 550,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
@@ -867,7 +874,7 @@
             Ext.apply(this.currentFormValues, {
             	id:'',
             	areaId:'',
-            	recordYearMonth: document.getElementById("queryDate").value.replace(".",""),
+            	recordYearMonth: document.getElementById("queryDate").value.replace("-",""),
             	investHouse:'',
             	investBusiness:'',
             	investOffice:'',
