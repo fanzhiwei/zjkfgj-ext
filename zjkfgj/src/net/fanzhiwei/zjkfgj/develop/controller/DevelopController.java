@@ -15,6 +15,13 @@ import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO1;
 import net.fanzhiwei.zjkfgj.develop.service.DevelopService;
 import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO;
 import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO2;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO3;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO4;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO5;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO6;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO7;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO8;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO9;
 import net.fanzhiwei.zjkfgj.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -229,4 +236,171 @@ public class DevelopController {
 		return responseMap;
 	}
 	
+	/**
+	 * 汇总表3列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count3")
+	public @ResponseBody Map<String,Object> getDevelopCount3(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO3>  list = developService.selectDevelopCount3(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表4列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count4")
+	public @ResponseBody Map<String,Object> getDevelopCount4(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO4>  list = developService.selectDevelopCount4(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表5列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count5")
+	public @ResponseBody Map<String,Object> getDevelopCount5(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO5>  list = developService.selectDevelopCount5(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表6列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count6")
+	public @ResponseBody Map<String,Object> getDevelopCount6(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO6>  list = developService.selectDevelopCount6(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表7列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count7")
+	public @ResponseBody Map<String,Object> getDevelopCount7(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO7>  list = developService.selectDevelopCount7(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表8列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count8")
+	public @ResponseBody Map<String,Object> getDevelopCount8(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO8>  list = developService.selectDevelopCount8(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * 汇总表9列表
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count9")
+	public @ResponseBody Map<String,Object> getDevelopCount9(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DevelopVO9>  list = developService.selectDevelopCount9(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
 }

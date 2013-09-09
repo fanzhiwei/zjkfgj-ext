@@ -10,8 +10,22 @@ import net.fanzhiwei.zjkfgj.develop.domain.Develop;
 import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO;
 import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO1;
 import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO2;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO3;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO4;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO5;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO6;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO7;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO8;
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO9;
 import net.fanzhiwei.zjkfgj.develop.persistence.DevelopMapper;
 import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO2;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO3;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO4;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO5;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO6;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO7;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO8;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO9;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -333,6 +347,209 @@ public class DevelopService{
 		DevelopVO2 vo = null;
 		for (DevelopDTO2 dto : listDTO) {
 			vo = new DevelopVO2();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO3> selectDevelopCount3(int startMonth,int endMonth) {
+		List<DevelopVO3> list = new ArrayList<DevelopVO3>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO3> listDTO = developMapper.selectDevelopCount3(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getFinancialSourcingInlandSum() == null) {
+			return list;
+		}
+		DevelopVO3 vo = null;
+		for (DevelopDTO3 dto : listDTO) {
+			vo = new DevelopVO3();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO4> selectDevelopCount4(int startMonth,int endMonth) {
+		List<DevelopVO4> list = new ArrayList<DevelopVO4>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO4> listDTO = developMapper.selectDevelopCount4(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getWorkingAreaHouseSum() == null) {
+			return list;
+		}
+		DevelopVO4 vo = null;
+		for (DevelopDTO4 dto : listDTO) {
+			vo = new DevelopVO4();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO5> selectDevelopCount5(int startMonth,int endMonth) {
+		List<DevelopVO5> list = new ArrayList<DevelopVO5>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO5> listDTO = developMapper.selectDevelopCount5(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getNewAreaHouseSum() == null) {
+			return list;
+		}
+		DevelopVO5 vo = null;
+		for (DevelopDTO5 dto : listDTO) {
+			vo = new DevelopVO5();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO6> selectDevelopCount6(int startMonth,int endMonth) {
+		List<DevelopVO6> list = new ArrayList<DevelopVO6>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO6> listDTO = developMapper.selectDevelopCount6(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getCompleteAreaHouseSum() == null) {
+			return list;
+		}
+		DevelopVO6 vo = null;
+		for (DevelopDTO6 dto : listDTO) {
+			vo = new DevelopVO6();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO7> selectDevelopCount7(int startMonth,int endMonth) {
+		List<DevelopVO7> list = new ArrayList<DevelopVO7>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO7> listDTO = developMapper.selectDevelopCount7(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getSaledAreaHouseSum() == null) {
+			return list;
+		}
+		DevelopVO7 vo = null;
+		for (DevelopDTO7 dto : listDTO) {
+			vo = new DevelopVO7();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO8> selectDevelopCount8(int startMonth,int endMonth) {
+		List<DevelopVO8> list = new ArrayList<DevelopVO8>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO8> listDTO = developMapper.selectDevelopCount8(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getIncomingHouseSum() == null) {
+			return list;
+		}
+		DevelopVO8 vo = null;
+		for (DevelopDTO8 dto : listDTO) {
+			vo = new DevelopVO8();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DevelopVO9> selectDevelopCount9(int startMonth,int endMonth) {
+		List<DevelopVO9> list = new ArrayList<DevelopVO9>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DevelopDTO9> listDTO = developMapper.selectDevelopCount9(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getOnsaleAreaHouseSum() == null) {
+			return list;
+		}
+		DevelopVO9 vo = null;
+		for (DevelopDTO9 dto : listDTO) {
+			vo = new DevelopVO9();
 			vo.setRecordMonth(recordMonth);
 			BeanUtils.copyProperties(dto,vo);
 			list.add(vo);

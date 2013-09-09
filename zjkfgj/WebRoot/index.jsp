@@ -21,7 +21,7 @@
 </html>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("body").css("background-image","url(images/background.jpg)");
-	$("body").css("background-repeat","repeat");
+	//$("body").css("background-image","url(images/fengjing.jpg)");
+	//$("body").css("background-repeat","repeat");
 });
 </script>

@@ -92,9 +92,9 @@ App.LoginDialog = function() {
             var dlg = new Ext.Window({
                 width: 400,
                 height: 300,
-                title: '张家口市房地产市场数据统计系统',
+                title: '登录',
                 plain: true,
-                closable: true,
+                closable: false,
                 resizable: false,
                 frame: true,
                 layout: 'fit',
