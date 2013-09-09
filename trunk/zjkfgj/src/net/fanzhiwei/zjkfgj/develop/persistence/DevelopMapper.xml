@@ -176,4 +176,214 @@
 	group by r.`areaId`
 	order by a.displayOrder)
   </select>
+  
+  <select id="selectDevelopCount3" parameterType="map" resultType="DevelopDTO3">
+	select 0 as id ,'合计' as district,
+	SUM(r.`financialSourcingInland` + r.`financialSourcingForeign` + r.`financialSourcingSelf` + r.`financialSourcingOther`) AS sumCount,
+	SUM(r.`financialSourcingInland`) as financialSourcingInlandSum, 
+	SUM(r.`financialSourcingForeign`) as financialSourcingForeignSum, 
+	SUM(r.`financialSourcingSelf`) as financialSourcingSelfSum, 
+	SUM(r.`financialSourcingOther`) as financialSourcingOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`financialSourcingInland` + r.`financialSourcingForeign` + r.`financialSourcingSelf` + r.`financialSourcingOther`) AS sumCount,
+	SUM(r.`financialSourcingInland`) as financialSourcingInlandSum, 
+	SUM(r.`financialSourcingForeign`) as financialSourcingForeignSum, 
+	SUM(r.`financialSourcingSelf`) as financialSourcingSelfSum, 
+	SUM(r.`financialSourcingOther`) as financialSourcingOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount4" parameterType="map" resultType="DevelopDTO4">
+	select 0 as id ,'合计' as district,
+	SUM(r.`workingAreaHouse` + r.`workingAreaBusiness` + r.`workingAreaOffice` + r.`workingAreaOther`) AS sumCount,
+	SUM(r.`workingAreaHouse`) as workingAreaHouseSum, 
+	SUM(r.`workingAreaBusiness`) as workingAreaBusinessSum, 
+	SUM(r.`workingAreaOffice`) as workingAreaOfficeSum, 
+	SUM(r.`workingAreaOther`) as workingAreaOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`workingAreaHouse` + r.`workingAreaBusiness` + r.`workingAreaOffice` + r.`workingAreaOther`) AS sumCount,
+	SUM(r.`workingAreaHouse`) as workingAreaHouseSum, 
+	SUM(r.`workingAreaBusiness`) as workingAreaBusinessSum, 
+	SUM(r.`workingAreaOffice`) as workingAreaOfficeSum, 
+	SUM(r.`workingAreaOther`) as workingAreaOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount5" parameterType="map" resultType="DevelopDTO5">
+	select 0 as id ,'合计' as district,
+	SUM(r.`newAreaHouse` + r.`newAreaBusiness` + r.`newAreaOffice` + r.`newAreaOther`) AS sumCount,
+	SUM(r.`newAreaHouse`) as newAreaHouseSum, 
+	SUM(r.`newAreaBusiness`) as newAreaBusinessSum, 
+	SUM(r.`newAreaOffice`) as newAreaOfficeSum, 
+	SUM(r.`newAreaOther`) as newAreaOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`newAreaHouse` + r.`newAreaBusiness` + r.`newAreaOffice` + r.`newAreaOther`) AS sumCount,
+	SUM(r.`newAreaHouse`) as newAreaHouseSum, 
+	SUM(r.`newAreaBusiness`) as newAreaBusinessSum, 
+	SUM(r.`newAreaOffice`) as newAreaOfficeSum, 
+	SUM(r.`newAreaOther`) as newAreaOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount6" parameterType="map" resultType="DevelopDTO6">
+	select 0 as id ,'合计' as district,
+	SUM(r.`completeAreaHouse` + r.`completeAreaBusiness` + r.`completeAreaOffice` + r.`completeAreaOther`) AS sumCount,
+	SUM(r.`completeAreaHouse`) as completeAreaHouseSum, 
+	SUM(r.`completeAreaBusiness`) as completeAreaBusinessSum, 
+	SUM(r.`completeAreaOffice`) as completeAreaOfficeSum, 
+	SUM(r.`completeAreaOther`) as completeAreaOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`completeAreaHouse` + r.`completeAreaBusiness` + r.`completeAreaOffice` + r.`completeAreaOther`) AS sumCount,
+	SUM(r.`completeAreaHouse`) as completeAreaHouseSum, 
+	SUM(r.`completeAreaBusiness`) as completeAreaBusinessSum, 
+	SUM(r.`completeAreaOffice`) as completeAreaOfficeSum, 
+	SUM(r.`completeAreaOther`) as completeAreaOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount7" parameterType="map" resultType="DevelopDTO7">
+	select 0 as id ,'合计' as district,
+	SUM(r.`saledAreaHouse` + r.`saledAreaBusiness` + r.`saledAreaOffice` + r.`saledAreaOther`) AS sumCount,
+	SUM(r.`saledAreaHouse`) as saledAreaHouseSum, 
+	SUM(r.`saledAreaBusiness`) as saledAreaBusinessSum, 
+	SUM(r.`saledAreaOffice`) as saledAreaOfficeSum, 
+	SUM(r.`saledAreaOther`) as saledAreaOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`saledAreaHouse` + r.`saledAreaBusiness` + r.`saledAreaOffice` + r.`saledAreaOther`) AS sumCount,
+	SUM(r.`saledAreaHouse`) as saledAreaHouseSum, 
+	SUM(r.`saledAreaBusiness`) as saledAreaBusinessSum, 
+	SUM(r.`saledAreaOffice`) as saledAreaOfficeSum, 
+	SUM(r.`saledAreaOther`) as saledAreaOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount8" parameterType="map" resultType="DevelopDTO8">
+	select 0 as id ,'合计' as district,
+	SUM(r.`incomingHouse` + r.`incomingBusiness` + r.`incomingOffice` + r.`incomingOther`) AS sumCount,
+	SUM(r.`incomingHouse`) as incomingHouseSum, 
+	SUM(r.`incomingBusiness`) as incomingBusinessSum, 
+	SUM(r.`incomingOffice`) as incomingOfficeSum, 
+	SUM(r.`incomingOther`) as incomingOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`incomingHouse` + r.`incomingBusiness` + r.`incomingOffice` + r.`incomingOther`) AS sumCount,
+	SUM(r.`incomingHouse`) as incomingHouseSum, 
+	SUM(r.`incomingBusiness`) as incomingBusinessSum, 
+	SUM(r.`incomingOffice`) as incomingOfficeSum, 
+	SUM(r.`incomingOther`) as incomingOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
+  
+  <select id="selectDevelopCount9" parameterType="map" resultType="DevelopDTO9">
+	select 0 as id ,'合计' as district,
+	SUM(r.`onsaleAreaHouse` + r.`onsaleAreaBusiness` + r.`onsaleAreaOffice` + r.`onsaleAreaOther`) AS sumCount,
+	SUM(r.`onsaleAreaHouse`) as onsaleAreaHouseSum, 
+	SUM(r.`onsaleAreaBusiness`) as onsaleAreaBusinessSum, 
+	SUM(r.`onsaleAreaOffice`) as onsaleAreaOfficeSum, 
+	SUM(r.`onsaleAreaOther`) as onsaleAreaOtherSum
+	from realestate_develop r 
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	union all (
+	select a.id as id,a.areaName as district,
+	SUM(r.`onsaleAreaHouse` + r.`onsaleAreaBusiness` + r.`onsaleAreaOffice` + r.`onsaleAreaOther`) AS sumCount,
+	SUM(r.`onsaleAreaHouse`) as onsaleAreaHouseSum, 
+	SUM(r.`onsaleAreaBusiness`) as onsaleAreaBusinessSum, 
+	SUM(r.`onsaleAreaOffice`) as onsaleAreaOfficeSum, 
+	SUM(r.`onsaleAreaOther`) as onsaleAreaOtherSum
+	from realestate_develop r
+	left join area a
+	on r.`areaId` = a.id
+	<![CDATA[
+		where r.`recordYearMonth` >= #{startMonth} 
+		and r.`recordYearMonth` <= #{endMonth}
+	]]>
+	group by r.`areaId`
+	order by a.displayOrder)
+  </select>
 </mapper>
