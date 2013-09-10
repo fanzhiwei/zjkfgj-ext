@@ -28,8 +28,10 @@ public class SessionFilter implements Filter {
         HttpServletResponse httpRes=(HttpServletResponse)res;  
         HttpSession httpSession=httpReq.getSession();  
         if(httpSession.getAttribute("user")==null){  
+        	System.out.println("跳转首页");
             httpRes.sendRedirect("index.jsp");  
         }else{  
+        	System.out.println("不跳转");
             chain.doFilter(req, res);  
         }  
     }  

@@ -40,7 +40,7 @@
     <session-timeout>30</session-timeout>
   </session-config> -->
 
-<filter>  
+<!-- filter>  
 	<filter-name>sessionFilter</filter-name>  
 	<filter-class>net.fanzhiwei.zjkfgj.core.SessionFilter</filter-class>  
 </filter>  
@@ -55,10 +55,10 @@
 	<url-pattern>/user/save</url-pattern>  
 	<url-pattern>/user/remove</url-pattern>  
 	<url-pattern>/user/changePassword</url-pattern>  
-</filter-mapping>
+</filter-mapping> -->
 	<!-- configure session timeout one minute -->  
 <session-config>  
-	<session-timeout>1</session-timeout>  
+	<session-timeout>1200</session-timeout>  
 </session-config> 
 
 
