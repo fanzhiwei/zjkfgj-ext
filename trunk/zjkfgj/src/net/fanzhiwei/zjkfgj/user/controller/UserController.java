@@ -83,6 +83,11 @@ public class UserController {
 	public @ResponseBody Map<String,Object> getMenus(HttpServletRequest request,   
             HttpServletResponse response){
 		Map<String,Object> responseMap = new HashMap<String,Object>();
+		if (request.getSession().getAttribute("user") == null) {
+			responseMap.put("success", "false");
+			responseMap.put("info", "会话过期，请重新登录！");
+			return responseMap;
+		}
 		User user = (User)request.getSession().getAttribute("user");
 		List<Menu> list = menuService.getMenuListByUserId(user.getId());
 		responseMap.put("success", "true");
@@ -226,6 +231,11 @@ public class UserController {
 	public @ResponseBody Map<String,Object> changePassword(HttpServletRequest request,   
             HttpServletResponse response){
 		Map<String,Object> responseMap = new HashMap<String,Object>();
+		if (request.getSession().getAttribute("user") == null) {
+			responseMap.put("success", "false");
+			responseMap.put("info", "会话过期，请重新登录！");
+			return responseMap;
+		}
 		String oldPassword = request.getParameter("oldPassword");
 		String newPassword = request.getParameter("newPassword");
 		User user =(User)request.getSession().getAttribute("user");
