@@ -45,6 +45,12 @@ public class DevelopController {
 	@RequestMapping(value="/lists")
 	public @ResponseBody Map<String,Object> getDevelopList(HttpServletRequest request,   
             HttpServletResponse response){
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		if (request.getSession().getAttribute("user") == null) {
+			responseMap.put("success", "false");
+			responseMap.put("info", "会话过期，请重新登录！");
+			return responseMap;
+		}
 		String recordYearMonth = request.getParameter("recordYearMonth");
 		if (recordYearMonth == null || "".equals(recordYearMonth)) {
 			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
@@ -57,7 +63,6 @@ public class DevelopController {
 //		params.put("recordYearMonth",201308);
 		List<Develop> developList = developService.getDevelopList(params);
 		
-		Map<String,Object> responseMap = new HashMap<String,Object>();
 		responseMap.put("totalCount", developList.size());
 		responseMap.put("rows", developList);
 		return responseMap;
@@ -90,6 +95,11 @@ public class DevelopController {
 	public @ResponseBody Map<String,Object> saveOrUpdate(DevelopVO vo,HttpServletRequest request,   
             HttpServletResponse response){
 		Map<String,Object> responseMap = new HashMap<String,Object>();
+		if (request.getSession().getAttribute("user") == null) {
+			responseMap.put("success", "false");
+			responseMap.put("info", "会话过期，请重新登录！");
+			return responseMap;
+		}
 		Map<String,Object> params = null;
 		User user = (User)request.getSession().getAttribute("user");
 		vo.setUserId(user.getId());
