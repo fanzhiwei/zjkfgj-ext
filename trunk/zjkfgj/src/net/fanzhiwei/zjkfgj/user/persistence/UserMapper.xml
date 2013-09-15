@@ -70,6 +70,7 @@
     FROM t_user u
     LEFT JOIN t_user_role ur ON(u.id=ur.user_id)
     LEFT JOIN t_role r ON(r.id=ur.role_id)
+    where u.id > 0
   </select>
   
   <resultMap id="userResult"  type="User"> 

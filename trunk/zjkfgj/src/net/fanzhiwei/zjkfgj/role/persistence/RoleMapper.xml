@@ -35,6 +35,7 @@
     	name,
     	description
     FROM t_role
+    where id > 0
   </select>
   
   <select id="getRoleMenuList" resultMap="roleResult">
