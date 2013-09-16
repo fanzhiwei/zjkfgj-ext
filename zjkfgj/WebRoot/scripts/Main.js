@@ -131,8 +131,8 @@ App.createCenter = function() {
             title: '欢迎您',
             closable: false,
             hideMode: 'offsets',
-//            html: "<div style='font-size:20px;padding:20 20'>张家口市房地产市场数据统计系统</div><div style=""></div>"
-            html: "张家口市房地产市场数据统计系统"
+            html: "<div style='background-image:url(images/background.jpg);background-repeat: no-repeat;background-attachment: fixed;width:1600px;height:1000px;font:normal small-caps bold 40px/2 Simsun,arial,sans-serif;padding:20 0 0 50;'>张家口市房地产市场数据统计系统</div>"
+//            html: "张家口市房地产市场数据统计系统"
         }]
     });
 

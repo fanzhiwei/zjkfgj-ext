@@ -13,6 +13,12 @@
     	var loginUserName = '<%=session.getAttribute("loginUserName")%>';
     </script>
     <title>张家口市房地产市场数据统计系统</title>
+<style type="text/css">
+	body {background-image: url(images/background.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;}
+</style>
   </head>
   <body>
     <%@ include file="/scripts/loading/loading.jsp"%>

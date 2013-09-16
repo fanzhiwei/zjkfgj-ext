@@ -100,7 +100,7 @@ App.LoginDialog = function() {
                 layout: 'fit',
                 closeAction: 'hide',
                 border: false,
-                modal: true,
+//                modal: true,
                 items: [form]
             });
             this.form = form;
