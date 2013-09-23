@@ -59,7 +59,8 @@ public class UserController {
 				responseMap.put("success", "true");
 				responseMap.put("info", "登录成功！");
 				request.getSession().setAttribute("user", user); 
-				request.getSession().setAttribute("loginUserName", user.getName()); 
+				String welcomeName = user.getOtherName() == null ? user.getName() : user.getOtherName();
+				request.getSession().setAttribute("loginUserName", welcomeName); 
 				return responseMap;
 			}else {
 				responseMap.put("success", "false");
@@ -140,6 +141,7 @@ public class UserController {
 		Map<String,Object> responseMap = new HashMap<String,Object>();
 		String id = request.getParameter("id");
 		String name = request.getParameter("name").trim();
+		String otherName = request.getParameter("otherName").trim();
 		String password = request.getParameter("password");
 		String roleList = request.getParameter("roleList");
 		try {
@@ -147,9 +149,10 @@ public class UserController {
 			Map<String,Object> paramMap = new HashMap<String,Object>();
 			paramMap.put("id",id);
 			paramMap.put("name",name);
+			paramMap.put("otherName",otherName);
 			User isExistUser = userService.getIsExistUser(paramMap);
 			if(isExistUser != null) {
-				responseMap.put("info", "用户名已存在！"); 
+				responseMap.put("info", "帐号或用户名称已存在！"); 
 				return responseMap;
 			}
 			
@@ -159,6 +162,7 @@ public class UserController {
 				param.put("id", id);
 				User user = userService.getUser(param);
 				user.setName(name);
+				user.setOtherName(otherName);
 				//表示修改了密码
 				if(!"".equals(password)) {
 					user.setPassword(password);
@@ -181,6 +185,7 @@ public class UserController {
 				user.setId(newId);
 				user.setCreateDate(new Date());
 				user.setName(name);
+				user.setOtherName(otherName);
 				user.setPassword(password);
 				Map<String,Object> param = new HashMap<String,Object>();
 				param.put("user_id", newId);

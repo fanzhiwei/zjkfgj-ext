@@ -665,7 +665,7 @@
                 },
                 {
                 	xtype:'fieldset',
-                	title:'完成投资（万元）',
+                	title:'待售面积（㎡）',
                 	collapsible:true,
 //                	height:100,
                 	items:
