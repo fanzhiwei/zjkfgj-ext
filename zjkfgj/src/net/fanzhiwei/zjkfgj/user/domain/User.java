@@ -12,6 +12,7 @@ public class User implements Serializable {
 	
 	private Long id;
 	private String name;
+	private String otherName;
 	private String password;
 	private Date createDate;
 	private List<Role> roles;
@@ -27,6 +28,12 @@ public class User implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getOtherName() {
+		return otherName;
+	}
+	public void setOtherName(String otherName) {
+		this.otherName = otherName;
 	}
 	public String getPassword() {
 		return password;

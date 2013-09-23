@@ -25,6 +25,10 @@
 						allowBlank: false
 					},
 					{
+						name: 'otherName',
+						allowBlank: false
+					},
+					{
 						name: 'createDate',
 						type: 'date',
 						dateFormat: 'time'
@@ -70,16 +74,29 @@
                 },
                 {
                     name: 'name',
-                    fieldLabel: '用户名称',
+                    fieldLabel: '帐号',
                     listeners: {
                         scope: this,
                         keypress: function(field, e) {
                             if (e.getKey() == 13) {
-                                var obj = this.form.getForm.findField("password");
+                                var obj = this.form.getForm.findField("otherName");
                                 if (obj) obj.focus();
                             }
                         }
                     }
+                },
+                {
+                	name: 'otherName',
+                	fieldLabel: '用户名称',
+                	listeners: {
+                		scope: this,
+                		keypress: function(field, e) {
+                			if (e.getKey() == 13) {
+                				var obj = this.form.getForm.findField("password");
+                				if (obj) obj.focus();
+                			}
+                		}
+                	}
                 },
                 {
                     inputType: 'password',
@@ -284,14 +301,20 @@
                     dataIndex: 'id'
                 },
                 {
-                    header: "用户名称",
+                    header: "帐号",
                     width: 100,
                     sortable: true,
                     dataIndex: 'name'
                 },
                 {
+                	header: "用户名称",
+                	width: 300,
+                	sortable: true,
+                	dataIndex: 'otherName'
+                },
+                {
                     header: "创建日期",
-                    width: 300,
+                    width: 200,
                     sortable: true,
                     dataIndex: 'createDate',
                     renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
@@ -311,6 +334,7 @@
             Ext.apply(this.currentFormValues, {
                 id: '',
                 name: "",
+                otherName: "",
                 password: "",
                 confirmPassword: "",
                 roleList: ""
@@ -330,6 +354,7 @@
                 Ext.apply(this.currentFormValues, {
                     id: rec.data.id,
                     name: rec.data.name,
+                    otherName: rec.data.otherName,
                     password: "",
                     confirmPassword: "",
                     roleList: ml.toString()
