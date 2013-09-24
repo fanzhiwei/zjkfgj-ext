@@ -18,7 +18,7 @@ App.LoginDialog = function() {
                 },
                 items: [{
                     name: 'name',
-                    fieldLabel: '用户名称',
+                    fieldLabel: '用户帐号',
                     listeners: {
                         scope: this,
                         keypress: function(field, e) {
