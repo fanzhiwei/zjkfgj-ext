@@ -89,16 +89,16 @@ public class DistrictController {
 		User user = (User)request.getSession().getAttribute("user");
 		vo.setUserId(user.getId());
 		//在新增记录时，同一区县，同一用户，同一年月，不得重复添加
-		if(vo.getId() == null || "".equals(vo.getId())) {
-			params = new HashMap<String,Object>();
-			params.put("userId",user.getId());
-			params.put("recordYearMonth",vo.getRecordYearMonth());
-			List<DistrictReport1> currList = districtService.getDistrictListReport1(params);
-			if (currList.size() > 0) {
-				responseMap.put("info", "您已填写过该地区该年月数据，请不要重复添加，或请修改原记录！");
-				return responseMap;
-			}
-		}
+//		if(vo.getId() == null || "".equals(vo.getId())) {
+//			params = new HashMap<String,Object>();
+//			params.put("userId",user.getId());
+//			params.put("recordYearMonth",vo.getRecordYearMonth());
+//			List<DistrictReport1> currList = districtService.getDistrictListReport1(params);
+//			if (currList.size() > 0) {
+//				responseMap.put("info", "您已填写过该地区该年月数据，请不要重复添加，或请修改原记录！");
+//				return responseMap;
+//			}
+//		}
 		
 		try {
 			//编辑用户信息

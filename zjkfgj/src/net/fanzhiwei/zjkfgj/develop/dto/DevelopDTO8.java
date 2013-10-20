@@ -3,11 +3,11 @@ package net.fanzhiwei.zjkfgj.develop.dto;
 public class DevelopDTO8 {
 	private Integer id;
 	private String district;
-	private Double sumCount;
-	private Double incomingHouseSum;
-	private Double incomingBusinessSum;
-	private Double incomingOfficeSum;
-	private Double incomingOtherSum;
+	private Double sumCount = 0d;
+	private Double incomingHouseSum = 0d;
+	private Double incomingBusinessSum = 0d;
+	private Double incomingOfficeSum = 0d;
+	private Double incomingOtherSum = 0d;
 
 	public Integer getId() {
 		return id;

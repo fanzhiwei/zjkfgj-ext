@@ -41,7 +41,9 @@
 						name: 'licenceNo'
 					},
 					{
-						name: 'licenceDate'
+						name: 'licenceDate',
+						type: 'date',
+						dateFormat: 'Y-m-d'
 					},
 					{
 						name: 'projectName'
@@ -113,7 +115,7 @@
                 buttonAlign: 'center',
                 bodyStyle: 'padding:5px',
                 frame: true,
-//                labelWidth: 60,
+                labelWidth: 120,
                 defaultType: 'textfield',
                 defaults: {
                     allowBlank: false,
@@ -169,24 +171,30 @@
                 },
                 {
                 	name: 'developerName',
+                	maxlength: 100,
                 	fieldLabel: '开发企业名称'
                 },
                 {
                 	name: 'licenceNo',
+                	maxlength: 25,
                 	fieldLabel: '预售许可证编号'
                 },
                 {
                 	name: 'licenceDate',
                 	fieldLabel: '预售许可证颁发时间',
-                	xtype:'date'
+                	xtype: 'datefield',
+                	format: 'Y-m-d',
+                	maxlength: 25
+                },
+                {
+                	name: 'projectName',
+                	maxlength: 50,
+                	fieldLabel: '项目名称'
                 },
                 {
                 	name: 'location',
+                	maxlength: 150,
                 	fieldLabel: '房屋坐落地'
-                },
-                {
-                	name: 'licenceDate',
-                	fieldLabel: '预售许可证颁发时间'
                 },
                 {
                 	xtype:'fieldset',
@@ -197,27 +205,27 @@
                 	[
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.5,
+            	    	   columnWidth:1,
             	    	   items:houseNumber
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.5,
+            	    	   columnWidth:1,
             	    	   items:houseArea
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.5,
+            	    	   columnWidth:1,
             	    	   items:business
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.5,
+            	    	   columnWidth:1,
             	    	   items:office
             	       },
             	       {
             	    	   layout:'form',
-            	    	   columnWidth:0.5,
+            	    	   columnWidth:1,
             	    	   items:other
             	       }
                 	],
@@ -285,8 +293,8 @@
 
         getDialog: function() {
             var dlg = new Ext.Window({
-                width: 800,
-                height: 550,
+                width: 550,
+                height: 420,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
@@ -323,7 +331,7 @@
                 loadMask: true,
                 tbar: [{
                     xtype: 'datefield',
-                    id: 'queryDate',
+                    id: 'queryDateReport1',
                     name: 'queryDate',
                     allowBlank:false,
                     value:new Date(),
@@ -334,10 +342,10 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace("-","")}});
+                        	App.DistrictReport1.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport1").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.Develop.store.reload({params:{recordYearMonth:document.getElementById("queryDate").value.replace("-","")}});
+		                	App.DistrictReport1.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport1").value.replace("-","")}});
 		                }
                     }
                 },{
@@ -372,7 +380,7 @@
                 },
                 {
                     header: "开发企业名称",
-                    width: 200,
+                    width: 220,
                     sortable: true,
                     dataIndex: 'developerName'
                 },
@@ -390,15 +398,27 @@
             		renderer: Ext.util.Format.dateRenderer('Y-m-d')
                 },
                 {
+                	header: "项目名称",
+                	width: 150,
+                	sortable: true,
+                	dataIndex: 'projectName'
+                },
+                {
+                	header: "房屋坐落地",
+                	width: 150,
+                	sortable: true,
+                	dataIndex: 'location'
+                },
+                {
                     header: "创建日期",
-                    width: 250,
+                    width: 140,
                     sortable: true,
                     dataIndex: 'createTime',
                     renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
                 },
                 {
                 	header: "修改日期",
-                	width: 250,
+                	width: 140,
                 	sortable: true,
                 	dataIndex: 'modifyTime',
                 	renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s')
@@ -410,7 +430,7 @@
         add: function() {
             Ext.apply(this.currentFormValues, {
             	id:'',
-            	recordYearMonth: document.getElementById("queryDate").value.replace("-",""),
+            	recordYearMonth: document.getElementById("queryDateReport1").value.replace("-",""),
             	developerName:'',
             	licenceNo:'',
             	licenceDate:'',
@@ -458,7 +478,7 @@
                 for (var i = 0; i < recs.length; i++) {
                     var data = recs[i].data;
                     ids.push(data.id);
-                    titles += data.recordYearMonth + data.areaName + '<br>';
+                    titles += data.developerName + '<br>';
                 }
                 Ext.Msg.confirm('删除记录', '确定删除以下记录？<br><font color="red">' + titles + '</font>',
                 function(btn) {
@@ -474,7 +494,7 @@
 								var info = result.info;
 								if(result.success=='true') {
 									Ext.Msg.alert('信息', info);
-                                    App.Develop.store.reload();
+                                    App.DistrictReport1.store.reload();
 								}else {
                                     Ext.Msg.alert('信息', info);
                                 }
