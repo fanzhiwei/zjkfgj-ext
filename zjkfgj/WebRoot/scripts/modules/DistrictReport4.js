@@ -1,4 +1,4 @@
-﻿App.DistrictReport1 = function() {
+﻿App.DistrictReport4 = function() {
     return {
 
         currentFormValues: {},
@@ -10,7 +10,7 @@
 //            		params : {start:0, limit:15,recordYearMonth:queryDate}
 				},
 				proxy: new Ext.data.HttpProxy({
-					url : 'district/listReport1?t=' + new Date().getTime()
+					url : 'district/listReport2_5?category=3&t=' + new Date().getTime()
 				}),
                 remoteSort: false,
 				reader: new Ext.data.JsonReader({
@@ -38,33 +38,29 @@
 						name: 'developerName'
 					},
 					{
-						name: 'licenceNo'
+						name: 'projectName'
 					},
 					{
-						name: 'licenceDate',
+						name: 'startTime',
 						type: 'date',
 						dateFormat: 'Y-m-d'
 					},
 					{
-						name: 'projectName'
+						name: 'completeTime',
+						type: 'date',
+						dateFormat: 'Y-m-d'
 					},
 					{
 						name: 'location'
 					},
 					{
-						name: 'houseNumber'
+						name: 'area'
 					},
 					{
-						name: 'houseArea'
+						name: 'totalPrice'
 					},
 					{
-						name: 'business'
-					},
-					{
-						name: "office"
-					},
-					{
-						name: "other"
+						name: "averagePrice"
 					}
 					]
 				})
@@ -73,44 +69,8 @@
         },
 
         getForm: function() {
-        	var houseNumber = {
-	        		xtype:'textfield',
-	      	    	fieldLabel: '住宅套数',
-	      	    	name: 'houseNumber',
-	      	    	regex:/^\d{0,12}$/,
-	      	    	regexText:'最多输入12位数字',
-	      	    	allowBlank: false
-        	},houseArea = {
-            		xtype:'textfield',
-          	    	fieldLabel: '住宅面积(㎡)',
-          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-          	    	regexText:'最多输入14位数字，且只能有两位小数',
-          	    	allowBlank: false,
-          	    	name: 'houseArea'
-            },business = {
-            		xtype:'textfield',
-          	    	fieldLabel: '商业营业房(㎡)',
-          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-          	    	regexText:'最多输入14位数字，且只能有两位小数',
-          	    	allowBlank: false,
-          	    	name: 'business'
-            },office = {
-            		xtype:'textfield',
-          	    	fieldLabel: '办公房(㎡)',
-          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-          	    	regexText:'最多输入14位数字，且只能有两位小数',
-          	    	allowBlank: false,
-          	    	name: 'office'
-            },other = {
-            		xtype:'textfield',
-          	    	fieldLabel: '其他房(㎡)',
-          	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-          	    	regexText:'最多输入14位数字，且只能有两位小数',
-          	    	allowBlank: false,
-          	    	name: 'other'
-            };
             var form = new Ext.form.FormPanel({
-				url:'district/saveReport1',
+				url:'district/saveReport2_5?category=3',
                 labelAlign: 'right',
                 buttonAlign: 'center',
                 bodyStyle: 'padding:5px',
@@ -128,42 +88,6 @@
                     name: 'id',
                     value: ''
                 },
-//                {
-//                	id:'area',
-//                    xtype: 'combo',
-//                    allowBlank: false,
-//                    name: 'area',
-//                    hiddenName:'areaId',
-//                    fieldLabel: '报送区域',
-//                    maxLength: 20,
-//                    store: new Ext.data. Store({
-//						proxy: new Ext.data.HttpProxy({
-//							url : 'develop/area'
-//						}),
-//						autoLoad: true,
-//						remoteSort: false,
-//						reader: new Ext.data.JsonReader({
-//							totalProperty: 'totalCount',
-//							idProperty: 'id',
-//							root: 'rows',
-//							fields: [{
-//								name: 'id'
-//							},
-//							{
-//								name: 'areaName'
-//							}]
-//						})
-//                    }),
-//					mode: 'local',
-//                    forceSelection: true,
-//                    valueField: 'id',
-//                    displayField: 'areaName',
-//					listeners:{
-//						"expand":function(combo, store,index){ 
-//						Ext.getCmp("area").getStore().load();
-//						} 
-//					}                    
-//                },
                 {
                     name: 'recordYearMonth',
                     fieldLabel: '报送年月',
@@ -175,21 +99,23 @@
                 	fieldLabel: '开发企业名称'
                 },
                 {
-                	name: 'licenceNo',
-                	maxLength: 25,
-                	fieldLabel: '预售许可证编号'
+                	name: 'projectName',
+                	maxLength: 50,
+                	fieldLabel: '项目名称'
                 },
                 {
-                	name: 'licenceDate',
-                	fieldLabel: '预售许可证颁发时间',
+                	name: 'startTime',
+                	fieldLabel: '开工时间',
                 	xtype: 'datefield',
                 	format: 'Y-m-d',
                 	maxLength: 25
                 },
                 {
-                	name: 'projectName',
-                	maxLength: 50,
-                	fieldLabel: '项目名称'
+                	name: 'completeTime',
+                	fieldLabel: '竣工时间',
+                	xtype: 'datefield',
+                	format: 'Y-m-d',
+                	maxLength: 25
                 },
                 {
                 	name: 'location',
@@ -197,39 +123,25 @@
                 	fieldLabel: '房屋坐落地'
                 },
                 {
-                	xtype:'fieldset',
-                	title:'房屋用途',
-                	collapsible:true,
-//                	height:100,
-                	items:
-                	[
-            	       {
-            	    	   layout:'form',
-            	    	   columnWidth:1,
-            	    	   items:houseNumber
-            	       },
-            	       {
-            	    	   layout:'form',
-            	    	   columnWidth:1,
-            	    	   items:houseArea
-            	       },
-            	       {
-            	    	   layout:'form',
-            	    	   columnWidth:1,
-            	    	   items:business
-            	       },
-            	       {
-            	    	   layout:'form',
-            	    	   columnWidth:1,
-            	    	   items:office
-            	       },
-            	       {
-            	    	   layout:'form',
-            	    	   columnWidth:1,
-            	    	   items:other
-            	       }
-                	],
-                	layout:"column"
+                	name: 'area',
+                	maxLength: 150,
+                	fieldLabel: '面积（㎡）',
+	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
+	      	    	regexText:'最多输入14位数字，且只能有两位小数'
+                },
+                {
+                	name: 'totalPrice',
+                	maxLength: 150,
+                	fieldLabel: '合同总价（万元）',
+            		regex:/^\d{0,12}\.?\d{0,2}$/,
+            		regexText:'最多输入14位数字，且只能有两位小数'
+                },
+                {
+                	name: 'averagePrice',
+                	maxLength: 150,
+                	fieldLabel: '平均价（元）',
+            		regex:/^\d{0,12}\.?\d{0,2}$/,
+            		regexText:'最多输入14位数字，且只能有两位小数'
                 }],
                 buttons: [{
                     text: '确定',
@@ -293,8 +205,8 @@
 
         getDialog: function() {
             var dlg = new Ext.Window({
-                width: 550,
-                height: 420,
+                width: 500,
+                height: 330,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
@@ -331,7 +243,7 @@
                 loadMask: true,
                 tbar: [{
                     xtype: 'datefield',
-                    id: 'queryDateReport1',
+                    id: 'queryDateReport4',
                     name: 'queryDate',
                     allowBlank:false,
                     value:new Date(),
@@ -342,10 +254,10 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.DistrictReport1.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport1").value.replace("-","")}});
+                        	App.DistrictReport4.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport4").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.DistrictReport1.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport1").value.replace("-","")}});
+		                	App.DistrictReport4.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport4").value.replace("-","")}});
 		                }
                     }
                 },{
@@ -385,19 +297,6 @@
                     dataIndex: 'developerName'
                 },
                 {
-                	header: "预售许可证编号",
-                	width: 100,
-                	sortable: true,
-                	dataIndex: 'licenceNo'
-                },
-                {
-                	header: "预售许可证颁发时间",
-                	width: 120,
-                	sortable: true,
-                	dataIndex: 'licenceDate',
-            		renderer: Ext.util.Format.dateRenderer('Y-m-d')
-                },
-                {
                 	header: "项目名称",
                 	width: 150,
                 	sortable: true,
@@ -408,6 +307,20 @@
                 	width: 150,
                 	sortable: true,
                 	dataIndex: 'location'
+                },
+                {
+                	header: "开工时间",
+                	width: 100,
+                	sortable: true,
+                	dataIndex: 'startTime',
+                	renderer: Ext.util.Format.dateRenderer('Y-m-d')
+                },
+                {
+                	header: "竣工时间",
+                	width: 100,
+                	sortable: true,
+                	dataIndex: 'completeTime',
+                	renderer: Ext.util.Format.dateRenderer('Y-m-d')
                 },
                 {
                     header: "创建日期",
@@ -430,17 +343,15 @@
         add: function() {
             Ext.apply(this.currentFormValues, {
             	id:'',
-            	recordYearMonth: document.getElementById("queryDateReport1").value.replace("-",""),
+            	recordYearMonth: document.getElementById("queryDateReport4").value.replace("-",""),
             	developerName:'',
-            	licenceNo:'',
-            	licenceDate:'',
             	projectName:'',
+            	startTime:'',
+            	completeTime:'',
             	location:'',
-            	houseNumber:'',
-            	houseArea:'',
-            	business:'',
-            	office:'',
-            	other:''
+            	area:'',
+            	totalPrice:'',
+            	averagePrice:''
             });
             this.dlg.setTitle("新增记录");
             this.dlg.show();
@@ -454,15 +365,13 @@
                 	id:rec.data.id,
                 	recordYearMonth:rec.data.recordYearMonth,
                 	developerName:rec.data.developerName,
-                	licenceNo:rec.data.licenceNo,
-                	licenceDate:rec.data.licenceDate,
                 	projectName:rec.data.projectName,
+                	startTime:rec.data.startTime,
+                	completeTime:rec.data.completeTime,
                 	location:rec.data.location,
-                	houseNumber:rec.data.houseNumber,
-                	houseArea:rec.data.houseArea,
-                	business:rec.data.business,
-                	office:rec.data.office,
-                	other:rec.data.other        
+                	area:rec.data.area,
+                	totalPrice:rec.data.totalPrice,
+                	averagePrice:rec.data.averagePrice      
                 });
                 this.dlg.show();
             } else {
@@ -485,7 +394,7 @@
                     if (btn == 'yes') {
 						Ext.Ajax.request({
 							method:'post',
-							url:'district/removeReport1',
+							url:'district/removeReport2_5',
 							params:{
 								ids:ids.toString()
 							},
@@ -494,7 +403,7 @@
 								var info = result.info;
 								if(result.success=='true') {
 									Ext.Msg.alert('信息', info);
-                                    App.DistrictReport1.store.reload();
+                                    App.DistrictReport4.store.reload();
 								}else {
                                     Ext.Msg.alert('信息', info);
                                 }

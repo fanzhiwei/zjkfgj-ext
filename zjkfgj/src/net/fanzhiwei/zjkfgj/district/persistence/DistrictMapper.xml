@@ -5,7 +5,7 @@
 <mapper namespace="net.fanzhiwei.zjkfgj.district.persistence.DistrictMapper">
   
   <select id="getDistrictListReport1" parameterType="map" resultType="DistrictReport1">
-   	select * from `district_report1` d 
+   	select * from `district_report1`
     <where>
     	<if test="id != null">
     		id = #{id}
@@ -51,7 +51,7 @@
 		  #{other})
   </insert>
   
-  <update id="updateDistrictReport1"  parameterType="Develop"> 
+  <update id="updateDistrictReport1"  parameterType="DistrictReport1"> 
 	UPDATE district_report1
 	<set> 
 		<if test="1 == 1">modifyTime=now(),</if> 
@@ -72,5 +72,78 @@
   
   <delete id="deleteDistrictReport1"  parameterType="map">
   	DELETE FROM district_report1 WHERE id=#{id}
+  </delete>
+  
+<!-- ************************************************************************************************ -->
+  <select id="getDistrictListReport2_5" parameterType="map" resultType="DistrictReport2_5">
+   	select * from `district_report2_5` 
+    <where>
+    	<if test="id != null">
+    		id = #{id}
+    	</if>
+    	<if test="recordYearMonth != null">
+    		and recordYearMonth = #{recordYearMonth}
+    	</if>
+    	<if test="userId != null">
+    		and userId = #{userId}
+    	</if>
+    	<if test="category != null">
+    		and category = #{category}
+    	</if>
+    </where>
+    order by createTime
+  </select>
+  
+  <insert id="insertDistrictReport2_5" parameterType="DistrictReport2_5" >
+  	INSERT INTO district_report2_5 
+  		( `userId`,
+		  `createTime`,
+		  `recordYearMonth`,
+		  `developerName`,
+		  `projectName`,
+		  `startTime`,
+		  `completeTime`,
+		  `location`,
+		  `houseNumber`,
+		  `area`,
+		  `totalPrice`,
+		  `averagePrice`,
+		  `category`)
+    VALUES 
+  		( #{userId},
+		  now(),
+		  #{recordYearMonth},
+		  #{developerName},
+		  #{projectName},
+		  #{startTime},
+		  #{completeTime},
+		  #{location},
+		  #{houseNumber},
+		  #{area},
+		  #{totalPrice},
+		  #{averagePrice},
+		  #{category})
+  </insert>
+  
+  <update id="updateDistrictReport2_5"  parameterType="DistrictReport2_5"> 
+	UPDATE district_report2_5
+	<set> 
+		<if test="1 == 1">modifyTime=now(),</if> 
+		<if test="userId != null">userId=#{userId},</if> 
+		<if test="recordYearMonth != null">recordYearMonth=#{recordYearMonth},</if> 
+		<if test="developerName != null">developerName=#{developerName},</if> 
+		<if test="projectName != null">projectName=#{projectName},</if> 
+		<if test="startTime != null">startTime=#{startTime},</if> 
+		<if test="completeTime != null">completeTime=#{completeTime},</if> 
+		<if test="houseNumber != null">houseNumber=#{houseNumber},</if> 
+		<if test="area != null">area=#{area},</if> 
+		<if test="totalPrice != null">totalPrice=#{totalPrice},</if> 
+		<if test="averagePrice != null">averagePrice=#{averagePrice}</if> 
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <delete id="deleteDistrictReport2_5"  parameterType="map">
+  	DELETE FROM district_report2_5 WHERE id=#{id}
   </delete>
 </mapper>
