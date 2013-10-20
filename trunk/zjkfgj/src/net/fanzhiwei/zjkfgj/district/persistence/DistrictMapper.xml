@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.fanzhiwei.zjkfgj.district.persistence.DistrictMapper">
+  
+  <select id="getDistrictListReport1" parameterType="map" resultType="DistrictReport1">
+   	select * from `district_report1` 
+    <where>
+    	<if test="id != null">
+    		id = #{id}
+    	</if>
+    	<if test="recordYearMonth != null">
+    		and recordYearMonth = #{recordYearMonth}
+    	</if>
+    	<if test="userId != null">
+    		and userId = #{userId}
+    	</if>
+    </where>
+    order by createTime
+  </select>
+  
+  <insert id="insertDistrictReport1" parameterType="DistrictReport1" >
+  	INSERT INTO district_report1 
+  		( `userId,
+		  `createTime`,
+		  `recordYearMonth`,
+		  `developerName`,
+		  `licenceNo`,
+		  `licenceDate`,
+		  `projectName`,
+		  `location`,
+		  `houseNumber`,
+		  `houseArea`,
+		  `business`,
+		  `office`,
+		  `other`)
+    VALUES 
+  		( #{userId},
+		  now(),
+		  #{recordYearMonth},
+		  #{developerName},
+		  #{licenceNo},
+		  #{licenceDate},
+		  #{projectName},
+		  #{location},
+		  #{houseNumber},
+		  #{houseArea},
+		  #{business},
+		  #{office},
+		  #{other})
+  </insert>
+  
+  <update id="updateDistrictReport1"  parameterType="Develop"> 
+	UPDATE district_report1
+	<set> 
+		<if test="1 == 1">modifyTime=now(),</if> 
+		<if test="userId != null">userId=#{userId},</if> 
+		<if test="recordYearMonth != null">recordYearMonth=#{recordYearMonth},</if> 
+		<if test="developerName != null">developerName=#{developerName},</if> 
+		<if test="licenceDate != null">licenceDate=#{licenceDate},</if> 
+		<if test="projectName != null">projectName=#{projectName},</if> 
+		<if test="location != null">location=#{location},</if> 
+		<if test="houseNumber != null">houseNumber=#{houseNumber},</if> 
+		<if test="houseArea != null">houseArea=#{houseArea},</if> 
+		<if test="business != null">business=#{business},</if> 
+		<if test="office != null">office=#{office},</if> 
+		<if test="other != null">other=#{other}</if> 
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <delete id="deleteDistrictReport1"  parameterType="map">
+  	DELETE FROM district_report1 WHERE id=#{id}
+  </delete>
+</mapper>
