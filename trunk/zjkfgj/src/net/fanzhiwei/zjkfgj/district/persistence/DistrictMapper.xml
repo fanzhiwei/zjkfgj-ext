@@ -5,7 +5,7 @@
 <mapper namespace="net.fanzhiwei.zjkfgj.district.persistence.DistrictMapper">
   
   <select id="getDistrictListReport1" parameterType="map" resultType="DistrictReport1">
-   	select * from `district_report1` 
+   	select * from `district_report1` d 
     <where>
     	<if test="id != null">
     		id = #{id}
@@ -22,7 +22,7 @@
   
   <insert id="insertDistrictReport1" parameterType="DistrictReport1" >
   	INSERT INTO district_report1 
-  		( `userId,
+  		( `userId`,
 		  `createTime`,
 		  `recordYearMonth`,
 		  `developerName`,

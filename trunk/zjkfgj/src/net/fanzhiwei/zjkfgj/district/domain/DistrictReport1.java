@@ -13,7 +13,7 @@ public class DistrictReport1 implements Serializable {
 	private Integer recordYearMonth;
 	private String developerName;
 	private String licenceNo;// 预售许可证编号
-	private Date licenceDate;// 预售许可证颁发时间
+	private String licenceDate;// 预售许可证颁发时间
 	private String projectName;// 项目名称
 	private String location;// 房屋坐落地
 	private Integer houseNumber;
@@ -78,11 +78,11 @@ public class DistrictReport1 implements Serializable {
 		this.licenceNo = licenceNo;
 	}
 
-	public Date getLicenceDate() {
+	public String getLicenceDate() {
 		return licenceDate;
 	}
 
-	public void setLicenceDate(Date licenceDate) {
+	public void setLicenceDate(String licenceDate) {
 		this.licenceDate = licenceDate;
 	}
 

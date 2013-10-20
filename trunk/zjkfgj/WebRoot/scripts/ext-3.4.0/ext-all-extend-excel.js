@@ -36283,7 +36283,7 @@ Ext.grid.GridPanel = Ext
 				                if ((cm.getDataIndex(j) != '')
 				                    && (includeHidden || !cm.isHidden(j))) {
 				                    var v = r[cm.getDataIndex(j)];
-				                    if (!v) {
+				                    if (!v && v!=0) {
 				                    	v = "";
 				                    }
 				                    if (cellType[k] !== "None") {

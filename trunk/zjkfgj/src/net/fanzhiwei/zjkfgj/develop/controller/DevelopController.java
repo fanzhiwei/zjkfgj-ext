@@ -115,30 +115,32 @@ public class DevelopController {
 				return responseMap;
 			}
 		}
-		params = new HashMap<String,Object>();
-		params.put("userId",user.getId());
-		params.put("areaId",vo.getAreaId());
-		params.put("recordYearMonth",getLastMonth(vo.getRecordYearMonth()));
-		List<Develop> developList = developService.getDevelopList(params);
-		if (developList.size() != 0) {
-			Develop lastDevelop = developList.get(0);
-			if (vo.getWorkingAreaHouse() - lastDevelop.getWorkingAreaHouse() != vo.getNewAreaHouse() - vo.getCompleteAreaHouse()) {
-				responseMap.put("info", "住宅不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
-				return responseMap;
-			}
-			if (vo.getWorkingAreaBusiness() - lastDevelop.getWorkingAreaBusiness() != vo.getNewAreaBusiness() - vo.getCompleteAreaBusiness()) {
-				responseMap.put("info", "商业房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
-				return responseMap;
-			}
-			if (vo.getWorkingAreaOffice() - lastDevelop.getWorkingAreaOffice() != vo.getNewAreaOffice() - vo.getCompleteAreaOffice()) {
-				responseMap.put("info", "办公房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
-				return responseMap;
-			}
-			if (vo.getWorkingAreaOther() - lastDevelop.getWorkingAreaOther() != vo.getNewAreaOther() - vo.getCompleteAreaOther()) {
-				responseMap.put("info", "其它房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
-				return responseMap;
-			}
-		}
+		
+		//取消限制条件
+//		params = new HashMap<String,Object>();
+//		params.put("userId",user.getId());
+//		params.put("areaId",vo.getAreaId());
+//		params.put("recordYearMonth",getLastMonth(vo.getRecordYearMonth()));
+//		List<Develop> developList = developService.getDevelopList(params);
+//		if (developList.size() != 0) {
+//			Develop lastDevelop = developList.get(0);
+//			if (vo.getWorkingAreaHouse() - lastDevelop.getWorkingAreaHouse() != vo.getNewAreaHouse() - vo.getCompleteAreaHouse()) {
+//				responseMap.put("info", "住宅不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
+//				return responseMap;
+//			}
+//			if (vo.getWorkingAreaBusiness() - lastDevelop.getWorkingAreaBusiness() != vo.getNewAreaBusiness() - vo.getCompleteAreaBusiness()) {
+//				responseMap.put("info", "商业房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
+//				return responseMap;
+//			}
+//			if (vo.getWorkingAreaOffice() - lastDevelop.getWorkingAreaOffice() != vo.getNewAreaOffice() - vo.getCompleteAreaOffice()) {
+//				responseMap.put("info", "办公房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
+//				return responseMap;
+//			}
+//			if (vo.getWorkingAreaOther() - lastDevelop.getWorkingAreaOther() != vo.getNewAreaOther() - vo.getCompleteAreaOther()) {
+//				responseMap.put("info", "其它房不满足条件：本月施工面积 = 上个月施工面积 +本月新开工面积 - 本月竣工面积");
+//				return responseMap;
+//			}
+//		}
 		
 		try {
 			//编辑用户信息
