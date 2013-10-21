@@ -77,8 +77,8 @@
 	        		xtype:'textfield',
 	      	    	fieldLabel: '住宅套数',
 	      	    	name: 'houseNumber',
-	      	    	regex:/^\d{0,12}$/,
-	      	    	regexText:'最多输入12位数字',
+	      	    	regex:/^\d{0,9}$/,
+	      	    	regexText:'最多输入9位数字',
 	      	    	allowBlank: false
         	},houseArea = {
             		xtype:'textfield',

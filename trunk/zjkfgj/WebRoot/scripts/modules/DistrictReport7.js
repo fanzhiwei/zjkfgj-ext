@@ -1,4 +1,4 @@
-﻿App.DistrictReport2 = function() {
+﻿App.DistrictReport7 = function() {
     return {
 
         currentFormValues: {},
@@ -10,7 +10,7 @@
 //            		params : {start:0, limit:15,recordYearMonth:queryDate}
 				},
 				proxy: new Ext.data.HttpProxy({
-					url : 'district/listReport2_5?category=1&t=' + new Date().getTime()
+					url : 'district/listReport7?t=' + new Date().getTime()
 				}),
                 remoteSort: false,
 				reader: new Ext.data.JsonReader({
@@ -35,35 +35,16 @@
 						name: 'recordYearMonth'
 					},
 					{
-						name: 'developerName'
+						name: 'dealNumber'
 					},
 					{
-						name: 'projectName'
-					},
-					{
-						name: 'startTime',
-						type: 'date',
-						dateFormat: 'Y-m-d'
-					},
-					{
-						name: 'completeTime',
-						type: 'date',
-						dateFormat: 'Y-m-d'
-					},
-					{
-						name: 'location'
-					},
-					{
-						name: 'houseNumber'
-					},
-					{
-						name: 'area'
+						name: 'dealArea'
 					},
 					{
 						name: 'totalPrice'
 					},
 					{
-						name: "averagePrice"
+						name: 'averagePrice'
 					}
 					]
 				})
@@ -73,7 +54,7 @@
 
         getForm: function() {
             var form = new Ext.form.FormPanel({
-				url:'district/saveReport2_5?category=1',
+				url:'district/saveReport7',
                 labelAlign: 'right',
                 buttonAlign: 'center',
                 bodyStyle: 'padding:5px',
@@ -97,61 +78,32 @@
                     readOnly:true
                 },
                 {
-                	name: 'developerName',
-                	maxLength: 100,
-                	fieldLabel: '开发企业名称'
-                },
-                {
-                	name: 'projectName',
-                	maxLength: 50,
-                	fieldLabel: '项目名称'
-                },
-                {
-                	name: 'startTime',
-                	fieldLabel: '开工时间',
-                	xtype: 'datefield',
-                	format: 'Y-m-d',
-                	maxLength: 25
-                },
-                {
-                	name: 'completeTime',
-                	fieldLabel: '竣工时间',
-                	xtype: 'datefield',
-                	format: 'Y-m-d',
-                	maxLength: 25
-                },
-                {
-                	name: 'location',
-                	maxLength: 150,
-                	fieldLabel: '房屋坐落地'
-                },
-                {
-                	name: 'houseNumber',
+                	name: 'dealNumber',
                 	maxLength: 9,
                 	fieldLabel: '套数',
 	      	    	regex:/^\d{0,9}$/,
 	      	    	regexText:'最多输入9位数字'
                 },
                 {
-                	name: 'area',
-                	maxLength: 150,
-                	fieldLabel: '面积（㎡）',
-	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-	      	    	regexText:'最多输入14位数字，且只能有两位小数'
+                	name: 'dealArea',
+                	maxLength: 50,
+                	fieldLabel: '面积（m2）',
+            		regex:/^\d{0,12}\.?\d{0,2}$/,
+            		regexText:'最多输入14位数字，且只能有两位小数'
                 },
                 {
                 	name: 'totalPrice',
-                	maxLength: 150,
-                	fieldLabel: '合同总价（万元）',
-            		regex:/^\d{0,12}\.?\d{0,2}$/,
-            		regexText:'最多输入14位数字，且只能有两位小数'
+                	maxLength: 11,
+                	fieldLabel: '总金额（万元）',
+                	regex:/^\d{0,10}$/,
+                	regexText:'最多输入10位数字'
                 },
                 {
                 	name: 'averagePrice',
-                	maxLength: 150,
+                	maxLength: 50,
                 	fieldLabel: '平均价（元）',
-            		regex:/^\d{0,12}\.?\d{0,2}$/,
-            		regexText:'最多输入14位数字，且只能有两位小数'
+                	regex:/^\d{0,12}\.?\d{0,2}$/,
+                	regexText:'最多输入14位数字，且只能有两位小数'
                 }],
                 buttons: [{
                     text: '确定',
@@ -216,7 +168,7 @@
         getDialog: function() {
             var dlg = new Ext.Window({
                 width: 500,
-                height: 350,
+                height: 330,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
@@ -253,7 +205,7 @@
                 loadMask: true,
                 tbar: [{
                     xtype: 'datefield',
-                    id: 'queryDateReport2',
+                    id: 'queryDateReport7',
                     name: 'queryDate',
                     allowBlank:false,
                     value:new Date(),
@@ -264,10 +216,10 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	App.DistrictReport2.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport2").value.replace("-","")}});
+                        	App.DistrictReport7.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport7").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	App.DistrictReport2.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport2").value.replace("-","")}});
+		                	App.DistrictReport7.store.reload({params:{recordYearMonth:document.getElementById("queryDateReport7").value.replace("-","")}});
 		                }
                     }
                 },{
@@ -301,36 +253,28 @@
                     }//自动编号
                 },
                 {
-                    header: "开发企业名称",
-                    width: 220,
+                    header: "套数",
+                    width: 100,
                     sortable: true,
-                    dataIndex: 'developerName'
+                    dataIndex: 'dealNumber'
                 },
                 {
-                	header: "项目名称",
-                	width: 150,
-                	sortable: true,
-                	dataIndex: 'projectName'
-                },
-                {
-                	header: "房屋坐落地",
-                	width: 150,
-                	sortable: true,
-                	dataIndex: 'location'
-                },
-                {
-                	header: "开工时间",
+                	header: "面积（m2）",
                 	width: 100,
                 	sortable: true,
-                	dataIndex: 'startTime',
-                	renderer: Ext.util.Format.dateRenderer('Y-m-d')
+                	dataIndex: 'dealArea'
                 },
                 {
-                	header: "竣工时间",
+                	header: "总金额（万元）",
                 	width: 100,
                 	sortable: true,
-                	dataIndex: 'completeTime',
-                	renderer: Ext.util.Format.dateRenderer('Y-m-d')
+                	dataIndex: 'totalPrice'
+                },
+                {
+                	header: "平均价（元）",
+                	width: 100,
+                	sortable: true,
+                	dataIndex: 'averagePrice'
                 },
                 {
                     header: "创建日期",
@@ -353,14 +297,9 @@
         add: function() {
             Ext.apply(this.currentFormValues, {
             	id:'',
-            	recordYearMonth: document.getElementById("queryDateReport2").value.replace("-",""),
-            	developerName:'',
-            	projectName:'',
-            	startTime:'',
-            	completeTime:'',
-            	location:'',
-            	houseNumber:'',
-            	area:'',
+            	recordYearMonth: document.getElementById("queryDateReport7").value.replace("-",""),
+            	dealNumber:'',
+            	dealArea:'',
             	totalPrice:'',
             	averagePrice:''
             });
@@ -375,15 +314,10 @@
                 Ext.apply(this.currentFormValues, {
                 	id:rec.data.id,
                 	recordYearMonth:rec.data.recordYearMonth,
-                	developerName:rec.data.developerName,
-                	projectName:rec.data.projectName,
-                	startTime:rec.data.startTime,
-                	completeTime:rec.data.completeTime,
-                	location:rec.data.location,
-                	houseNumber:rec.data.houseNumber,
-                	area:rec.data.area,
+                	dealNumber:rec.data.dealNumber,
+                	dealArea:rec.data.dealArea,
                 	totalPrice:rec.data.totalPrice,
-                	averagePrice:rec.data.averagePrice      
+                	averagePrice:rec.data.averagePrice     
                 });
                 this.dlg.show();
             } else {
@@ -406,7 +340,7 @@
                     if (btn == 'yes') {
 						Ext.Ajax.request({
 							method:'post',
-							url:'district/removeReport2_5',
+							url:'district/removeReport7',
 							params:{
 								ids:ids.toString()
 							},
@@ -415,7 +349,7 @@
 								var info = result.info;
 								if(result.success=='true') {
 									Ext.Msg.alert('信息', info);
-                                    App.DistrictReport2.store.reload();
+                                    App.DistrictReport7.store.reload();
 								}else {
                                     Ext.Msg.alert('信息', info);
                                 }
