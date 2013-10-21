@@ -146,4 +146,124 @@
   <delete id="deleteDistrictReport2_5"  parameterType="map">
   	DELETE FROM district_report2_5 WHERE id=#{id}
   </delete>
+  
+<!-- ************************************************************************************************ -->
+  <select id="getDistrictListReport6" parameterType="map" resultType="DistrictReport6">
+   	select * from `district_report6` 
+    <where>
+    	<if test="id != null">
+    		id = #{id}
+    	</if>
+    	<if test="recordYearMonth != null">
+    		and recordYearMonth = #{recordYearMonth}
+    	</if>
+    	<if test="userId != null">
+    		and userId = #{userId}
+    	</if>
+    </where>
+    order by createTime
+  </select>
+  
+  <insert id="insertDistrictReport6" parameterType="DistrictReport6" >
+  	INSERT INTO district_report6 
+  		( `userId`,
+		  `createTime`,
+		  `recordYearMonth`,
+		  `firstNumber`,
+		  `firstArea`,
+		  `secondNumber`,
+		  `secondArea`,
+		  `threeNumber`,
+		  `threeArea`,
+		  `fourNumber`,
+		  `fourArea`)
+    VALUES 
+  		( #{userId},
+		  now(),
+		  #{recordYearMonth},
+		  #{firstNumber},
+		  #{firstArea},
+		  #{secondNumber},
+		  #{secondArea},
+		  #{threeNumber},
+		  #{threeArea},
+		  #{fourNumber},
+		  #{fourArea})
+  </insert>
+  
+  <update id="updateDistrictReport6"  parameterType="DistrictReport6"> 
+	UPDATE district_report6
+	<set> 
+		<if test="1 == 1">modifyTime=now(),</if> 
+		<if test="userId != null">userId=#{userId},</if> 
+		<if test="recordYearMonth != null">recordYearMonth=#{recordYearMonth},</if> 
+		<if test="firstNumber != null">firstNumber=#{firstNumber},</if> 
+		<if test="firstArea != null">firstArea=#{firstArea},</if> 
+		<if test="secondNumber != null">secondNumber=#{secondNumber},</if> 
+		<if test="secondArea != null">secondArea=#{secondArea},</if> 
+		<if test="threeNumber != null">threeNumber=#{threeNumber},</if> 
+		<if test="threeArea != null">threeArea=#{threeArea},</if> 
+		<if test="fourNumber != null">fourNumber=#{fourNumber},</if> 
+		<if test="fourArea != null">fourArea=#{fourArea}</if> 
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <delete id="deleteDistrictReport6"  parameterType="map">
+  	DELETE FROM district_report6 WHERE id=#{id}
+  </delete>
+  
+<!-- ************************************************************************************************ -->
+  <select id="getDistrictListReport7" parameterType="map" resultType="DistrictReport7">
+   	select * from `district_report7` 
+    <where>
+    	<if test="id != null">
+    		id = #{id}
+    	</if>
+    	<if test="recordYearMonth != null">
+    		and recordYearMonth = #{recordYearMonth}
+    	</if>
+    	<if test="userId != null">
+    		and userId = #{userId}
+    	</if>
+    </where>
+    order by createTime
+  </select>
+  
+  <insert id="insertDistrictReport7" parameterType="DistrictReport7" >
+  	INSERT INTO district_report7 
+  		( `userId`,
+		  `createTime`,
+		  `recordYearMonth`,
+		  `dealNumber`,
+		  `dealArea`,
+		  `totalPrice`,
+		  `averagePrice`)
+    VALUES 
+  		( #{userId},
+		  now(),
+		  #{recordYearMonth},
+		  #{dealNumber},
+		  #{dealArea},
+		  #{totalPrice},
+		  #{averagePrice})
+  </insert>
+  
+  <update id="updateDistrictReport7"  parameterType="DistrictReport7"> 
+	UPDATE district_report7
+	<set> 
+		<if test="1 == 1">modifyTime=now(),</if> 
+		<if test="userId != null">userId=#{userId},</if> 
+		<if test="recordYearMonth != null">recordYearMonth=#{recordYearMonth},</if> 
+		<if test="dealNumber != null">dealNumber=#{dealNumber},</if> 
+		<if test="dealArea != null">dealArea=#{dealArea},</if> 
+		<if test="totalPrice != null">totalPrice=#{totalPrice},</if> 
+		<if test="averagePrice != null">averagePrice=#{averagePrice}</if> 
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+  <delete id="deleteDistrictReport7"  parameterType="map">
+  	DELETE FROM district_report7 WHERE id=#{id}
+  </delete>
 </mapper>
