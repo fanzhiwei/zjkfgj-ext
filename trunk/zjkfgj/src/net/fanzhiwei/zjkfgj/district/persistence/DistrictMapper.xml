@@ -266,4 +266,44 @@
   <delete id="deleteDistrictReport7"  parameterType="map">
   	DELETE FROM district_report7 WHERE id=#{id}
   </delete>
+  
+<!-- **********************************************统计sql开始*********************************************** -->
+<!-- ************************************************************************************************** -->
+  <select id="selectDistrictCount1" parameterType="map" resultType="DistrictSumReportDTO1">
+	select '合计' as district,
+    count(d.id) as licenceSum,
+	SUM(d.`houseNumber`) as houseNumberSum, 
+	SUM(d.`houseArea`) as houseAreaSum, 
+	SUM(d.`business`) as businessSum, 
+	SUM(d.`office`) as officeSum,
+    SUM(d.`other`) as otherSum
+	from district_report1 d 
+		<![CDATA[
+			where r.`recordYearMonth` >= #{startMonth} 
+			and r.`recordYearMonth` <= #{endMonth}
+		]]>
+	union all (
+	select u.otherName as district,d.licenceSum,d.houseNumberSum,d.houseAreaSum,d.businessSum,d.officeSum,d.otherSum from
+	(
+		select
+        d.userId,
+    	count(d.id) as licenceSum,
+		SUM(d.`houseNumber`) as houseNumberSum, 
+		SUM(d.`houseArea`) as houseAreaSum, 
+		SUM(d.`business`) as businessSum, 
+		SUM(d.`office`) as officeSum,
+    	SUM(d.`other`) as otherSum
+		from district_report1 d 
+		<![CDATA[
+			where r.`recordYearMonth` >= #{startMonth} 
+			and r.`recordYearMonth` <= #{endMonth}
+		]]>
+		group by d.`userId`
+	) d
+	right join t_user u
+	on d.`userId` = u.id
+    where u.userType = 2
+	order by u.id)
+  </select>  
+  
 </mapper>

@@ -1,15 +1,21 @@
 package net.fanzhiwei.zjkfgj.district.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.fanzhiwei.zjkfgj.develop.dto.DevelopDTO2;
+import net.fanzhiwei.zjkfgj.develop.vo.DevelopVO2;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport1;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport2_5;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport6;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport7;
+import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO1;
 import net.fanzhiwei.zjkfgj.district.persistence.DistrictMapper;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO1;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -168,5 +174,35 @@ public class DistrictService{
 			map.put("id", idsArray[i]);
 			districtMapper.deleteDistrictReport7(map);
 		}
+	}
+	
+/****************************************统计**********************************************/
+	@Transactional(readOnly = true)
+	public List<DistrictSumReportVO1> selectDistrictCount1(int startMonth,int endMonth) {
+		List<DistrictSumReportVO1> list = new ArrayList<DistrictSumReportVO1>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DistrictSumReportDTO1> listDTO = districtMapper.selectDistrictCount1(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getHouseAreaSum() == null) {
+			return list;
+		}
+		DistrictSumReportVO1 vo = null;
+		for (DistrictSumReportDTO1 dto : listDTO) {
+			vo = new DistrictSumReportVO1();
+			vo.setRecordMonth(recordMonth);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
 	}
 }
