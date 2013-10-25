@@ -13,6 +13,7 @@ public class User implements Serializable {
 	private Long id;
 	private String name;
 	private String otherName;
+	private Integer userType;
 	private String password;
 	private Date createDate;
 	private List<Role> roles;
@@ -52,5 +53,11 @@ public class User implements Serializable {
 	}
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+	public Integer getUserType() {
+		return userType;
+	}
+	public void setUserType(Integer userType) {
+		this.userType = userType;
 	}
 }

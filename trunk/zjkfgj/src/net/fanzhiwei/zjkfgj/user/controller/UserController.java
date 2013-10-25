@@ -142,6 +142,7 @@ public class UserController {
 		String id = request.getParameter("id");
 		String name = request.getParameter("name").trim();
 		String otherName = request.getParameter("otherName").trim();
+		String userType = request.getParameter("userType").trim();
 		String password = request.getParameter("password");
 		String roleList = request.getParameter("roleList");
 		try {
@@ -150,6 +151,7 @@ public class UserController {
 			paramMap.put("id",id);
 			paramMap.put("name",name);
 			paramMap.put("otherName",otherName);
+			paramMap.put("userType",userType);
 			User isExistUser = userService.getIsExistUser(paramMap);
 			if(isExistUser != null) {
 				responseMap.put("info", "帐号或用户名称已存在！"); 
@@ -186,6 +188,7 @@ public class UserController {
 				user.setCreateDate(new Date());
 				user.setName(name);
 				user.setOtherName(otherName);
+				user.setUserType(Integer.parseInt(userType));
 				user.setPassword(password);
 				Map<String,Object> param = new HashMap<String,Object>();
 				param.put("user_id", newId);

@@ -104,60 +104,89 @@
                 },'房地产开发企业待售面积情况汇总表'
                 ],
                 store: this.store,
-                columns: [
-                {
-                    header: "序号",
-                    width: 50,
-                    //sortable: true,
-                    dataIndex: 'id'
-                },
-                {
-                    header: "统计日期",
-                    width: 160,
-                    //sortable: true,
-                    dataIndex: 'recordMonth'
-                },                
-                {
-                    header: "县（区）",
-                    width: 100,
-                    //sortable: true,
-                    dataIndex: 'district'
-                },
-                {
-                	header: "小计(㎡)",
-                	width: 100,
-                	//sortable: true,
-                	dataIndex: 'sumCount'
-                },
-                {
-                    header: "住宅(㎡)",
-                    width: 100,
-                    //sortable: true,
-                    dataIndex: 'onsaleAreaHouseSum'
-                },
-                {
-                	header: "商业营业房(㎡)",
-                	width: 120,
-                	//sortable: true,
-                	dataIndex: 'onsaleAreaBusinessSum'
-                },
-                {
-                	header: "办公房(㎡)",
-                	width: 100,
-                	//sortable: true,
-                	dataIndex: 'onsaleAreaOfficeSum'
-                },
-                {
-                	header: "其他房(㎡)",
-                	width: 100,
-                	//sortable: true,
-                	dataIndex: 'onsaleAreaOtherSum'
-                }],
+//                columns: [
+//                {
+//                    header: "序号",
+//                    width: 50,
+//                    //sortable: true,
+//                    dataIndex: 'id'
+//                },
+//                {
+//                    header: "统计日期",
+//                    width: 160,
+//                    //sortable: true,
+//                    dataIndex: 'recordMonth'
+//                },                
+//                {
+//                    header: "县（区）",
+//                    width: 100,
+//                    //sortable: true,
+//                    dataIndex: 'district'
+//                },
+//                {
+//                	header: "小计(㎡)",
+//                	width: 100,
+//                	//sortable: true,
+//                	dataIndex: 'sumCount'
+//                },
+//                {
+//                    header: "住宅(㎡)",
+//                    width: 100,
+//                    //sortable: true,
+//                    dataIndex: 'onsaleAreaHouseSum'
+//                },
+//                {
+//                	header: "商业营业房(㎡)",
+//                	width: 120,
+//                	//sortable: true,
+//                	dataIndex: 'onsaleAreaBusinessSum'
+//                },
+//                {
+//                	header: "办公房(㎡)",
+//                	width: 100,
+//                	//sortable: true,
+//                	dataIndex: 'onsaleAreaOfficeSum'
+//                },
+//                {
+//                	header: "其他房(㎡)",
+//                	width: 100,
+//                	//sortable: true,
+//                	dataIndex: 'onsaleAreaOtherSum'
+//                }],
+                colModel: new Ext.grid.ColumnModel({
+    				columns: [
+    					{header: '序号', width: 50, dataIndex: 'id'},
+    					{header: '统计日期', width: 160, dataIndex: 'recordMonth'},
+    					{header: '县（区）', width: 100, dataIndex: 'district'},
+    					{header: '小计(㎡)', width: 100, dataIndex: 'sumCount'},
+    					{header: '住宅(㎡)', width: 100, dataIndex: 'onsaleAreaHouseSum'},
+    					{header: '商业营业房(㎡)', width: 120, dataIndex: 'onsaleAreaBusinessSum'},
+    					{header: '办公房(㎡)', width: 100, dataIndex: 'onsaleAreaOfficeSum'},
+    					{header: '其他房(㎡)', width: 50, dataIndex: 'onsaleAreaOtherSum'}
+    				],
+    				defaultSortable: true,
+    				rows: [
+    					[
+    						{},{},{},{},
+    						{header: '房屋', colspan: 4, align: 'center'}
+//    						{header: 'After', colspan: 4, align: 'center'},
+//    						{header: 'Sum', colspan: 2, align: 'center', rowspan: 2}
+    					]
+    				]
+    			}),
+    			enableColumnMove: false,
+    			viewConfig: {
+    				forceFit: true
+    			},
+    			plugins: [new Ext.ux.plugins.GroupHeaderGrid()],                
+                
+                
+                
                 bbar:new Ext.Toolbar({
                     buttons: [new Ext.Button({
                         text: '导出到Excel',
                         handler: function() {
-                            var vExportContent = Ext.getCmp("gridId9").getExcelXml();
+                            var vExportContent = Ext.getCmp("gridId9").getExcelXml(true);
                             if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
                                 var fd=Ext.get('frmDummy');
                                 if (!fd) {

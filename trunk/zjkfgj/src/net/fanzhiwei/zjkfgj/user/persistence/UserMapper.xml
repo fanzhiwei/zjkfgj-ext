@@ -15,6 +15,7 @@
     	id,
     	name,
     	otherName,
+    	userType,
    		password,
     	create_date
     FROM t_user
@@ -26,6 +27,7 @@
     	id,
     	name,
     	otherName,
+    	userType,
    		password,
     	create_date
     FROM t_user
@@ -47,6 +49,7 @@
     	id,
     	name,
     	otherName,
+    	userType,
    		password
     FROM t_user
     <where>
@@ -68,6 +71,7 @@
     	u.id as user_id,
     	u.name as user_name,
     	u.otherName as otherName,
+    	u.userType as userType,
     	u.create_date,
     	r.id as role_id,
     	r.name as role_name
@@ -81,6 +85,7 @@
 		<id property="id"  column="user_id" />
 		<result property="name" column="user_name"/>
 		<result property="otherName" column="otherName"/>
+		<result property="userType" column="userType"/>
 		<result property="createDate" column="create_date"/>
 		<collection property="roles"  ofType="Role"> 
 			<id property="id"  column="role_id"/> 
@@ -89,8 +94,8 @@
   </resultMap>
   
   <insert id="insertUser" parameterType="User" >
-  	INSERT INTO t_user (id,name,otherName, password, create_date)
-    VALUES (#{id},#{name},#{otherName}, #{password}, #{createDate,jdbcType=TIMESTAMP})
+  	INSERT INTO t_user (id,name,otherName, password, create_date,userType)
+    VALUES (#{id},#{name},#{otherName}, #{password}, #{createDate,jdbcType=TIMESTAMP},#{userType})
   </insert>
   
   <insert id="insertUserRole" parameterType="map">
@@ -103,6 +108,7 @@
 	<set> 
 		<if test="name != null">name=#{name},</if> 
 		<if test="otherName != null">otherName=#{otherName},</if> 
+		<if test="userType != null">userType=#{userType},</if> 
 		<if test="password != null">password=#{password}</if>
 	</set>
 	WHERE id=#{id} 
