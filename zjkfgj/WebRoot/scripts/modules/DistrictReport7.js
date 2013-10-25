@@ -168,7 +168,7 @@
         getDialog: function() {
             var dlg = new Ext.Window({
                 width: 500,
-                height: 330,
+                height: 220,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',
@@ -335,7 +335,7 @@
                     ids.push(data.id);
                     titles += data.developerName + '<br>';
                 }
-                Ext.Msg.confirm('删除记录', '确定删除以下记录？<br><font color="red">' + titles + '</font>',
+                Ext.Msg.confirm('删除记录', '确定删除当前记录？',
                 function(btn) {
                     if (btn == 'yes') {
 						Ext.Ajax.request({

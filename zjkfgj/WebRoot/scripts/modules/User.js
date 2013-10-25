@@ -29,6 +29,10 @@
 						allowBlank: false
 					},
 					{
+						name: 'userType',
+						allowBlank: false
+					},
+					{
 						name: 'createDate',
 						type: 'date',
 						dateFormat: 'time'
@@ -129,6 +133,14 @@
                         }
                     }
                 },
+                { 
+                    xtype:'radiogroup', 
+                    fieldLabel:'用户类型', 
+                    allowBlank: false, 
+                    items:[{boxLabel:'开发商',inputValue:'1',name:'userType'},
+                           {boxLabel:'房管局',inputValue:'2',name:'userType'},
+                           {boxLabel:'其它',inputValue:'3',name:'userType'}] 
+                }, 
                 {
                     xtype: 'panel',
                     width: 330,
@@ -335,6 +347,7 @@
                 id: '',
                 name: "",
                 otherName: "",
+                userType:"",
                 password: "",
                 confirmPassword: "",
                 roleList: ""
@@ -355,6 +368,7 @@
                     id: rec.data.id,
                     name: rec.data.name,
                     otherName: rec.data.otherName,
+                    userType: rec.data.userType,
                     password: "",
                     confirmPassword: "",
                     roleList: ml.toString()

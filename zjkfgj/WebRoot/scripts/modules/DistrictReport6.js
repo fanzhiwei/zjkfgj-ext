@@ -383,7 +383,7 @@
                     ids.push(data.id);
                     titles += data.developerName + '<br>';
                 }
-                Ext.Msg.confirm('删除记录', '确定删除以下记录？<br><font color="red">' + titles + '</font>',
+                Ext.Msg.confirm('删除记录', '确定删除当前记录？',
                 function(btn) {
                     if (btn == 'yes') {
 						Ext.Ajax.request({

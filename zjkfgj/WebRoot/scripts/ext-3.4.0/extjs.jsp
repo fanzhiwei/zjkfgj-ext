@@ -4,6 +4,8 @@
     <script type="text/javascript" src="${EXTJS_ROOT}/ext-base.js"></script>
     <script type="text/javascript" src="${EXTJS_ROOT}/ext-all-extend-excel.js"></script>
     <script type="text/javascript" src="${EXTJS_ROOT}/ext-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx}/styles/GroupHeaderPlugin.css" />
+	<script type="text/javascript" src="${ctx}/scripts/ux/GroupHeaderPlugin.js"></script>
     <script type="text/javascript">
 Ext.BLANK_IMAGE_URL = '${EXTJS_ROOT}/resources/images/default/s.gif';
     </script>
