@@ -387,4 +387,82 @@
     WHERE userType = 2
     order by id
   </select> 
+<!-- ************************************************************************************************** -->
+  <select id="selectDistrictCount3" parameterType="map" resultType="DistrictSumReportDTO3">
+	select '合计' as district,
+	    SUM(d.`firstNumber` + d.`secondNumber` + d.`threeNumber` + d.`fourNumber`) as totalNumber,
+        SUM(d.`firstArea` + d.`secondArea` + d.`threeArea` + d.`fourArea`) as totalArea,
+		SUM(d.`firstNumber`) as firstNumberSum, 
+		SUM(d.`firstArea`) as firstAreaSum, 
+		SUM(d.`secondNumber`) as secondNumberSum, 
+		SUM(d.`secondArea`) as secondAreaSum,
+		SUM(d.`threeNumber`) as threeNumberSum, 
+		SUM(d.`threeArea`) as threeAreaSum, 
+		SUM(d.`fourNumber`) as fourNumberSum, 
+		SUM(d.`fourArea`) as fourAreaSum
+		from district_report6 d 
+		<![CDATA[
+			where d.`recordYearMonth` >= #{startMonth} 
+			and d.`recordYearMonth` <= #{endMonth}
+		]]>
+		union all (
+		select u.otherName as district,d.totalNumber,d.totalArea,d.firstNumberSum,d.firstAreaSum,d.secondNumberSum,d.secondAreaSum,d.threeNumberSum,d.threeAreaSum,d.fourNumberSum,d.fourAreaSum from
+	    (
+	        select
+	        d.userId,
+		    SUM(d.`firstNumber` + d.`secondNumber` + d.`threeNumber` + d.`fourNumber`) as totalNumber,
+	        SUM(d.`firstArea` + d.`secondArea` + d.`threeArea` + d.`fourArea`) as totalArea,
+			SUM(d.`firstNumber`) as firstNumberSum, 
+			SUM(d.`firstArea`) as firstAreaSum, 
+			SUM(d.`secondNumber`) as secondNumberSum, 
+			SUM(d.`secondArea`) as secondAreaSum,
+			SUM(d.`threeNumber`) as threeNumberSum, 
+			SUM(d.`threeArea`) as threeAreaSum, 
+			SUM(d.`fourNumber`) as fourNumberSum, 
+			SUM(d.`fourArea`) as fourAreaSum
+	        from district_report6 d 
+			<![CDATA[
+				where d.`recordYearMonth` >= #{startMonth} 
+				and d.`recordYearMonth` <= #{endMonth}
+			]]>
+	        group by d.`userId`
+	    ) d
+	    right join t_user u
+	    on d.`userId` = u.id
+	    where u.userType = 2
+	    order by u.id)
+  </select>  
+<!-- ************************************************************************************************** -->
+  <select id="selectDistrictCount4" parameterType="map" resultType="DistrictSumReportDTO4">
+	select '合计' as district,
+		SUM(d.`dealNumber`) as dealNumberSum, 
+		SUM(d.`dealArea`) as dealAreaSum, 
+		SUM(d.`totalPrice`) as totalPriceSum, 
+		SUM(d.`averagePrice`) as averagePriceSum
+		from district_report7 d 
+		<![CDATA[
+			where d.`recordYearMonth` >= #{startMonth} 
+			and d.`recordYearMonth` <= #{endMonth}
+		]]>
+		union all (
+		select u.otherName as district,d.dealNumberSum,d.dealAreaSum,d.totalPriceSum,d.averagePriceSum from
+	    (
+	        select
+	        d.userId,
+			SUM(d.`dealNumber`) as dealNumberSum, 
+			SUM(d.`dealArea`) as dealAreaSum, 
+			SUM(d.`totalPrice`) as totalPriceSum, 
+			SUM(d.`averagePrice`) as averagePriceSum
+            from district_report7 d 
+			<![CDATA[
+				where d.`recordYearMonth` >= #{startMonth} 
+				and d.`recordYearMonth` <= #{endMonth}
+			]]>
+            group by d.`userId`
+        ) d
+        right join t_user u
+        on d.`userId` = u.id
+        where u.userType = 2
+        order by u.id)
+  </select>    
 </mapper>
