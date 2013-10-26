@@ -16,7 +16,7 @@ public class DistrictReport2_5 implements Serializable {
 	private String startTime;
 	private String completeTime;
 	private String location;
-	private Integer houseNumber;
+	private Integer houseNumber = 1;//记录数
 	private Double area;
 	private Double totalPrice;
 	private Double averagePrice;

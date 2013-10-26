@@ -1,4 +1,4 @@
-﻿App.Develop9 = function() {
+﻿App.DistrictCount1 = function() {
     return {
 
         currentFormValues: {},
@@ -17,7 +17,7 @@
 //            		params : {start:0, limit:15,recordYearMonth:queryDate}
 				},
 				proxy: new Ext.data.HttpProxy({
-					url : 'develop/count9?t=' + new Date().getTime()
+					url : 'district/count1?t=' + new Date().getTime()
 				}),
                 remoteSort: false,
 				reader: new Ext.data.JsonReader({
@@ -35,19 +35,22 @@
 						name: 'district'
 					},
 					{
-						name: 'sumCount'
+						name: 'licenceSum'
 					},
 					{
-						name: 'onsaleAreaHouseSum'
+						name: 'houseNumberSum'
 					},
 					{
-						name: 'onsaleAreaBusinessSum'
+						name: 'houseAreaSum'
 					},
 					{
-						name: 'onsaleAreaOfficeSum'
+						name: 'businessSum'
 					},
 					{
-						name: 'onsaleAreaOtherSum'
+						name: 'officeSum'
+					},
+					{
+						name: 'otherSum'
 					}
 					]
 				})
@@ -60,13 +63,13 @@
             panel.body.dom.innerHTML = "";
             
             this.grid = new Ext.grid.GridPanel({
-            	id:'gridId9',
+            	id:'gridIdD1',
                 loadMask: true,
-                title:'张家口市房地产开发企业待售面积情况汇总表',
+                title:'张家口市颁发商品房预售许可证情况汇总表',
                 tbar: [' ','张家口市',{
                     xtype: 'datefield',
-                    id: 'startMonth9',
-                    name: 'startMonth9',
+                    id: 'startMonthD1',
+                    name: 'startMonthD1',
                     allowBlank:false,
                     value:new Date(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
@@ -76,16 +79,16 @@
                     listeners: {
                     	scope: this,
                     	select: function(obj, date) {
-                    		this.store.reload({params:{startMonth:document.getElementById("startMonth9").value.replace("-",""),endMonth:document.getElementById("endMonth9").value.replace("-","")}});
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonthD1").value.replace("-",""),endMonth:document.getElementById("endMonthD1").value.replace("-","")}});
                     	},
                     	change: function(obj, date) {
-                    		this.store.reload({params:{startMonth:document.getElementById("startMonth9").value.replace("-",""),endMonth:document.getElementById("endMonth9").value.replace("-","")}});
+                    		this.store.reload({params:{startMonth:document.getElementById("startMonthD1").value.replace("-",""),endMonth:document.getElementById("endMonthD1").value.replace("-","")}});
                     	}
                     }
                 },'至',{
                     xtype: 'datefield',
-                    id: 'endMonth9',
-                    name: 'endMonth9',
+                    id: 'endMonthD1',
+                    name: 'endMonthD1',
                     allowBlank:false,
                     value:new Date(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
@@ -95,13 +98,13 @@
                     listeners: {
                         scope: this,
                         select: function(obj, date) {
-                        	this.store.reload({params:{startMonth:document.getElementById("startMonth9").value.replace("-",""),endMonth:document.getElementById("endMonth9").value.replace("-","")}});
+                        	this.store.reload({params:{startMonth:document.getElementById("startMonthD1").value.replace("-",""),endMonth:document.getElementById("endMonthD1").value.replace("-","")}});
                         },
 		                change: function(obj, date) {
-		                	this.store.reload({params:{startMonth:document.getElementById("startMonth9").value.replace("-",""),endMonth:document.getElementById("endMonth9").value.replace("-","")}});
+		                	this.store.reload({params:{startMonth:document.getElementById("startMonthD1").value.replace("-",""),endMonth:document.getElementById("endMonthD1").value.replace("-","")}});
 		                }
                     }
-                },'房地产开发企业待售面积情况汇总表'
+                },'颁发商品房预售许可证情况汇总表'
                 ],
                 store: this.store,
                 columns: [
@@ -124,40 +127,46 @@
                     dataIndex: 'district'
                 },
                 {
-                	header: "小计(㎡)",
+                	header: "预售许可证份数",
                 	width: 100,
                 	//sortable: true,
-                	dataIndex: 'sumCount'
+                	dataIndex: 'licenceSum'
                 },
                 {
-                    header: "住宅(㎡)",
+                    header: "住宅套数",
                     width: 100,
                     //sortable: true,
-                    dataIndex: 'onsaleAreaHouseSum'
+                    dataIndex: 'houseNumberSum'
                 },
                 {
-                	header: "商业营业房(㎡)",
+                	header: "住宅面积(㎡)",
+                	width: 100,
+                	//sortable: true,
+                	dataIndex: 'houseAreaSum'
+                },
+                {
+                	header: "商业营业  房  (㎡)",
                 	width: 120,
                 	//sortable: true,
-                	dataIndex: 'onsaleAreaBusinessSum'
+                	dataIndex: 'businessSum'
                 },
                 {
                 	header: "办公房(㎡)",
                 	width: 100,
                 	//sortable: true,
-                	dataIndex: 'onsaleAreaOfficeSum'
+                	dataIndex: 'officeSum'
                 },
                 {
                 	header: "其他房(㎡)",
                 	width: 100,
                 	//sortable: true,
-                	dataIndex: 'onsaleAreaOtherSum'
+                	dataIndex: 'otherSum'
                 }],
                 bbar:new Ext.Toolbar({
                     buttons: [new Ext.Button({
                         text: '导出到Excel',
                         handler: function() {
-                            var vExportContent = Ext.getCmp("gridId9").getExcelXml();
+                            var vExportContent = Ext.getCmp("gridIdD1").getExcelXml();
                             if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
                                 var fd=Ext.get('frmDummy');
                                 if (!fd) {

@@ -14,6 +14,8 @@ import net.fanzhiwei.zjkfgj.district.domain.DistrictReport2_5;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport6;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport7;
 import net.fanzhiwei.zjkfgj.district.service.DistrictService;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO1;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO2;
 import net.fanzhiwei.zjkfgj.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -470,5 +472,51 @@ public class DistrictController {
 			responseMap.put("info", e.getClass()+":"+e.getMessage());
 			return responseMap;
 		}
+	}
+	
+/**************************************************统计**********************************************************/
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count1")
+	public @ResponseBody Map<String,Object> selectDistrictCount1(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO1>  list = districtService.selectDistrictCount1(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count2")
+	public @ResponseBody Map<String,Object> selectDistrictCount2(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO2>  list = districtService.selectDistrictCount2(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
 	}
 }
