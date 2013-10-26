@@ -279,8 +279,8 @@
     SUM(d.`other`) as otherSum
 	from district_report1 d 
 		<![CDATA[
-			where r.`recordYearMonth` >= #{startMonth} 
-			and r.`recordYearMonth` <= #{endMonth}
+			where d.`recordYearMonth` >= #{startMonth} 
+			and d.`recordYearMonth` <= #{endMonth}
 		]]>
 	union all (
 	select u.otherName as district,d.licenceSum,d.houseNumberSum,d.houseAreaSum,d.businessSum,d.officeSum,d.otherSum from
@@ -295,8 +295,8 @@
     	SUM(d.`other`) as otherSum
 		from district_report1 d 
 		<![CDATA[
-			where r.`recordYearMonth` >= #{startMonth} 
-			and r.`recordYearMonth` <= #{endMonth}
+			where d.`recordYearMonth` >= #{startMonth} 
+			and d.`recordYearMonth` <= #{endMonth}
 		]]>
 		group by d.`userId`
 	) d
@@ -306,4 +306,85 @@
 	order by u.id)
   </select>  
   
+<!-- ************************************************************************************************** -->
+  <select id="selectDistrictCount2a" parameterType="map" resultType="DistrictSumReportDTO2">
+	select * from (
+	    select 
+	    SUM(d1.`houseNumber`) as houseNumberSum1,
+	    SUM(d1.`area`) as areaSum1, 
+	    SUM(d1.`totalPrice`) as totalPriceSum1, 
+	    SUM(d1.`averagePrice`) as averagePriceSum1
+	    from district_report2_5 d1 
+	    <![CDATA[
+	            where d1.`recordYearMonth` >= #{startMonth} 
+	            and d1.`recordYearMonth` <= #{endMonth}
+	    ]]>
+	            and d1.`category` = 1) d1
+	    join  
+	    (select 
+	    SUM(d2.`houseNumber`) as houseNumberSum2,
+	    SUM(d2.`area`) as areaSum2, 
+	    SUM(d2.`totalPrice`) as totalPriceSum2, 
+	    SUM(d2.`averagePrice`) as averagePriceSum2
+	    from district_report2_5 d2 
+	    <![CDATA[
+	            where d2.`recordYearMonth` >= #{startMonth}
+	            and d2.`recordYearMonth` <= #{endMonth}
+	    ]]>
+	            and d2.`category` = 2) d2
+	    on 1=1
+	    join  
+	    (select 
+	    SUM(d3.`houseNumber`) as houseNumberSum3,
+	    SUM(d3.`area`) as areaSum3, 
+	    SUM(d3.`totalPrice`) as totalPriceSum3, 
+	    SUM(d3.`averagePrice`) as averagePriceSum3
+	    from district_report2_5 d3 
+	    <![CDATA[
+	            where d3.`recordYearMonth` >= #{startMonth}
+	            and d3.`recordYearMonth` <= #{endMonth}
+	    ]]>
+	            and d3.`category` = 3) d3
+	    on 1=1
+	    join  
+	    (select 
+	    SUM(d4.`houseNumber`) as houseNumberSum4,
+	    SUM(d4.`area`) as areaSum4, 
+	    SUM(d4.`totalPrice`) as totalPriceSum4, 
+	    SUM(d4.`averagePrice`) as averagePriceSum4
+	    from district_report2_5 d4 
+	    <![CDATA[
+	            where d4.`recordYearMonth` >= #{startMonth}
+	            and d4.`recordYearMonth` <= #{endMonth}
+	    ]]>
+	            and d4.`category` = 4) d4
+	    on 1=1
+  </select>  
+  <select id="selectDistrictCount2b" parameterType="map" resultType="DistrictSumReportDTO2b">
+        select 
+        d.`userId`,
+        SUM(d.`houseNumber`) as houseNumberSum,
+        SUM(d.`area`) as areaSum, 
+        SUM(d.`totalPrice`) as totalPriceSum, 
+        SUM(d.`averagePrice`) as averagePriceSum
+        from district_report2_5 d 
+  		<![CDATA[
+	            where d.`recordYearMonth` >= #{startMonth}
+	            and d.`recordYearMonth` <= #{endMonth}
+	            and d.`category` = #{category}
+	    ]]>
+        group by d.`userId`
+  </select>  
+  <select id="getDistrictUsers" resultType="User">
+    SELECT
+    	id,
+    	name,
+    	otherName,
+    	userType,
+   		password,
+    	create_date
+    FROM t_user
+    WHERE userType = 2
+    order by id
+  </select> 
 </mapper>

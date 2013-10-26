@@ -8,6 +8,9 @@ import net.fanzhiwei.zjkfgj.district.domain.DistrictReport2_5;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport6;
 import net.fanzhiwei.zjkfgj.district.domain.DistrictReport7;
 import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO1;
+import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO2a;
+import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO2b;
+import net.fanzhiwei.zjkfgj.user.domain.User;
 
 public interface DistrictMapper {
 	List<DistrictReport1> getDistrictListReport1(Map<String,Object> param);
@@ -33,4 +36,7 @@ public interface DistrictMapper {
 	
 /****************************************统计 *******************************************/
 	List<DistrictSumReportDTO1> selectDistrictCount1(Map<String,Object> param);
+	List<DistrictSumReportDTO2a> selectDistrictCount2a(Map<String,Object> param);
+	List<DistrictSumReportDTO2b> selectDistrictCount2b(Map<String,Object> param);
+	List<User> getDistrictUsers();
 }
