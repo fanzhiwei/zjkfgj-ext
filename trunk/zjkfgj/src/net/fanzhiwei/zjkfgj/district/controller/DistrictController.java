@@ -16,6 +16,8 @@ import net.fanzhiwei.zjkfgj.district.domain.DistrictReport7;
 import net.fanzhiwei.zjkfgj.district.service.DistrictService;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO1;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO2;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO3;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO4;
 import net.fanzhiwei.zjkfgj.user.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -513,6 +515,51 @@ public class DistrictController {
 			endMonth = startMonth;
 		}
 		List<DistrictSumReportVO2>  list = districtService.selectDistrictCount2(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count3")
+	public @ResponseBody Map<String,Object> selectDistrictCount3(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO3>  list = districtService.selectDistrictCount3(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		
+		Map<String,Object> responseMap = new HashMap<String,Object>();
+		responseMap.put("totalCount", list.size());
+		responseMap.put("rows", list);
+		return responseMap;
+	}
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/count4")
+	public @ResponseBody Map<String,Object> selectDistrictCount4(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO4>  list = districtService.selectDistrictCount4(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
 		
 		Map<String,Object> responseMap = new HashMap<String,Object>();
 		responseMap.put("totalCount", list.size());

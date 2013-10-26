@@ -12,9 +12,13 @@ import net.fanzhiwei.zjkfgj.district.domain.DistrictReport7;
 import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO1;
 import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO2a;
 import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO2b;
+import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO3;
+import net.fanzhiwei.zjkfgj.district.dto.DistrictSumReportDTO4;
 import net.fanzhiwei.zjkfgj.district.persistence.DistrictMapper;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO1;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO2;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO3;
+import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO4;
 import net.fanzhiwei.zjkfgj.user.domain.User;
 
 import org.springframework.beans.BeanUtils;
@@ -289,4 +293,69 @@ public class DistrictService{
 		}
 		return list;
 	}
+	
+	/**************************************************************************************/
+	@Transactional(readOnly = true)
+	public List<DistrictSumReportVO3> selectDistrictCount3(int startMonth,int endMonth) {
+		List<DistrictSumReportVO3> list = new ArrayList<DistrictSumReportVO3>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DistrictSumReportDTO3> listDTO = districtMapper.selectDistrictCount3(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getFirstAreaSum() == null) {
+			return list;
+		}
+		DistrictSumReportVO3 vo = null;
+		DistrictSumReportDTO3 dto = null;
+		for (int i = 0; i< listDTO.size(); i++) {
+			dto = listDTO.get(i);
+			vo = new DistrictSumReportVO3();
+			vo.setRecordMonth(recordMonth);
+			vo.setId(i);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}	
+	/**************************************************************************************/
+	@Transactional(readOnly = true)
+	public List<DistrictSumReportVO4> selectDistrictCount4(int startMonth,int endMonth) {
+		List<DistrictSumReportVO4> list = new ArrayList<DistrictSumReportVO4>();
+		String recordMonth = "";
+		if (startMonth > endMonth) {
+			return list;
+		}
+		if (startMonth == endMonth) {
+			recordMonth = String.valueOf(startMonth);
+		} else {
+			recordMonth = String.valueOf(startMonth) + "~" + String.valueOf(endMonth);
+		}
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("startMonth", startMonth);
+		param.put("endMonth", endMonth);
+		List<DistrictSumReportDTO4> listDTO = districtMapper.selectDistrictCount4(param);
+		if (listDTO.size() == 0 || listDTO.get(0).getDealAreaSum() == null) {
+			return list;
+		}
+		DistrictSumReportVO4 vo = null;
+		DistrictSumReportDTO4 dto = null;
+		for (int i = 0; i< listDTO.size(); i++) {
+			dto = listDTO.get(i);
+			vo = new DistrictSumReportVO4();
+			vo.setRecordMonth(recordMonth);
+			vo.setId(i);
+			BeanUtils.copyProperties(dto,vo);
+			list.add(vo);
+		}
+		return list;
+	}	
 }
