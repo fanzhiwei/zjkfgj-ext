@@ -22,7 +22,8 @@ App.createViewport = function() {
         items: [
             App.createNorth(),
             App.createWest(),
-            App.createCenter()
+            App.createCenter(),
+            App.createSouth()
         ]
     });
 };
@@ -49,6 +50,14 @@ App.createNorth = function() {
             }
         }]
     };
+};
+
+App.createSouth = function() {
+	return {
+		region: 'south',
+		height: 22,
+		bbar: ['->','<div style="font-size:10px;">© 张家口市房地产交易产权管理处.  Powered by zhiwei, 1265805779@qq.com</div>','->']
+	};
 };
 
 App.createWest = function() {
