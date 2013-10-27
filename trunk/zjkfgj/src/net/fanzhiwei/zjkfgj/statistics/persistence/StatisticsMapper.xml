@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.fanzhiwei.zjkfgj.statistics.persistence.StatisticsMapper">
+  <select id="getDevUserStatistics1" parameterType="map" resultType="UserRecordStatistics">
+  	select '已填数合计',COUNT(1) from
+    (select `userId` from realestate_develop where recordYearMonth = #{recordYearMonth}
+    and exists ( select * from t_user where id = userId and userType = 1)
+	group by `userId`) t
+    union all
+	select u.`otherName` as userName,
+		CASE WHEN t.userId is null THEN '未填'
+		ELSE '已填' END as recordFlag
+	from `t_user` u
+	left join 
+	     (select `userId` from realestate_develop where recordYearMonth = #{recordYearMonth}
+	      group by `userId`) t 
+	on u.`id` = t.`userId`
+	where u.`userType` = 1
+  </select>
+  <select id="getDisUserStatistics1" parameterType="map" resultType="UserRecordStatistics">
+  	select '已填数合计',COUNT(1) from
+    (select `userId` from district_report1 where recordYearMonth = #{recordYearMonth}
+    and exists ( select * from t_user where id = userId and userType = 2)
+	group by `userId`) t
+    union all
+	select u.`otherName` as userName,
+		CASE WHEN t.userId is null THEN '未填'
+		ELSE '已填' END as recordFlag
+	from `t_user` u
+	left join 
+	     (select `userId` from district_report1 where recordYearMonth = #{recordYearMonth}
+	      group by `userId`) t 
+	on u.`id` = t.`userId`
+	where u.`userType` = 2
+  </select>
+  <select id="getDisUserStatistics2_5" parameterType="map" resultType="UserRecordStatistics">
+  	select '已填数合计',COUNT(1) from
+    (select `userId` from district_report2_5 where recordYearMonth = #{recordYearMonth}
+    and exists ( select * from t_user where id = userId and userType = 2)
+	group by `userId`) t
+    union all
+	select u.`otherName` as userName,
+		CASE WHEN t.userId is null THEN '未填'
+		ELSE '已填' END as recordFlag
+	from `t_user` u
+	left join 
+	     (select `userId` from district_report2_5 where recordYearMonth = #{recordYearMonth} and category = #{category}
+	      group by `userId`) t 
+	on u.`id` = t.`userId`
+	where u.`userType` = 2
+  </select>
+  <select id="getDisUserStatistics6" parameterType="map" resultType="UserRecordStatistics">
+  	select '已填数合计',COUNT(1) from
+    (select `userId` from district_report6 where recordYearMonth = #{recordYearMonth}
+    and exists ( select * from t_user where id = userId and userType = 2)
+	group by `userId`) t
+    union all
+	select u.`otherName` as userName,
+		CASE WHEN t.userId is null THEN '未填'
+		ELSE '已填' END as recordFlag
+	from `t_user` u
+	left join 
+	     (select `userId` from district_report6 where recordYearMonth = #{recordYearMonth}
+	      group by `userId`) t 
+	on u.`id` = t.`userId`
+	where u.`userType` = 2
+  </select>
+  <select id="getDisUserStatistics7" parameterType="map" resultType="UserRecordStatistics">
+  	select '已填数合计',COUNT(1) from
+    (select `userId` from district_report7 where recordYearMonth = #{recordYearMonth}
+    and exists ( select * from t_user where id = userId and userType = 2)
+	group by `userId`) t
+    union all
+	select u.`otherName` as userName,
+		CASE WHEN t.userId is null THEN '未填'
+		ELSE '已填' END as recordFlag
+	from `t_user` u
+	left join 
+	     (select `userId` from district_report7 where recordYearMonth = #{recordYearMonth}
+	      group by `userId`) t 
+	on u.`id` = t.`userId`
+	where u.`userType` = 2
+  </select>
+</mapper>
