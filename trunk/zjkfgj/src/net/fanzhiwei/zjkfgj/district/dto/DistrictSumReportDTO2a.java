@@ -1,7 +1,6 @@
 package net.fanzhiwei.zjkfgj.district.dto;
 
 public class DistrictSumReportDTO2a {
-	private String district;
 	private Integer houseNumberSum1 = 0;
 	private Double areaSum1 = 0d;
 	private Double totalPriceSum1 = 0d;
@@ -18,14 +17,6 @@ public class DistrictSumReportDTO2a {
 	private Double areaSum4 = 0d;
 	private Double totalPriceSum4 = 0d;
 	private Double averagePriceSum4 = 0d;
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
 
 	public Integer getHouseNumberSum1() {
 		return houseNumberSum1;

@@ -181,19 +181,13 @@
                     buttons: [new Ext.Button({
                         text: '导出到Excel',
                         handler: function() {
-                            var vExportContent = Ext.getCmp("gridIdD2").getExcelXml();
-                            if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
-                                var fd=Ext.get('frmDummy');
-                                if (!fd) {
-                                    fd=Ext.DomHelper.append(Ext.getBody(),{tag:'form',method:'post',id:'frmDummy',action:'exportexcel.jsp', target:'_blank',name:'frmDummy',cls:'x-hidden',cn:[
-                                        {tag:'input',name:'exportContent',id:'exportContent',type:'hidden'}
-                                    ]},true);
-                                }
-                                fd.child('#exportContent').set({value:vExportContent});
-                                fd.dom.submit();
-                            } else {
-                                document.location = 'data:application/vnd.ms-excel;base64,'+Base64.encode(vExportContent);
-                            }}
+//                        	var params = {startMonth:document.getElementById("startMonthD2").value.replace("-",""),endMonth:document.getElementById("endMonthD2").value.replace("-","")};
+//                		    $.post("district/exportCount2",params,
+//                		    function(data){
+//                			   //donothing
+//                		    },"json");//这里返回的类型有：json,html,xml,text
+                        	window.location.href = "district/exportShangPinXiaoShou?startMonth=" + document.getElementById("startMonthD2").value.replace("-","") + "&endMonth=" + document.getElementById("endMonthD2").value.replace("-","");
+                        }
                     })]
                 })
             });
