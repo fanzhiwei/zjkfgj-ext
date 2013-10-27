@@ -13,6 +13,15 @@ public class UserRecordStatistics {
 	}
 
 	public String getRecordFlag() {
+		if (recordFlag == null) {
+			return recordFlag;
+		}
+		if ("-1".equals(recordFlag)) {
+			return "未填";
+		}
+		if ("-2".equals(recordFlag)) {
+			return "已填";
+		}
 		return recordFlag;
 	}
 
