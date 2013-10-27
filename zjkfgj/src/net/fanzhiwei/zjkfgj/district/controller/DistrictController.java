@@ -1,5 +1,6 @@
 package net.fanzhiwei.zjkfgj.district.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO2;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO3;
 import net.fanzhiwei.zjkfgj.district.vo.DistrictSumReportVO4;
 import net.fanzhiwei.zjkfgj.user.domain.User;
+import net.sf.excelutils.ExcelException;
+import net.sf.excelutils.ExcelUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -566,4 +569,71 @@ public class DistrictController {
 		responseMap.put("rows", list);
 		return responseMap;
 	}
+	
+	/**********************************************导出excel***************************************************/
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/exportShangPinXiaoShou")
+	public String exportDistrictCount2(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO2>  list = districtService.selectDistrictCount2(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		ExcelUtils.addValue("list", list);
+
+		String config = "/WEB-INF/xls/shangpinfangxiaohuizongbiao.xls";
+		response.reset();
+		response.setContentType("application/vnd.ms-excel");
+		try {
+			ExcelUtils.export(request.getSession().getServletContext(), config,
+					response.getOutputStream());
+		} catch (ExcelException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/exportDengJiZaiCe")
+	public String exportDistrictCount3(HttpServletRequest request,   
+			HttpServletResponse response){
+		String startMonth = request.getParameter("startMonth");
+		String endMonth = request.getParameter("endMonth");
+		if (startMonth == null || "".equals(startMonth)) {
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMM");
+			startMonth = sd.format(new Date());
+			endMonth = startMonth;
+		}
+		List<DistrictSumReportVO3>  list = districtService.selectDistrictCount3(Integer.parseInt(startMonth),Integer.parseInt(endMonth));
+		ExcelUtils.addValue("list", list);
+
+		String config = "/WEB-INF/xls/dengjizaicehuizongbiao.xls";
+		response.reset();
+		response.setContentType("application/vnd.ms-excel");
+		try {
+			ExcelUtils.export(request.getSession().getServletContext(), config,
+					response.getOutputStream());
+		} catch (ExcelException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}	
 }
