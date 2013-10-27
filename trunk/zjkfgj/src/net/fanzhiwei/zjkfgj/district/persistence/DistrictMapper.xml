@@ -307,7 +307,7 @@
   </select>  
   
 <!-- ************************************************************************************************** -->
-  <select id="selectDistrictCount2a" parameterType="map" resultType="DistrictSumReportDTO2">
+  <select id="selectDistrictCount2a" parameterType="map" resultType="DistrictSumReportDTO2a">
 	select * from (
 	    select 
 	    SUM(d1.`houseNumber`) as houseNumberSum1,

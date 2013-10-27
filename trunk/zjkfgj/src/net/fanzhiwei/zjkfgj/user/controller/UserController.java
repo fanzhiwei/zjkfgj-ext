@@ -165,6 +165,7 @@ public class UserController {
 				User user = userService.getUser(param);
 				user.setName(name);
 				user.setOtherName(otherName);
+				user.setUserType(Integer.parseInt(userType));
 				//表示修改了密码
 				if(!"".equals(password)) {
 					user.setPassword(password);

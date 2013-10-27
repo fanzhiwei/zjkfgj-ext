@@ -139,27 +139,27 @@
                 store: this.store,
                 colModel: new Ext.grid.ColumnModel({
     				columns: [
-    					{header: '序号', width: 50, dataIndex: 'id'},
-    					{header: '统计日期', width: 140, dataIndex: 'recordMonth'},
-    					{header: '县（区）', width: 80, dataIndex: 'district'},
-    					{header: '套数', width: 80, dataIndex: 'houseNumberSum1'},
-    					{header: '面积(㎡)', width: 80, dataIndex: 'areaSum1'},
-    					{header: '合同总价（万元）', width: 100, dataIndex: 'totalPriceSum1'},
-    					{header: '平均价（元）', width: 80, dataIndex: 'averagePriceSum1'},
-    					{header: '套数', width: 80, dataIndex: 'houseNumberSum2'},
-    					{header: '面积(㎡)', width: 80, dataIndex: 'areaSum2'},
-    					{header: '合同总价（万元）', width: 200, dataIndex: 'totalPriceSum2'},
-    					{header: '平均价（元）', width: 80, dataIndex: 'averagePriceSum2'},
-    					{header: '套数', width: 80, dataIndex: 'houseNumberSum3'},
-    					{header: '面积(㎡)', width: 80, dataIndex: 'areaSum3'},
-    					{header: '合同总价（万元）', width: 300, dataIndex: 'totalPriceSum3'},
-    					{header: '平均价（元）', width: 80, dataIndex: 'averagePriceSum3'},
-    					{header: '套数', width: 80, dataIndex: 'houseNumberSum4'},
-    					{header: '面积(㎡)', width: 80, dataIndex: 'areaSum4'},
-    					{header: '合同总价（万元）', width: 400, dataIndex: 'totalPriceSum4'},
-    					{header: '平均价（元）', width: 80, dataIndex: 'averagePriceSum4'}
+    					{header: '序号', width: 40, dataIndex: 'id'},
+    					{header: '统计日期', width: 80, dataIndex: 'recordMonth', align: 'center'},
+    					{header: '县（区）', width: 80, dataIndex: 'district', align: 'center'},
+    					{header: '套数', width: 60, dataIndex: 'houseNumberSum1', align: 'center'},
+    					{header: '面积(㎡)', width: 70, dataIndex: 'areaSum1', align: 'center'},
+    					{header: '合同总价（万元）', width: 110, dataIndex: 'totalPriceSum1', align: 'center'},
+    					{header: '平均价（元）', width: 100, dataIndex: 'averagePriceSum1', align: 'center'},
+    					{header: '套数', width: 60, dataIndex: 'houseNumberSum2', align: 'center'},
+    					{header: '面积(㎡)', width: 70, dataIndex: 'areaSum2', align: 'center'},
+    					{header: '合同总价（万元）', width: 110, dataIndex: 'totalPriceSum2', align: 'center'},
+    					{header: '平均价（元）', width: 100, dataIndex: 'averagePriceSum2', align: 'center'},
+    					{header: '套数', width: 60, dataIndex: 'houseNumberSum3', align: 'center'},
+    					{header: '面积(㎡)', width: 70, dataIndex: 'areaSum3', align: 'center'},
+    					{header: '合同总价（万元）', width: 110, dataIndex: 'totalPriceSum3', align: 'center'},
+    					{header: '平均价（元）', width: 100, dataIndex: 'averagePriceSum3', align: 'center'},
+    					{header: '套数', width: 60, dataIndex: 'houseNumberSum4', align: 'center'},
+    					{header: '面积(㎡)', width: 70, dataIndex: 'areaSum4', align: 'center'},
+    					{header: '合同总价（万元）', width: 110, dataIndex: 'totalPriceSum4', align: 'center'},
+    					{header: '平均价（元）', width: 100, dataIndex: 'averagePriceSum4', align: 'center'}
     				],
-    				defaultSortable: true,
+    				defaultSortable: false,
     				rows: [
     					[
     						{},{},{},
@@ -171,8 +171,9 @@
     				]
     			}),
     			enableColumnMove: false,
+    			enableColumnHide: false,
     			viewConfig: {
-    				forceFit: true
+//    				forceFit: true
     			},
     			plugins: [new Ext.ux.plugins.GroupHeaderGrid()],                
                 
