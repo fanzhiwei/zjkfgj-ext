@@ -206,7 +206,7 @@
         getDialog: function() {
             var dlg = new Ext.Window({
                 width: 500,
-                height: 330,
+                height: 345,
                 autoScroll:true,
                 bodyStyle:'overflow-y:auto;overflow-x:hidden;',
                 title: '',

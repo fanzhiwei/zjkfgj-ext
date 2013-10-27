@@ -135,10 +135,10 @@
     					{header: '套数', width: 80, dataIndex: 'fourNumberSum'},
     					{header: '面积（万㎡）', width: 110, dataIndex: 'fourAreaSum'}
     				],
-    				defaultSortable: true,
+    				defaultSortable: false,
     				rows: [
     					[
-    						{},{},{},
+    						{},{},{},{},{},
     						{header: '1990年之前', colspan: 2, align: 'center'},
     						{header: '1991年-2000年', colspan: 2, align: 'center'},
     						{header: '2001年-2010年', colspan: 2, align: 'center'},
@@ -147,8 +147,9 @@
     				]
     			}),
     			enableColumnMove: false,
+    			enableColumnHide: false,
     			viewConfig: {
-    				forceFit: true
+//    				forceFit: true
     			},
     			plugins: [new Ext.ux.plugins.GroupHeaderGrid()],                
                 

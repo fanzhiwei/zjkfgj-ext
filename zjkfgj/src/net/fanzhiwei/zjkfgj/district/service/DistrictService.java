@@ -235,7 +235,9 @@ public class DistrictService{
 		List<DistrictSumReportDTO2a> list2a = districtMapper.selectDistrictCount2a(param);//合计数,一条记录;
 		List<User> allUsers =  districtMapper.getDistrictUsers();//所有要统计的用户
 		DistrictSumReportVO2 vo = new DistrictSumReportVO2();
-		BeanUtils.copyProperties(list2a.get(0),vo);
+		if (list2a != null && list2a.get(0) != null && list2a.size() == 1) {
+			BeanUtils.copyProperties(list2a.get(0),vo);
+		}
 		vo.setDistrict("合计");
 		vo.setId(0);
 		vo.setRecordMonth(recordMonth);
