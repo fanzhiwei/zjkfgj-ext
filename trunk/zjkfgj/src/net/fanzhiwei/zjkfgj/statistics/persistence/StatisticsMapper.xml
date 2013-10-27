@@ -4,7 +4,7 @@
 
 <mapper namespace="net.fanzhiwei.zjkfgj.statistics.persistence.StatisticsMapper">
   <select id="getDevUserStatistics1" parameterType="map" resultType="UserRecordStatistics">
-  	select '已填数合计' as userName,COUNT(1) as recordFlag from
+  	select '已填合计' as userName,COUNT(1) as recordFlag from
     (select `userId` from realestate_develop where recordYearMonth = #{recordYearMonth}
     and exists ( select * from t_user where t_user.id = userId and userType = 1)
 	group by `userId`) t
@@ -20,7 +20,7 @@
 	where u.`userType` = 1)
   </select>
   <select id="getDisUserStatistics1" parameterType="map" resultType="UserRecordStatistics">
-  	select '已填数合计' as userName,COUNT(1) as recordFlag from
+  	select '已填合计' as userName,COUNT(1) as recordFlag from
     (select `userId` from district_report1 where recordYearMonth = #{recordYearMonth}
     and exists ( select * from t_user where t_user.id = userId and userType = 2)
 	group by `userId`) t
@@ -36,7 +36,7 @@
 	where u.`userType` = 2
   </select>
   <select id="getDisUserStatistics2_5" parameterType="map" resultType="UserRecordStatistics">
-  	select '已填数合计' as userName,COUNT(1) as recordFlag from
+  	select '已填合计' as userName,COUNT(1) as recordFlag from
     (select `userId` from district_report2_5 where recordYearMonth = #{recordYearMonth}
     and exists ( select * from t_user where t_user.id = userId and userType = 2)
     and category = #{category}
@@ -53,7 +53,7 @@
 	where u.`userType` = 2
   </select>
   <select id="getDisUserStatistics6" parameterType="map" resultType="UserRecordStatistics">
-  	select '已填数合计' as userName,COUNT(1) as recordFlag from
+  	select '已填合计' as userName,COUNT(1) as recordFlag from
     (select `userId` from district_report6 where recordYearMonth = #{recordYearMonth}
     and exists ( select * from t_user where t_user.id = userId and userType = 2)
 	group by `userId`) t
@@ -69,7 +69,7 @@
 	where u.`userType` = 2
   </select>
   <select id="getDisUserStatistics7" parameterType="map" resultType="UserRecordStatistics">
-  	select '已填数合计' as userName,COUNT(1) as recordFlag from
+  	select '已填合计' as userName,COUNT(1) as recordFlag from
     (select `userId` from district_report7 where recordYearMonth = #{recordYearMonth}
     and exists ( select * from t_user where t_user.id = userId and userType = 2)
 	group by `userId`) t
