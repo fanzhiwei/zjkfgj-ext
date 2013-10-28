@@ -45,11 +45,11 @@ public class UserController {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String vcode = (String)request.getSession().getAttribute("vcode");
-//		if(vcode==null || !captcha.equals(vcode)) {
-//			responseMap.put("success", "false");
-//			responseMap.put("info", "验证码错误！");
-//			return responseMap;
-//		}
+		if(vcode==null || !captcha.equals(vcode)) {
+			responseMap.put("success", "false");
+			responseMap.put("info", "验证码错误！");
+			return responseMap;
+		}
 		try {
 			Map<String,Object> param = new HashMap<String,Object>();
 			param.put("name", name);
