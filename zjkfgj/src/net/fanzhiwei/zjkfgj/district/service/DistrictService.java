@@ -1,5 +1,6 @@
 package net.fanzhiwei.zjkfgj.district.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -241,6 +242,33 @@ public class DistrictService{
 		vo.setDistrict("合计");
 		vo.setId(0);
 		vo.setRecordMonth(recordMonth);
+		
+		//计算平均价
+		if (vo.getAreaSum1().doubleValue() != 0d) {
+			double d = vo.getTotalPriceSum1().doubleValue()*10000/vo.getAreaSum1().doubleValue();
+			vo.setAveragePriceSum1(Double.parseDouble(String.format("%.2f", d)));
+		} else {
+			vo.setAveragePriceSum1(0d);
+		}
+		if (vo.getAreaSum2().doubleValue() != 0d) {
+			double d = vo.getTotalPriceSum2().doubleValue()*10000/vo.getAreaSum2().doubleValue();
+			vo.setAveragePriceSum2(Double.parseDouble(String.format("%.2f", d)));
+		} else {
+			vo.setAveragePriceSum2(0d);
+		}
+		if (vo.getAreaSum3().doubleValue() != 0d) {
+			double d = vo.getTotalPriceSum3().doubleValue()*10000/vo.getAreaSum3().doubleValue();
+			vo.setAveragePriceSum3(Double.parseDouble(String.format("%.2f", d)));
+		} else {
+			vo.setAveragePriceSum3(0d);
+		}
+		if (vo.getAreaSum4().doubleValue() != 0d) {
+			double d = vo.getTotalPriceSum4().doubleValue()*10000/vo.getAreaSum4().doubleValue();
+			vo.setAveragePriceSum4(Double.parseDouble(String.format("%.2f", d)));
+		} else {
+			vo.setAveragePriceSum4(0d);
+		}
+		
 		list.add(vo);
 		for (int i= 0; i< allUsers.size(); i++) {
 			vo = new DistrictSumReportVO2();
@@ -265,15 +293,28 @@ public class DistrictService{
 					list.get(i).setHouseNumberSum1(dto.getHouseNumberSum());
 					list.get(i).setAreaSum1(dto.getAreaSum());
 					list.get(i).setTotalPriceSum1(dto.getTotalPriceSum());
-					list.get(i).setAveragePriceSum1(dto.getAveragePriceSum());
+					
+					if (dto.getAreaSum().doubleValue() != 0d) {
+						double d = dto.getTotalPriceSum().doubleValue()*10000/dto.getAreaSum().doubleValue();
+						list.get(i).setAveragePriceSum1(Double.parseDouble(String.format("%.2f", d)));
+					} else {
+						list.get(i).setAveragePriceSum1(0d);
+					}
 				}
 			}
 			for (DistrictSumReportDTO2b dto : list2b2) {
 				if (list.get(i).getUserId().longValue() == dto.getUserId().longValue()) {
+					
 					list.get(i).setHouseNumberSum2(dto.getHouseNumberSum());
 					list.get(i).setAreaSum2(dto.getAreaSum());
 					list.get(i).setTotalPriceSum2(dto.getTotalPriceSum());
-					list.get(i).setAveragePriceSum2(dto.getAveragePriceSum());
+					
+					if (dto.getAreaSum().doubleValue() != 0d) {
+						double d = dto.getTotalPriceSum().doubleValue()*10000/dto.getAreaSum().doubleValue();
+						list.get(i).setAveragePriceSum2(Double.parseDouble(String.format("%.2f", d)));
+					} else {
+						list.get(i).setAveragePriceSum2(0d);
+					}
 				}
 			}
 			for (DistrictSumReportDTO2b dto : list2b3) {
@@ -281,7 +322,13 @@ public class DistrictService{
 					list.get(i).setHouseNumberSum3(dto.getHouseNumberSum());
 					list.get(i).setAreaSum3(dto.getAreaSum());
 					list.get(i).setTotalPriceSum3(dto.getTotalPriceSum());
-					list.get(i).setAveragePriceSum3(dto.getAveragePriceSum());
+					
+					if (dto.getAreaSum().doubleValue() != 0d) {
+						double d = dto.getTotalPriceSum().doubleValue()*10000/dto.getAreaSum().doubleValue();
+						list.get(i).setAveragePriceSum3(Double.parseDouble(String.format("%.2f", d)));
+					} else {
+						list.get(i).setAveragePriceSum3(0d);
+					}
 				}
 			}
 			for (DistrictSumReportDTO2b dto : list2b4) {
@@ -289,7 +336,13 @@ public class DistrictService{
 					list.get(i).setHouseNumberSum4(dto.getHouseNumberSum());
 					list.get(i).setAreaSum4(dto.getAreaSum());
 					list.get(i).setTotalPriceSum4(dto.getTotalPriceSum());
-					list.get(i).setAveragePriceSum4(dto.getAveragePriceSum());
+					
+					if (dto.getAreaSum().doubleValue() != 0d) {
+						double d = dto.getTotalPriceSum().doubleValue()*10000/dto.getAreaSum().doubleValue();
+						list.get(i).setAveragePriceSum4(Double.parseDouble(String.format("%.2f", d)));
+					} else {
+						list.get(i).setAveragePriceSum4(0d);
+					}
 				}
 			}
 		}
@@ -356,6 +409,14 @@ public class DistrictService{
 			vo.setRecordMonth(recordMonth);
 			vo.setId(i);
 			BeanUtils.copyProperties(dto,vo);
+			
+			if (dto.getDealAreaSum().doubleValue() != 0d) {
+				double d = dto.getTotalPriceSum().doubleValue()*10000/dto.getDealAreaSum().doubleValue();
+				vo.setAveragePriceSum(Double.parseDouble(String.format("%.2f", d)));
+			} else {
+				vo.setAveragePriceSum(0d);
+			}
+			
 			list.add(vo);
 		}
 		return list;

@@ -196,29 +196,22 @@ public class DistrictController {
 			responseMap.put("info", "会话过期，请重新登录！");
 			return responseMap;
 		}
-		Map<String,Object> params = null;
 		User user = (User)request.getSession().getAttribute("user");
 		vo.setUserId(user.getId());
-		//在新增记录时，同一区县，同一用户，同一年月，不得重复添加
-//		if(vo.getId() == null || "".equals(vo.getId())) {
-//			params = new HashMap<String,Object>();
-//			params.put("userId",user.getId());
-//			params.put("recordYearMonth",vo.getRecordYearMonth());
-//			List<DistrictReport2_5> currList = districtService.getDistrictListReport2_5(params);
-//			if (currList.size() > 0) {
-//				responseMap.put("info", "您已填写过该地区该年月数据，请不要重复添加，或请修改原记录！");
-//				return responseMap;
-//			}
-//		}
+		
+		//用户要添加记录，以记录该月已报送，但套数为0
+		if (vo.getCategory() != null && !"1".equals(vo.getCategory())) {
+			if (vo.getTotalPrice().doubleValue() == 0d && vo.getArea().doubleValue() == 0d) {
+				vo.setHouseNumber(0);
+			}
+		}
 		
 		try {
-			//编辑用户信息
 			if(vo.getId() != null && !"".equals(vo.getId())) {
 				districtService.updateDistrictReport2_5(vo);
 				responseMap.put("success", "true");
 				responseMap.put("info", "编辑成功！");
 			}
-			//新增用户信息
 			else {
 				districtService.insertDistrictReport2_5(vo);
 				responseMap.put("method", "Create");

@@ -281,6 +281,7 @@
 		<![CDATA[
 			where d.`recordYearMonth` >= #{startMonth} 
 			and d.`recordYearMonth` <= #{endMonth}
+			and d.licenceNo <> '0'
 		]]>
 	union all (
 	select u.otherName as district,d.licenceSum,d.houseNumberSum,d.houseAreaSum,d.businessSum,d.officeSum,d.otherSum from
@@ -297,6 +298,7 @@
 		<![CDATA[
 			where d.`recordYearMonth` >= #{startMonth} 
 			and d.`recordYearMonth` <= #{endMonth}
+			and d.licenceNo <> '0'
 		]]>
 		group by d.`userId`
 	) d

@@ -2,7 +2,7 @@ package net.fanzhiwei.zjkfgj.district.dto;
 
 public class DistrictSumReportDTO3 {
 	private String district;
-	private Integer totalNumbe = 0;
+	private Integer totalNumber = 0;
 	private Double totalArea = 0d;
 	private Integer firstNumberSum = 0;
 	private Double firstAreaSum = 0d;
@@ -85,12 +85,12 @@ public class DistrictSumReportDTO3 {
 		this.fourAreaSum = fourAreaSum;
 	}
 
-	public Integer getTotalNumbe() {
-		return totalNumbe;
+	public Integer getTotalNumber() {
+		return totalNumber;
 	}
 
-	public void setTotalNumbe(Integer totalNumbe) {
-		this.totalNumbe = totalNumbe;
+	public void setTotalNumber(Integer totalNumber) {
+		this.totalNumber = totalNumber;
 	}
 
 	public Double getTotalArea() {
