@@ -109,6 +109,7 @@
                 {
                 	name: 'startTime',
                 	fieldLabel: '开工时间',
+                	allowBlank: true,
                 	xtype: 'datefield',
                 	format: 'Y-m-d',
                 	maxLength: 25
@@ -116,6 +117,7 @@
                 {
                 	name: 'completeTime',
                 	fieldLabel: '竣工时间',
+                	allowBlank: true,
                 	xtype: 'datefield',
                 	format: 'Y-m-d',
                 	maxLength: 25
@@ -137,21 +139,50 @@
                 	maxLength: 150,
                 	fieldLabel: '面积（㎡）',
 	      	    	regex:/^\d{0,12}\.?\d{0,2}$/,
-	      	    	regexText:'最多输入14位数字，且只能有两位小数'
+	      	    	regexText:'最多输入14位数字，且只能有两位小数',
+	      	    	listeners: {
+	      	    		scope: this,
+	      	    		change: function(e) {
+	      	    			var tatalPriceLis = App.DistrictReport2.form.form.findField("totalPrice").getValue();
+	      	    			var areaLis = App.DistrictReport2.form.form.findField("area").getValue();
+	      	    			var averagePriceLis = tatalPriceLis*10000/areaLis;
+
+	                    	if (tatalPriceLis == 0 || areaLis == 0) {
+	                    		App.DistrictReport2.form.form.findField("averagePrice").setValue('0.00');
+	                    	} else {
+	                    		App.DistrictReport2.form.form.findField("averagePrice").setValue(Ext.util.Format.number(averagePriceLis, '0.00'));
+	                    	}
+	      	    		}
+	      	    	}                
                 },
                 {
                 	name: 'totalPrice',
                 	maxLength: 150,
                 	fieldLabel: '合同总价（万元）',
             		regex:/^\d{0,12}\.?\d{0,2}$/,
-            		regexText:'最多输入14位数字，且只能有两位小数'
+            		regexText:'最多输入14位数字，且只能有两位小数',
+	                listeners: {
+	                    scope: this,
+	                    change: function(e) {
+	                    	var tatalPriceLis = App.DistrictReport2.form.form.findField("totalPrice").getValue();
+	                    	var areaLis = App.DistrictReport2.form.form.findField("area").getValue();
+	                    	var averagePriceLis = tatalPriceLis*10000/areaLis;
+	                        
+	                        if (tatalPriceLis == 0 || areaLis == 0) {
+	                        	App.DistrictReport2.form.form.findField("averagePrice").setValue('0.00');
+	                        } else {
+	                        	App.DistrictReport2.form.form.findField("averagePrice").setValue(Ext.util.Format.number(averagePriceLis, '0.00'));
+	                        }
+	                    }
+	                }                
                 },
                 {
                 	name: 'averagePrice',
                 	maxLength: 150,
                 	fieldLabel: '平均价（元）',
+                	readOnly: true,
             		regex:/^\d{0,12}\.?\d{0,2}$/,
-            		regexText:'最多输入14位数字，且只能有两位小数'
+            		regexText:'错误的平均价，请核对合同总价与面积是否正确'
                 }],
                 buttons: [{
                     text: '确定',

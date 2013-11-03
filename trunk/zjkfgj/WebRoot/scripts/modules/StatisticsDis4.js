@@ -40,7 +40,9 @@
 
             var sm = new Ext.grid.CheckboxSelectionModel();
             this.grid = new Ext.grid.GridPanel({
+            	id:'gridIdSS4',
                 loadMask: true,
+                title:'办公房销售备案报送情况统计',
                 tbar: [{
                     xtype: 'datefield',
                     id: 'dis4',
@@ -68,6 +70,7 @@
                     header: "编号",
                     width: 40,
                     sortable: true,
+                    dataIndex: 'id',
                     renderer:function(value,metadata,record,rowIndex){
                     	if(this.rowspan){ 
                     	p.cellAttr = 'rowspan="'+this.rowspan+'"'; 
@@ -87,7 +90,26 @@
                 	width: 100,
                 	sortable: false,
                 	dataIndex: 'recordFlag'
-                }]
+                }],
+                bbar:new Ext.Toolbar({
+	                buttons: [new Ext.Button({
+	                    text: '导出到Excel',
+	                    handler: function() {
+	                        var vExportContent = Ext.getCmp("gridIdSS4").getExcelXml();
+	                        if (Ext.isIE6 || Ext.isIE7 || Ext.isIE9 || Ext.isIE8|| Ext.isSafari || Ext.isSafari2 || Ext.isSafari3 || Ext.isSafari4) {
+	                            var fd=Ext.get('frmDummy');
+	                            if (!fd) {
+	                                fd=Ext.DomHelper.append(Ext.getBody(),{tag:'form',method:'post',id:'frmDummy',action:'exportexcel.jsp', target:'_blank',name:'frmDummy',cls:'x-hidden',cn:[
+	                                    {tag:'input',name:'exportContent',id:'exportContent',type:'hidden'}
+	                                ]},true);
+	                            }
+	                            fd.child('#exportContent').set({value:vExportContent});
+	                            fd.dom.submit();
+	                        } else {
+	                            document.location = 'data:application/vnd.ms-excel;base64,'+Base64.encode(vExportContent);
+	                        }}
+	                })]
+	            }) 
             });
             panel.add(this.grid);
         },

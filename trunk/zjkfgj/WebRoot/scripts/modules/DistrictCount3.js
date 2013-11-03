@@ -35,7 +35,7 @@
 						name: 'district'
 					},
 					{
-						name: 'totalNumbe'
+						name: 'totalNumber'
 					},
 					{
 						name: 'totalArea'
@@ -124,7 +124,7 @@
     					{header: '序号', width: 50, dataIndex: 'id'},
     					{header: '统计日期', width: 140, dataIndex: 'recordMonth'},
     					{header: '县（区）', width: 80, dataIndex: 'district'},
-    					{header: '总套数', width: 85, dataIndex: 'totalNumbe'},
+    					{header: '总套数', width: 85, dataIndex: 'totalNumber'},
     					{header: '总面积（万㎡）', width: 120, dataIndex: 'totalArea'},
     					{header: '套数', width: 80, dataIndex: 'firstNumberSum'},
     					{header: '面积（万㎡）', width: 110, dataIndex: 'firstAreaSum'},
