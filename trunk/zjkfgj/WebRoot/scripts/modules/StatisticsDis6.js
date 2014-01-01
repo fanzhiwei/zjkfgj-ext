@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'在册私有住宅报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis6',
                     name: 'queryDate',
                     allowBlank:false,

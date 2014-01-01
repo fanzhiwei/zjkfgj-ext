@@ -61,7 +61,7 @@
                 loadMask: true,
                 title:'张家口市二手房住宅交易情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonthD4',
                     name: 'startMonthD4',
                     allowBlank:false,
@@ -80,7 +80,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonthD4',
                     name: 'endMonthD4',
                     allowBlank:false,

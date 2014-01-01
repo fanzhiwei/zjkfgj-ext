@@ -79,7 +79,7 @@
                 loadMask: true,
                 title:'张家口市登记在册私有住宅汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonthD3',
                     name: 'startMonthD3',
                     allowBlank:false,
@@ -98,7 +98,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonthD3',
                     name: 'endMonthD3',
                     allowBlank:false,

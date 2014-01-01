@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'商品住宅销售备案报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis2',
                     name: 'queryDate',
                     allowBlank:false,

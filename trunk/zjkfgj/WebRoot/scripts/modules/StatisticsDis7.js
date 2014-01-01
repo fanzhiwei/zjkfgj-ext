@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'二手住宅交易报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis7',
                     name: 'queryDate',
                     allowBlank:false,

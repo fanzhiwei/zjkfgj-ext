@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'颁发商品房预售许可证报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis1',
                     name: 'queryDate',
                     allowBlank:false,

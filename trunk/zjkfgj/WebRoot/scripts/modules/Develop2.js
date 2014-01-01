@@ -64,7 +64,7 @@
                 loadMask: true,
                 title:'张家口市房地产开发企业完成投资情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonth2',
                     name: 'startMonth2',
                     allowBlank:false,
@@ -83,7 +83,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonth2',
                     name: 'endMonth2',
                     allowBlank:false,

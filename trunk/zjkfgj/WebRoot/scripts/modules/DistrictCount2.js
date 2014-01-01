@@ -97,7 +97,7 @@
                 loadMask: true,
                 title:'张家口市商品房销售情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonthD2',
                     name: 'startMonthD2',
                     allowBlank:false,
@@ -116,7 +116,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonthD2',
                     name: 'endMonthD2',
                     allowBlank:false,

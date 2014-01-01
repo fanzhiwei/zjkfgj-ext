@@ -64,7 +64,7 @@
                 loadMask: true,
                 title:'张家口市房地产开发企业待售面积情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonth9',
                     name: 'startMonth9',
                     allowBlank:false,
@@ -83,7 +83,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonth9',
                     name: 'endMonth9',
                     allowBlank:false,
