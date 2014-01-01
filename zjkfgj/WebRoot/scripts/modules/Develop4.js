@@ -64,7 +64,7 @@
                 loadMask: true,
                 title:'张家口市房地产开发企业在建工程施工面积情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonth4',
                     name: 'startMonth4',
                     allowBlank:false,
@@ -83,7 +83,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonth4',
                     name: 'endMonth4',
                     allowBlank:false,

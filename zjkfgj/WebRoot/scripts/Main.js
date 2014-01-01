@@ -8,6 +8,37 @@ App.initMain = function() {
 
     App.createViewport();
 
+    //修改ext 显示年月bug
+	Ext.form.WMDateField = Ext.extend(Ext.form.DateField, {
+		safeParse : function(value, format) {
+			if (/[gGhH]/.test(format.replace(/(\\.)/g, ''))) {
+				return Date.parseDate(value, format);
+			} else if ("Y-m" == format) {
+				var parsedDate = Date.parseDate(value + '-01 '
+						+ this.initTime, format + '-d '
+						+ this.initTimeFormat);
+				if (parsedDate) {
+					return parsedDate.clearTime();
+				}
+			} else if ("Ym" == format) {
+				var parsedDate = Date.parseDate(value + '01 '
+						+ this.initTime, format + 'd '
+						+ this.initTimeFormat);
+				if (parsedDate) {
+					return parsedDate.clearTime();
+				}
+			} else {
+				var parsedDate = Date.parseDate(
+						value + ' ' + this.initTime, format + ' '
+								+ this.initTimeFormat);
+				if (parsedDate) {
+					return parsedDate.clearTime();
+				}
+			}
+		}
+	});
+	Ext.reg('wmdatefield', Ext.form.WMDateField);    
+    
     setTimeout(function() {
       Ext.get('loading').remove();
       Ext.get('loading-mask').fadeOut({ remove: true });

@@ -67,7 +67,7 @@
                 loadMask: true,
                 title:'张家口市颁发商品房预售许可证情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonthD1',
                     name: 'startMonthD1',
                     allowBlank:false,
@@ -86,7 +86,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonthD1',
                     name: 'endMonthD1',
                     allowBlank:false,

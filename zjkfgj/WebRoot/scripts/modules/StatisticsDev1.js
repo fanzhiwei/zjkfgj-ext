@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'开发商报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dev1',
                     name: 'queryDate',
                     allowBlank:false,

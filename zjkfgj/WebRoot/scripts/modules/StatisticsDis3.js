@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'商业营业房销售备案报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis3',
                     name: 'queryDate',
                     allowBlank:false,

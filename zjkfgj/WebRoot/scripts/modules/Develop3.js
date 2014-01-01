@@ -64,7 +64,7 @@
                 loadMask: true,
                 title:'张家口市房地产开发企业资金来源情况汇总表',
                 tbar: [' ','张家口市',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'startMonth3',
                     name: 'startMonth3',
                     allowBlank:false,
@@ -83,7 +83,7 @@
                     	}
                     }
                 },'至',{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'endMonth3',
                     name: 'endMonth3',
                     allowBlank:false,

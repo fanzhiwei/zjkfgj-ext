@@ -44,7 +44,7 @@
                 loadMask: true,
                 title:'其它房销售备案报送情况统计',
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'dis5',
                     name: 'queryDate',
                     allowBlank:false,

@@ -273,7 +273,7 @@
             this.grid = new Ext.grid.GridPanel({
                 loadMask: true,
                 tbar: [{
-                    xtype: 'datefield',
+                    xtype: 'wmdatefield',
                     id: 'queryDateReport3',
                     name: 'queryDate',
                     allowBlank:false,
