@@ -334,7 +334,7 @@
                     id: 'queryDateReport1',
                     name: 'queryDate',
                     allowBlank:false,
-                    value:new Date(),
+                    value:App.getPreMonth(),
                     invalidText:"您输入的日期无效，必须符合yyyy-mm格式",
                     fieldLabel: '查询日期',
                     maxLength: 20,
