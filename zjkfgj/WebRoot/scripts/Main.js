@@ -223,3 +223,19 @@ App.createCenter = function() {
     App.mainPanel = mainPanel;
     return mainPanel;
 };
+
+App.getPreMonth = function () {
+	var now = new Date();
+	var nowYear = now.getFullYear();
+	var nowMonth = now.getMonth();
+	var pre = new Date();
+	if (nowMonth == 0) {
+		pre.setDate(1);
+		pre.setMonth(11);
+		pre.setFullYear(nowYear - 1);
+	} else {
+		pre.setDate(1);	
+		pre.setMonth(nowMonth - 1);
+	}
+	return pre;
+};
