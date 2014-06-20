@@ -72,7 +72,6 @@ public class DistrictController {
 	 * 保存或更新记录
 	 * @param request
 	 * @param response
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value="/saveReport1",method=RequestMethod.POST)
@@ -184,7 +183,6 @@ public class DistrictController {
 	 * 保存或更新记录
 	 * @param request
 	 * @param response
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value="/saveReport2_5",method=RequestMethod.POST)
@@ -288,7 +286,6 @@ public class DistrictController {
 	 * 保存或更新记录
 	 * @param request
 	 * @param response
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value="/saveReport6",method=RequestMethod.POST)
@@ -399,8 +396,6 @@ public class DistrictController {
 	 * 保存或更新记录
 	 * @param request
 	 * @param response
-	 * @param user
-	 * @return
 	 */
 	@RequestMapping(value="/saveReport7",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> saveOrUpdateReport7(DistrictReport7 vo,HttpServletRequest request,   

@@ -57,7 +57,6 @@ public class RoleController {
 	 * 保存角色信息（新增角色or编辑角色）
 	 * @param request
 	 * @param response
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
