@@ -157,7 +157,7 @@
                     buttons: [new Ext.Button({
                         text: '导出到Excel',
                         handler: function() {
-                        	window.location.href = "district/exportDengJiZaiCe?startMonth=" + document.getElementById("startMonthD2").value.replace("-","") + "&endMonth=" + document.getElementById("endMonthD2").value.replace("-","");
+                        	window.location.href = "district/exportDengJiZaiCe?startMonth=" + document.getElementById("startMonthD3").value.replace("-","") + "&endMonth=" + document.getElementById("endMonthD3").value.replace("-","");
                         }
                     })]
                 })
